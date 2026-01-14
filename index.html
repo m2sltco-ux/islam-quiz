@@ -6,9 +6,46 @@
     <meta name='admaven-placement' content=Bqjw7rjnF>
     <title>Quiz Islam - Vrai/Faux avancé</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+     
+       @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
         
         *{margin:0;padding:0;box-sizing:border-box}
+        
+        /* Minuteur Ramadan - en haut à droite du menu */
+#ramadanCountdown {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    background: rgba(255, 215, 0, 0.2); /* fond or très léger */
+    border: 2px solid #FFD700;
+    border-radius: 12px;
+    padding: 10px 16px;
+    color: #FFD700;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    z-index: 10;
+    min-width: 220px;
+}
+
+#ramadanCountdown span {
+    color: #e2e8f0;
+    font-size: 1.1rem;
+    display: block;
+    margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+    #ramadanCountdown {
+        position: static;
+        margin: 15px auto;
+        width: 90%;
+        right: auto;
+        top: auto;
+    }
+}
+
 
         /* COULEURS VERT/OR */
         body{
@@ -556,6 +593,10 @@
 
     <div id="menu" class="hidden">
         <h1>Quiz Islam</h1>
+        <div id="ramadanCountdown">
+    Event du ramadan 2026 dans...
+    <span id="countdownTimer">Calcul en cours...</span>
+</div>
         <div class="user-info">
             Bienvenue <strong id="username"></strong> • Niveau <strong id="levelNum">1</strong>
             <br>💰 Points : <strong id="userPoints">0</strong>
@@ -1676,6 +1717,57 @@
     }),
     
     currentUser.achievements.slice(0,9).every(e=>1===e) && currentUser.achievements[9] === 1 && currentUser.achievements[11] === 1 && 0===currentUser.achievements[10] && (currentUser.achievements[10]=1,document.getElementById("unlock").play(),showPopup("💎","FÉLICITATIONS !","Légende de la oumma : Tous les succès débloqués")),saveUser()}
+    // Countdown Ramadan (premier jour de jeûne estimé : 18 février 2026)
+function startRamadanCountdown() {
+    // Date cible : 18 février 2026 à 00:00 (premier Fajr/jeûne)
+    const ramadanStart = new Date('2026-02-18T00:00:00');
+    
+    function updateCountdown() {
+        const now = new Date();
+        const diff = ramadanStart - now;
+        
+        if (diff <= 0) {
+            document.getElementById('countdownTimer').textContent = "Ramadan a commencé ! Ramadan Mubarak 🌙";
+            return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        
+        let text = "";
+        if (days > 0) {
+            text = `${days} jour${days > 1 ? 's' : ''} ${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+        } else if (hours > 0) {
+            text = `${hours}h ${minutes.toString().padStart(2,'0')}min ${seconds.toString().padStart(2,'0')}s`;
+        } else {
+            text = `${minutes}min ${seconds.toString().padStart(2,'0')}s`;
+        }
+        
+        document.getElementById('countdownTimer').textContent = text;
+    }
+    
+    // Mise à jour immédiate + toutes les secondes
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
+// Lancer seulement quand on affiche le menu
+function showMenu() {
+    showScreen("menu");
+    updateStats();
+    
+    // ... ton code existant ...
+    
+    // Lancement du countdown (une seule fois suffit)
+    if (!document.getElementById('countdownTimer').dataset.started) {
+        startRamadanCountdown();
+        document.getElementById('countdownTimer').dataset.started = "true";
+    }
+    
+    // ... suite de ton code ...
+}
     
 </script>
 </body>
