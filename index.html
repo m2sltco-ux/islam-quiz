@@ -10,6 +10,10 @@
        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
       
         *{margin:0;padding:0;box-sizing:border-box}
+        @keyframes pulse {
+    from { transform: scale(1); }
+    to   { transform: scale(1.1); }
+}
       
         /* Minuteur Ramadan - en haut à droite du menu */
 #ramadanCountdown {
@@ -1917,18 +1921,69 @@ const qcmQuestions = [
             alert("Vous n'avez pas d'indice ! Achetez-en au Shop.");
         }
     }
-    function startTimer(){const e=parseInt(document.getElementById("timerContainer").getAttribute("data-time-limit"))||1e4;let t=Math.ceil(e/1e3);const s=document.getElementById("timerFill"),n=document.getElementById("timerText");
-  
-    requestAnimationFrame(() => {
-        s.style.transition=`width ${e}ms linear`,s.style.width="100%"
-    });
-    n.textContent=`${t}s`;const o=()=>{t--,n.textContent=`${t}s`,t<=0?(clearTimeout(timer),isAnswered||(isAnswered=!1,s.style.transition="none",s.style.width="0%",document.getElementById("timeout").play(),processAnswer(false,true))):timer=setTimeout(o,1e3)};timer=setTimeout(o,1e3)}
-    function answer(e){if(isAnswered)return;isAnswered=!0,clearTimeout(timer),document.getElementById("timerFill").style.transition="none",processAnswer(e,!1)}
+    function startTimer() {
+    const timeLimit = parseInt(document.getElementById("timerContainer").getAttribute("data-time-limit")) || 10000;
+    let remaining = Math.ceil(timeLimit / 1000);
+
+    const fill = document.getElementById("timerFill");
+    const text = document.getElementById("timerText");
+
+    // Reset total avant tout
+    fill.style.transition = "none";
+    fill.style.width = "100%";
+    text.textContent = `${remaining}s`;
+    text.style.color = "#388E3C";
+    text.style.animation = "none";
+
+    // Forcer reflow (important pour CSS)
+    void fill.offsetWidth;
+
+    // Lancement animation
+    fill.style.transition = `width ${timeLimit}ms linear`;
+    fill.style.width = "0%";
+
+    const tick = () => {
+        remaining--;
+        text.textContent = `${remaining}s`;
+
+        // Clignotement urgence < 4s
+        if (remaining <= 3) {
+            text.style.color = "#ff4444";
+            text.style.animation = "pulse 0.8s infinite alternate";
+        }
+
+        if (remaining <= 0) {
+            if (!isAnswered) {
+                isAnswered = true;
+                fill.style.transition = "none";
+                fill.style.width = "0%";
+                document.getElementById("timeout").play();
+                processAnswer(false, true); // timeout = faux
+            }
+            return;
+        }
+
+        timer = setTimeout(tick, 1000);
+    };
+
+    timer = setTimeout(tick, 1000);
+}
+    function answer(e){if(isAnswered)return;isAnswered=!0,clearTimeout(timer);const fill = document.getElementById("timerFill");
+    fill.style.transition = "none";
+    fill.style.width = "100%";
+    document.getElementById("timerText").style.animation = "none";
+    document.getElementById("timerText").style.color = "#388E3C";
+    fill.style.transition = "none";
+    fill.style.width = "100%";document.getElementById("timerFill").style.transition="none",processAnswer(e,!1)}
   
     function answerQCM(btn) {
         if (isAnswered) return;
         isAnswered = true;
-        clearTimeout(timer);
+        clearTimeout(timer);const fill = document.getElementById("timerFill");
+    fill.style.transition = "none";
+    fill.style.width = "100%";
+    document.getElementById("timerText").style.animation = "none";
+    document.getElementById("timerText").style.color = "#388E3C";
         const selectedIndex = parseInt(btn.dataset.index);
         const currentQ = quiz[current - 1];
         const isCorrect = selectedIndex === currentQ.correctIndex;
