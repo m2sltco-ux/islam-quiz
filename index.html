@@ -6,11 +6,11 @@
     <meta name='admaven-placement' content=Bqjw7rjnF>
     <title>Quiz Islam - Vrai/Faux avancé</title>
     <style>
-     
+    
        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
-        
+       
         *{margin:0;padding:0;box-sizing:border-box}
-        
+       
         /* Minuteur Ramadan - en haut à droite du menu */
 #ramadanCountdown {
     position: absolute;
@@ -28,14 +28,12 @@
     z-index: 10;
     min-width: 220px;
 }
-
 #ramadanCountdown span {
     color: #e2e8f0;
     font-size: 1.1rem;
     display: block;
     margin-top: 4px;
 }
-
 @media (max-width: 600px) {
     #ramadanCountdown {
         position: static;
@@ -45,13 +43,11 @@
         top: auto;
     }
 }
-
-
         /* COULEURS VERT/OR */
         body{
             font-family:'Amiri',serif;
             /* Vert foncé pour le fond */
-            background:linear-gradient(135deg,#143C30,#1D483C); 
+            background:linear-gradient(135deg,#143C30,#1D483C);
             color:#e2e8f0;
             min-height:100vh;
             display:flex;
@@ -60,29 +56,26 @@
             padding:15px;
             position:relative
         }
-
         .box{
             width:100%;
             max-width:500px;
             /* Vert plus clair/transparence */
-            background:rgba(20,60,48,0.96); 
+            background:rgba(20,60,48,0.96);
             border-radius:28px;
             padding:40px 30px;
             box-shadow:0 25px 70px rgba(0,0,0,0.8);
             /* Bordure Vert Olive/Kaki */
-            border:2px solid #6B8E23; 
+            border:2px solid #6B8E23;
             text-align:center
         }
-
         h1{
             font-size:3.4rem;
             /* Or */
-            color:#FFD700; 
+            color:#FFD700;
             /* Ombre Or */
-            text-shadow:0 0 30px #DAA520; 
+            text-shadow:0 0 30px #DAA520;
             margin-bottom:20px
         }
-
         .menu-btn{
             display:block;
             width:88%;
@@ -92,19 +85,18 @@
             font-weight:700;
             color:#143C30; /* Texte foncé pour les boutons or */
             /* Gradient Or/Bronze */
-            background:linear-gradient(135deg,#FFD700,#B8860B); 
+            background:linear-gradient(135deg,#FFD700,#B8860B);
             border:none;
             border-radius:60px;
             cursor:pointer;
             /* Ombre Or */
-            box-shadow:0 12px 35px rgba(255,215,0,0.5); 
+            box-shadow:0 12px 35px rgba(255,215,0,0.5);
             transition:all .4s
         }
-
         .menu-btn:hover{
             transform:translateY(-8px)
         }
-        
+       
         /* Bouton désactivé (general) */
         .menu-btn:disabled{
             background:linear-gradient(135deg,#475569,#64748b)!important;
@@ -112,51 +104,42 @@
             transform:none!important;
             cursor:default;
         }
-
         /* Couleurs secondaires */
         .infinite-btn{
             background:linear-gradient(135deg,#a0522d,#cd853f)!important; /* Marron Sienne (Terre) */
             color: #e2e8f0;
         }
-
         .success-btn{
             background:linear-gradient(135deg,#006400,#228b22)!important; /* Vert (Success) */
             color: #e2e8f0;
         }
-
         .danger-btn{
             background:linear-gradient(135deg,#8b0000,#dc143c)!important; /* Rouge (Danger) */
             font-size:1.4rem;
             padding:16px;
             color: #e2e8f0;
         }
-
         .settings-btn{
             background:linear-gradient(135deg,#4f4f4f,#696969); /* Gris/Ardoise */
             font-size:1.5rem;
             padding:18px;
             color: #e2e8f0;
         }
-
         .chrono-btn{
             background:linear-gradient(135deg,#800080,#9932cc)!important; /* Violet/Mauve (Chrono) */
             color: #e2e8f0;
         }
-
         .leaderboard-btn{
             background:linear-gradient(135deg,#483d8b,#6a5acd)!important; /* Bleu foncé/Ardoise (Classement) */
             color: #e2e8f0;
         }
-
         .qcm-btn{
             background:linear-gradient(135deg,#4682b4,#5f9ea0)!important; /* Bleu-Vert/Acier */
             color: #e2e8f0;
         }
-
         .hidden{
             display:none
         }
-
         input{
             width:85%;
             padding:16px;
@@ -168,25 +151,22 @@
             background:#1E293B; /* Garder un fond sombre pour le champ */
             color:#fff
         }
-
         .user-info{
             /* Vert foncé/Olive */
-            background:#6B8E23; 
+            background:#6B8E23;
             padding:15px;
             border-radius:20px;
             margin:20px 0;
             font-size:1.2rem
         }
-        
+       
         .user-info strong{
             color:#FFD700;
         }
-
         .stats{
             margin:15px 0;
             color:#C0C0C0; /* Argent clair */
         }
-
         .xp-bar{
             height:18px;
             background:#1e293b;
@@ -194,16 +174,14 @@
             overflow:hidden;
             margin:15px 0
         }
-
         .xp-fill{
             height:100%;
             /* Gradient Or pour l'XP */
-            background:linear-gradient(90deg,#DAA520,#FFD700); 
+            background:linear-gradient(90deg,#DAA520,#FFD700);
             width:0;
             border-radius:10px;
             transition:width 1s ease
         }
-
         .timer-bar{
             height:12px;
             background:#1e293b;
@@ -211,22 +189,19 @@
             overflow:hidden;
             margin:10px 0
         }
-
         .timer-fill{
             height:100%;
             /* Gradient Vert/Jaune pour le chrono */
-            background:linear-gradient(90deg,#388E3C,#FFD700); 
+            background:linear-gradient(90deg,#388E3C,#FFD700);
             width:100%;
             transition:width 1s linear
         }
-
         .timer-text{
             font-size:1.5rem;
             font-weight:700;
             color:#388E3C;
             margin-bottom:10px
         }
-
         .answers{
             display:flex;
             justify-content:center;
@@ -235,11 +210,9 @@
             margin:40px 20px 20px;
             flex-wrap:wrap
         }
-
         @media (max-width:480px){
             .answers{gap:15px;margin:30px 10px 15px}
         }
-
         .ans{
             flex:1 1 45%;
             min-width:120px;
@@ -255,17 +228,15 @@
             user-select:none;
             text-align:center
         }
-
         .ans:hover{
             transform:translateY(-8px);
             box-shadow:0 20px 50px rgba(0,0,0,0.7)
         }
-
         .ans.disabled{
             pointer-events:none;
             opacity:.5
         }
-        
+       
         /* Style spécifique QCM (boutons plus petits) */
         .qcm-style .ans{
             flex:1 1 48%; /* Deux par ligne */
@@ -273,16 +244,21 @@
             max-width: unset;
             padding: 20px 15px; /* Moins de padding */
             font-size: 1.1rem;
+            text-align: left;
+            white-space: normal;
+            word-wrap: break-word;
         }
-
+        @media (min-width: 500px) {
+            .qcm-style .ans {
+                flex: 1 1 45%;
+            }
+        }
         .vrai{
             background:#388E3C; /* Vert Vrai (Success) */
         }
-
         .faux{
             background:#D32F2F; /* Rouge Faux (Error) */
         }
-
         .question{
             font-size:1.65rem;
             line-height:1.7;
@@ -290,46 +266,41 @@
             background:rgba(30,41,59,0.9);
             border-radius:22px;
             /* Bordure Or/Vert */
-            border:2px solid #DAA52033; 
+            border:2px solid #DAA52033;
             min-height:150px;
             display:flex;
             align-items:center;
             justify-content:center;
             margin:25px 20px
         }
-
         .result{
             font-size:2.4rem;
             margin:25px 0;
             font-weight:700
         }
-
         .levelup{
             font-size:1.8rem;
             /* Jaune vif pour Level Up */
-            color:#FFFACD; 
+            color:#FFFACD;
             text-shadow:0 0 10px #FFD700;
             margin:15px 0
         }
-
         .exp{
             margin:25px;
             padding:22px;
             /* Fond pour explication (Or clair avec bordure Or) */
-            background:rgba(255,215,0,0.15); 
+            background:rgba(255,215,0,0.15);
             border-left:6px solid #FFD700;
             border-radius:18px;
             font-size:1.25rem;
             line-height:1.7
         }
-
         #dailyQuizBtn.disabled{
             cursor:default;
             background:linear-gradient(135deg,#475569,#64748b)!important;
             box-shadow:0 5px 15px rgba(0,0,0,0.5);
             transform:none!important
         }
-
         #dailyTimerDisplay{
             display:block;
             font-size:1.1rem;
@@ -337,47 +308,38 @@
             font-weight:700;
             margin-top:5px
         }
-
         .leaderboard-table{
             width:100%;
             border-collapse:collapse;
             margin:20px 0;
             font-size:1.2rem
         }
-
         .leaderboard-table th,.leaderboard-table td{
             padding:12px;
             border-bottom:1px solid #1e293b
         }
-
         .leaderboard-table th{
             /* En-tête de tableau vert foncé */
-            background:#6B8E23; 
+            background:#6B8E23;
             color:#fff;
             font-size:1.3rem
         }
-
         .leaderboard-table td:first-child{
             font-weight:700
         }
-
         .leaderboard-table tr:nth-child(2) td{
             color:#FFD700; /* Or pour le 2e */
         }
-
         .leaderboard-table tr:nth-child(3) td{
             color:#C0C0C0; /* Argent pour le 3e */
         }
-
         .leaderboard-table tr:nth-child(4) td{
             color:#CD7F32; /* Bronze pour le 4e */
         }
-
         .user-row{
             background:rgba(20,60,48,0.96); /* Fond de la boîte */
             border:3px solid #FFD700; /* Bordure Or */
         }
-
         .popup{
             position:fixed;
             top:50%;
@@ -387,39 +349,34 @@
             padding:40px 30px;
             border-radius:30px;
             /* Bordure Or Vif */
-            border:4px solid #FFD700; 
+            border:4px solid #FFD700;
             /* Ombre Or Vif */
-            box-shadow:0 0 80px #FFD700; 
+            box-shadow:0 0 80px #FFD700;
             z-index:9999;
             text-align:center;
             transition:all .5s ease;
             opacity:0;
             max-width:90%
         }
-
         .popup.show{
             transform:translate(-50%,-50%) scale(1);
             opacity:1
         }
-
         .popup h2{
             font-size:3rem;
             color:#FFD700;
             margin:20px 0
         }
-
         .popup .emoji{
             font-size:5rem;
             margin:15px 0
         }
-
         .popup p{
             font-size:1.6rem;
             color:#e2e8f0;
             /* Permet un retour à la ligne pour les listes de récompenses */
             white-space: pre-line;
         }
-
         .achievement{
             margin:18px auto;
             padding:18px;
@@ -434,7 +391,6 @@
             transition:all .4s;
             opacity:.6
         }
-
         .achievement.unlocked{
             /* Succès débloqué : Or */
             background:rgba(255,215,0,0.25)!important;
@@ -442,16 +398,13 @@
             box-shadow:0 0 30px #FFD70077;
             opacity:1
         }
-
         .achievement.unlocked .emoji{
             font-size:3rem!important
         }
-
         .achievement .emoji{
             font-size:2.2rem;
             opacity:.7
         }
-
         /* MODIFICATION CSS: Le conteneur prend moins de largeur (max-width: 380px) */
         .daily-challenge-box{
             width:90%;
@@ -465,20 +418,17 @@
             color:#fff;
             margin:20px auto
         }
-
         .daily-challenge-box h2{
             font-size:1.8rem;
             font-weight:bold;
             text-transform:uppercase;
             margin-bottom:10px
         }
-
         .daily-challenge-box p{
             font-size:1.2rem;
             margin-bottom:25px;
             font-weight:500
         }
-
         .play-button{
             display:block;
             width:100%;
@@ -498,17 +448,15 @@
             /* Ombre foncée */
             box-shadow:0 12px 0 0 #143C30;
         }
-
         .play-button:hover{
             transform:translateY(-2px);
             box-shadow:0 15px 0 0 #143C30
         }
-
         .play-button:active{
             transform:translateY(8px);
             box-shadow:0 4px 0 0 #143C30
         }
-        
+       
         /* STYLE DU SHOP AJOUTÉ */
         .shop-item {
             background:rgba(107,142,35,0.4); /* Vert Olive Transparent */
@@ -518,36 +466,30 @@
             text-align:left;
             box-shadow:0 8px 15px rgba(0,0,0,0.4);
         }
-
         .item-header{
             display:flex;
             justify-content:space-between;
             align-items:center;
             margin-bottom:10px
         }
-
         .shop-item h3{
             font-size:1.7rem;
             color:#FFD700;
         }
-
         .shop-item .stock{
             font-size:1.2rem;
             color:#C0C0C0;
         }
-
         .item-desc{
             font-size:1.1rem;
             color:#e2e8f0;
             margin-bottom:15px
         }
-
         .item-footer{
             display:flex;
             justify-content:space-between;
             align-items:center;
         }
-
         .item-footer .price{
             font-size:1.5rem;
             font-weight:700;
@@ -556,7 +498,6 @@
             align-items:center;
             gap:10px;
         }
-
         .buy-btn{
             /* Utilise la classe menu-btn pour le style Or/Bronze */
             width:auto;
@@ -564,7 +505,7 @@
             font-size:1.1rem;
             margin:0!important;
         }
-        
+       
         .buy-btn:disabled{
             background:linear-gradient(135deg,#475569,#64748b)!important;
             box-shadow:0 5px 15px rgba(0,0,0,0.5);
@@ -572,6 +513,34 @@
             cursor:default;
         }
         /* FIN STYLE SHOP */
+        /* Correction visibilité texte boutons QCM */
+.qcm-style .ans {
+    color: #ffffff !important;           /* texte blanc forcé */
+    background: #2d5a4a !important;      /* fond vert foncé lisible */
+    border: 2px solid #FFD700 !important; /* bordure or pour contraste */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.6) !important;
+}
+
+.qcm-style .ans:hover {
+    background: #3a6f5c !important;      /* un peu plus clair au survol */
+    transform: translateY(-4px);
+}
+
+.qcm-style .ans:disabled {
+    opacity: 0.7;
+    background: #1e3a32 !important;      /* encore plus sombre quand désactivé */
+}
+
+/* Couleur quand bonne réponse (vert) et mauvaise (rouge) */
+.qcm-style .ans[style*="background-color: #388E3C"],
+.qcm-style .ans[style*="background-color: rgb(56, 142, 60)"] {
+    color: #ffffff !important;
+}
+
+.qcm-style .ans[style*="background-color: #D32F2F"],
+.qcm-style .ans[style*="background-color: rgb(211, 47, 47)"] {
+    color: #ffffff !important;
+}
     </style>
 </head>
 <body>
@@ -580,7 +549,6 @@
 <audio id="timeout" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-bass-548.mp3"></audio>
 <audio id="levelup" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
 <audio id="unlock" src="https://assets.mixkit.co/sfx/preview/mixkit-unlock-game-notification-253.mp3"></audio>
-
 <div class="box">
     <div id="auth" class="">
         <h1>Quiz Islam</h1>
@@ -590,7 +558,6 @@
         <button class="menu-btn" onclick="login()">Se connecter</button>
         <button class="menu-btn settings-btn" onclick="register()">Créer un compte</button>
     </div>
-
     <div id="menu" class="hidden">
         <h1>Quiz Islam</h1>
         <div id="ramadanCountdown">
@@ -604,14 +571,14 @@
         <div class="stats">Streak : <span id="streak">0</span> | Record Infini : <span id="best">0</span></div>
         <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
         <div style="margin:15px 0;color:#94a3b8;">XP: <span id="xp">0</span>/<span id="xpMax">100</span></div>
-            
+           
         <div class="daily-challenge-box" id="dailyQuizBtnContainer">
             <h2>DÉFI DU JOUR</h2>
             <p>5 questions &rarr; **+200 XP si 5/5**</p>
             <button class="play-button" id="dailyQuizBtn" onclick="checkDailyQuizAvailability()">JOUER</button>
             <span id="dailyTimerDisplay" style="display:none;font-size:1.1rem;color:#f87171;font-weight:700;margin-top:15px;display:block;"></span>
         </div>
-        
+       
         <button class="menu-btn leaderboard-btn" onclick="showShop()">🛍️ Shop Quotidien</button>
         <button class="menu-btn" onclick="showDifficultyMenu()">Mode Classique (Difficulté)</button>
         <button class="menu-btn qcm-btn" onclick="startQCM()">Mode QCM (10 Q. - 4 Choix)</button>
@@ -621,23 +588,20 @@
         <button class="menu-btn success-btn" onclick="showAchievements()">Succès</button>
         <button class="menu-btn settings-btn" onclick="showSettings()">Paramètres</button>
     </div>
-    
+   
     <div id="shop" class="hidden">
         <h1>🛍️ Shop Quotidien</h1>
         <p style="font-size:1.4rem;margin-bottom:20px;color:#FFD700;">Les offres changent tous les jours !</p>
-        
+       
         <div id="shopChrono" style="font-size: 1.3rem; font-weight: bold; color: #f87171; margin-bottom: 20px;"></div>
-
         <div id="shopItemsContainer" style="display:flex;flex-direction:column;gap:20px;">
             </div>
-
         <h2 style="margin-top:40px;margin-bottom:15px;color:#6B8E23;">Inventaire</h2>
         <ul id="ownedItemsList" style="list-style:none;text-align:left;padding:0 20px;font-size:1.3rem;">
             </ul>
-        
+       
         <button class="menu-btn settings-btn" onclick="showMenu()">Retour au menu</button>
     </div>
-
     <div id="leaderboard" class="hidden">
         <h1>Classement</h1>
         <table class="leaderboard-table" id="leaderboardTable">
@@ -648,7 +612,6 @@
         </table>
         <button class="menu-btn" onclick="showMenu()">Retour</button>
     </div>
-
     <div id="achievements" class="hidden">
         <h1>Succès</h1>
         <div class="achievement" id="a1"><span class="emoji">👶</span><div><strong>Premier pas</strong><br><span id="a1-prog"></span></div></div>
@@ -660,13 +623,11 @@
         <div class="achievement" id="a7"><span class="emoji">📚</span><div><strong>Savant en devenir</strong><br><span id="a7-prog"></span></div></div>
         <div class="achievement" id="a8"><span class="emoji">🏆</span><div><strong>Maître du Vrai/Faux</strong><br><span id="a8-prog"></span></div></div>
         <div class="achievement" id="a9"><span class="emoji">📿</span><div><strong>Hafiz</strong><br><span id="a9-prog"></span></div></div>
-
         <div class="achievement" id="a11"><span class="emoji">🧠</span><div><strong>QCM Initié</strong><br><span id="a11-prog"></span></div></div>
         <div class="achievement" id="a12"><span class="emoji">✅</span><div><strong>Maître QCM</strong><br><span id="a12-prog"></span></div></div>
         <div class="achievement" id="a10"><span class="emoji">💎</span><div><strong>Légende de la oumma</strong><br><span id="a10-prog"></span></div></div>
         <button class="menu-btn" onclick="showMenu()">Retour</button>
     </div>
-
     <div id="settings" class="hidden">
                                   <h1>Paramètres</h1>
         <div class="user-info">Connecté : <strong id="username2"></strong><br>Niveau <strong id="levelNum2">1</strong> • XP total : <strong id="totalXp">0</strong></div>
@@ -675,7 +636,6 @@
         <button class="menu-btn danger-btn" onclick="resetAccount()">Réinitialiser mon compte</button>
         <button class="menu-btn settings-btn" onclick="logout()">Déconnexion</button>
     </div>
-
     <div id="difficultyMenu" class="hidden">
         <h1>Choix de la Difficulté</h1>
         <p style="font-size:1.4rem;margin-bottom:25px;color:#94a3b8;">10 questions par partie. Gagnez des **points** en répondant correctement.</p>
@@ -684,7 +644,6 @@
         <button class="menu-btn infinite-btn" onclick="startClassic(3)">Difficile (15 XP/Q)</button>
         <button class="menu-btn settings-btn" onclick="showMenu()">Retour au menu</button>
     </div>
-
     <div id="game" class="hidden">
         <h1 id="gameTitle">Quiz Islam</h1>
         <div class="stats" id="gameProgress"></div>
@@ -693,26 +652,23 @@
             <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
         </div>
         <div class="question" id="q">Prêt ?</div>
-            
+           
         <div class="answers" id="answers">
             </div>
-
         <div class="result" id="result"></div>
         <div class="levelup hidden" id="levelUp">NIVEAU UP !</div>
         <div class="exp" id="exp"></div>
         <button class="menu-btn chrono-btn" id="hintBtn" onclick="useHint()" style="width:50%;margin-top:10px;">Utiliser Indice (<span id="hintCount">0</span>)</button>
-        
+       
         <button class="menu-btn hidden" id="nextBtn" onclick="nextQuestion()">Question Suivante</button>
         <button class="menu-btn hidden" id="restartBtn" onclick="showMenu()">Retour au menu principal</button>
     </div>
 </div>
-
 <div class="popup" id="popup">
     <div class="emoji" id="popupEmoji">🏆</div>
     <h2 id="popupTitle">Succès débloqué !</h2>
     <p id="popupText">MashaAllah akhi !</p>
 </div>
-
 <script>
     const questions=[{q: "La sourate la plus courte du Coran est Al-Kawthar.", a: true, e: "Elle ne comporte que 3 versets.", diff: 1},
 {q: "Le Prophète Muhammad ﷺ a eu 4 filles.", a: true, e: "Zaynab, Ruqayya, Umm Kulthum et Fatima.", diff: 1},
@@ -724,7 +680,6 @@
 {q: "La sourate Al-Ikhlas parle de l'unicité d'Allah.", a: true, e: "Elle est appelée 'l'équivalent du tiers du Coran'.", diff: 1},
 {q: "Le Prophète ﷺ est mort à l’âge de 63 ans.", a: true, e: "En l'an 11 de l'Hégire, à Médine.", diff: 1},
 {q: "La prière du vendredi (Jumu'a) remplace la prière du Dhuhr.", a: true, e: "Elle compte pour le Dhuhr du vendredi.", diff: 1},
-
 // Nouvelles questions - Niveau 2 (moyen - diff:2)
 {q: "La sourate Al-Baqara est la seule à mentionner directement le jeûne du Ramadan.", a: true, e: "Versets 183-185 qui instituent le jeûne.", diff: 2},
 {q: "Il est obligatoire de réciter la Fatiha dans chaque rakat des prières obligatoires.", a: true, e: "Selon la majorité des écoles (madhahib).", diff: 2},
@@ -736,7 +691,6 @@
 {q: "La prière de l’istikhara est réservée uniquement aux questions de mariage.", a: false, e: "Elle est recommandée pour toute décision importante.", diff: 2},
 {q: "Il existe exactement 99 noms d’Allah mentionnés dans le Coran et la Sunna.", a: true, e: "C’est le nombre traditionnel rapporté.", diff: 2},
 {q: "Le Prophète ﷺ a dit que le jeûne du jour de ‘Achoura efface les péchés d’une année entière.", a: false, e: "C’est le jeûne de ‘Achoura + un jour avant ou après qui efface une année de péchés mineurs.", diff: 2},
-
 // Nouvelles questions - Niveau 3 (avancé - diff:3)
 {q: "La meilleure action après les obligations est le jihad dans le sentier d’Allah selon un hadith authentique.", a: false, e: "Selon Bukhari/Muslim, c’est la Hajj mabrur qui vient en second.", diff: 3},
 {q: "La sourate Al-Masad (Al-Lahab) est la seule à mentionner Abou Lahab par son nom.", a: true, e: "Elle le cite explicitement.", diff: 3},
@@ -809,7 +763,6 @@
 {q: "La chahada est le premier pilier de l'islam.", a: true, e: "Témoignage de foi.", diff: 1},
 {q: "Il est interdit de couper les ongles pendant le Hajj avant le sacrifice.", a: false, e: "Interdit pour celui qui est en ihram avant le sacrifice.", diff: 1},
 {q: "Le jour de l'Aïd al-Fitr marque la fin du Ramadan.", a: true, e: "Fête de la rupture du jeûne.", diff: 1},
-
 // === Nouvelles questions - Niveau 2 (moyen - diff:2) - 20 questions ===
 {q: "La sourate Al-Mulk protège du châtiment de la tombe.", a: true, e: "Hadith authentique rapporté par Tirmidhi.", diff: 2},
 {q: "Il est recommandé de jeûner les 6 jours de Shawwal après Ramadan.", a: true, e: "Équivaut à jeûner toute l'année.", diff: 2},
@@ -831,7 +784,6 @@
 {q: "Le Prophète ﷺ a interdit de jeûner le jour de l'Aïd.", a: true, e: "Jour de fête, pas de jeûne.", diff: 2},
 {q: "La sourate An-Nasr annonce la victoire et l'entrée massive dans l'islam.", a: true, e: "Révélation tardive.", diff: 2},
 {q: "Il est recommandé de lire la sourate Al-Mulk chaque soir avant de dormir.", a: true, e: "Protection jusqu'au matin.", diff: 2},
-
 // === Nouvelles questions - Niveau 3 (avancé - diff:3) - 20 questions ===
 {q: "Le Prophète ﷺ a dit que la Hajj mabrur est la meilleure action après les obligations.", a: true, e: "Hadith Bukhari/Muslim.", diff: 3},
 {q: "La sourate Al-Bayyina est la seule sourate qui commence par 'lam yakun' sans 'qul'.", a: true, e: "Elle est mecquoise selon majorité.", diff: 3},
@@ -852,8 +804,117 @@
 {q: "Le hadith 'L'islam est bâti sur 5 piliers' est rapporté par Boukhari et Muslim.", a: true, e: "Hadith fondamental.", diff: 3},
 {q: "Il est interdit de réciter le Coran en rythme musical (chant).", a: false, e: "Permis tant que ça reste tajwid et non musique profane.", diff: 3},
 {q: "La sourate Al-Ahzab mentionne le hijab des épouses du Prophète ﷺ.", a: true, e: "Verset 59 sur le jilbab.", diff: 3},
-{q: "Le Prophète ﷺ a dit que le meilleur dhikr est 'La ilaha illa Allah'.", a: true, e: "Hadith authentique.", diff: 3}]
-    
+{q: "Le Prophète ﷺ a dit que le meilleur dhikr est 'La ilaha illa Allah'.", a: true, e: "Hadith authentique.", diff: 3}];
+
+// === QUESTIONS POUR LE MODE QCM (format classique : une question + 4 choix) ===
+const qcmQuestions = [
+    {
+        question: "Quelle est la couleur préférée du Prophète Muhammad ﷺ selon plusieurs hadiths ?",
+        options: ["Rouge", "Vert", "Violet", "Noir"],
+        correctIndex: 1, // B
+        explanation: "Rapporté par Anas ibn Malik (hadith hasan) : le vert était parmi les couleurs les plus aimées du Messager ﷺ.",
+        diff: 2
+    },
+    {
+        question: "Combien de piliers compte l'Islam ?",
+        options: ["4", "5", "6", "7"],
+        correctIndex: 1,
+        explanation: "Les 5 piliers : Chahada, Salat, Zakat, Sawm, Hajj (hadith Jibril – Bukhari/Muslim).",
+        diff: 1
+    },
+    {
+        question: "Quel est le premier calife de l'Islam après le Prophète ﷺ ?",
+        options: ["Omar ibn al-Khattab", "Abou Bakr As-Siddiq", "Othman ibn Affan", "Ali ibn Abi Talib"],
+        correctIndex: 1,
+        explanation: "Abou Bakr fut choisi à la Saqifa de Banu Sa'ida.",
+        diff: 1
+    },
+    {
+        question: "Dans quelle sourate trouve-t-on Ayat al-Kursi ?",
+        options: ["Al-Fatiha", "Al-Baqara", "Yasin", "Al-Ikhlas"],
+        correctIndex: 1,
+        explanation: "Verset 255 de Sourate Al-Baqara.",
+        diff: 1
+    },
+    {
+        question: "Combien de rakats compte la prière obligatoire du Fajr ?",
+        options: ["2", "3", "4", "5"],
+        correctIndex: 0,
+        explanation: "2 rakats sunnah + 2 rakats farḍ.",
+        diff: 1
+    },
+    {
+        question: "Quel ange est chargé de la révélation ?",
+        options: ["Israfil", "Jibril", "Mikail", "Azraël"],
+        correctIndex: 1,
+        explanation: "Jibril (Gabriel) apporte le Coran au Prophète ﷺ.",
+        diff: 1
+    },
+    {
+        question: "Laylat al-Qadr est meilleure que combien de mois ?",
+        options: ["500 mois", "1000 mois", "2000 mois", "Une vie entière"],
+        correctIndex: 1,
+        explanation: "Sourate Al-Qadr : « meilleure que mille mois ».",
+        diff: 1
+    },
+    {
+        question: "Quel est le nom de la mosquée construite par le Prophète ﷺ à Médine ?",
+        options: ["Masjid al-Haram", "Masjid an-Nabawi", "Masjid al-Aqsa", "Masjid Quba"],
+        correctIndex: 1,
+        explanation: "Masjid an-Nabawi (la Mosquée du Prophète).",
+        diff: 1
+    },
+    {
+        question: "Combien de fois le Prophète ﷺ a-t-il accompli le Hajj ?",
+        options: ["Jamais", "Une fois", "Deux fois", "Trois fois"],
+        correctIndex: 1,
+        explanation: "Hajj al-Wadaa (Hajj d'adieu) en l'an 10 de l'Hégire.",
+        diff: 2
+    },
+    {
+        question: "Quel jour de la semaine est recommandé pour lire Sourate Al-Kahf ?",
+        options: ["Lundi", "Mardi", "Jeudi", "Vendredi"],
+        correctIndex: 3,
+        explanation: "Hadith authentique (Muslim) : protection du Dajjal entre deux vendredis.",
+        diff: 2
+    },
+    {
+        question: "Quelle est la première sourate révélée en entier ?",
+        options: ["Al-Fatiha", "Al-Alaq", "Al-Muddaththir", "Al-Muzzammil"],
+        correctIndex: 1,
+        explanation: "Sourate Al-Alaq (versets 1-5) : première révélation.",
+        diff: 2
+    },
+    {
+        question: "Le jeûne de 'Achoura est recommandé les 9 et 10 Muharram pour :",
+        options: ["imiter les Juifs", "se distinguer des Juifs", "célébrer une victoire", "commémorer Noé"],
+        correctIndex: 1,
+        explanation: "Hadith Bukhari : « Nous jeûnerons le 9 avec le 10 pour nous différencier des Gens du Livre ».",
+        diff: 2
+    },
+    {
+        question: "Quelle sourate n'a pas de Bismillah au début ?",
+        options: ["At-Tawba", "Al-Fatiha", "An-Nas", "Al-Falaq"],
+        correctIndex: 0,
+        explanation: "Sourate At-Tawba (Al-Bara'a) est la seule sans Bismillah.",
+        diff: 3
+    },
+    {
+        question: "Quel est le nom du hadith qui commence par « Les actions ne valent que par les intentions » ?",
+        options: ["Hadith Jibril", "Hadith de l'intention", "Hadith d'Omar", "Hadith Qudsi"],
+        correctIndex: 1,
+        explanation: "Premier hadith du Sahih Bukhari.",
+        diff: 2
+    },
+    {
+        question: "La Qibla a été changée de Jérusalem vers La Mecque après combien d'années à Médine ?",
+        options: ["6 mois", "17 mois", "2 ans", "5 ans"],
+        correctIndex: 1,
+        explanation: "Verset 144 de Sourate Al-Baqara – après environ 17 mois.",
+        diff: 3
+    }
+];
+
     // NOUVELLES CONSTANTES SHOP & CADEAU QUOTIDIEN
     const DAILY_COOLDOWN_MS = 86400000; // 24 heures en millisecondes
     const SHOP_ITEMS = {
@@ -862,114 +923,110 @@
         'INFINITE_REVIVE': ['Revive Infini', 1000, "Permet de faire une erreur de plus en Mode Infini.", 'CONSUMABLE'],
         'DAILY_REROLL': ['Reset Défi du Jour', 1500, "Permet de rejouer immédiatement au Défi du Jour.", 'CONSUMABLE'],
     };
-    
+   
     // Structure des récompenses aléatoires du cadeau de connexion
     const DAILY_GIFT_REWARDS = [
         // Type : 'points', 'xp' ou 'item' (si 'item', l'ID doit correspondre à une clé de SHOP_ITEMS)
         // Les points sont toujours donnés (probability: 100)
         { type: 'points', min: 100, max: 500, probability: 100, label: 'Points Boutique' },
-        
+       
         // Récompenses aléatoires
         { type: 'xp', min: 50, max: 250, probability: 60, label: 'XP' },
         { type: 'item', id: 'HINT_TOKEN', min: 1, max: 2, probability: 40, label: 'Indice(s)' },
         { type: 'item', id: 'XP_BOOST_X2', min: 1, max: 1, probability: 10, label: 'Boost XP x2' },
         { type: 'item', id: 'DAILY_REROLL', min: 1, max: 1, probability: 5, label: 'Reroll Quotidien' },
     ];
-    
+   
     let currentUser=null,current=0,score=0,quiz=[],streak=0,isInfiniteMode=!1,isChronoMode=!1,isQCMMode=!1,xpPerCorrect=10,xpToNextLevel=100,timer,dailyTimerInterval;
     const NEXT_QUESTION_DELAY=3e3,initialBots=[{pseudo:"Ibrahim",totalXp:15e3},{pseudo:"Aïcha",totalXp:9500},{pseudo:"Moussa",totalXp:6e3},{pseudo:"Fatima",totalXp:3500},{pseudo:"Ali",totalXp:1200}];
     let isAnswered=!1;
-    let totalQCMCompleted=0; 
+    let totalQCMCompleted=0;
     let shopTimerInterval;
 
-    // Fonction utilitaire pour nombre aléatoire dans une plage [Min, Max]
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    
+   
     function calculateXpToNextLevel(e){return 100*Math.pow(1.5,e-1)}function shuffleArray(e){for(let t=e.length-1;t>0;t--){const s=Math.floor(Math.random()*(t+1));[e[t],e[s]]=[e[s],e[t]]}return e}
-    
+   
     if(localStorage.getItem("currentUser")){
         currentUser=JSON.parse(localStorage.getItem("currentUser"));
-        
-        // Initialisation/Correction des propriétés manquantes 
-        currentUser.dailyQuizLastPlayed = currentUser.dailyQuizLastPlayed || 0;
-        currentUser.totalQCMCompleted = currentUser.totalQCMCompleted || 0;
-        currentUser.points = currentUser.points || 0; 
-        currentUser.ownedItems = currentUser.ownedItems || {'XP_BOOST_X2': 0, 'HINT_TOKEN': 0, 'INFINITE_REVIVE': 0, 'DAILY_REROLL': 0};
-        currentUser.shopLastRefresh = currentUser.shopLastRefresh || 0;
-        currentUser.dailyShopItems = currentUser.dailyShopItems || []; 
-        currentUser.dailyGiftLastCollected = currentUser.dailyGiftLastCollected || 0; // Nouvelle propriété
-        
-        totalQCMCompleted=currentUser.totalQCMCompleted;
-        generateDailyShop(); 
-        
-        document.getElementById("auth").classList.add("hidden");
-        showMenu();
-    }
-    
-    function saveUser(){
-        currentUser.totalQCMCompleted=totalQCMCompleted;
-        localStorage.setItem("user_"+currentUser.pseudo,JSON.stringify(currentUser));
-        localStorage.setItem("currentUser",JSON.stringify(currentUser));
-    }
-    
-    function register(){
-        const e=document.getElementById("pseudo").value.trim(),t=document.getElementById("password").value;
-        if(e.length<3||t.length<4)return alert("Pseudo ≥3 | Mot de passe ≥4");
-        if(localStorage.getItem("user_"+e))return alert("Pseudo déjà pris");
-        
-        currentUser={
-            pseudo:e,pass:t,level:1,xp:0,totalXp:0,streak:0,best:0,totalCorrect:0,totalQuestions:0,achievements:Array(12).fill(0),dailyQuizLastPlayed:0,totalQCMCompleted:0,
-            points: 1000, 
-            ownedItems: {'XP_BOOST_X2': 0, 'HINT_TOKEN': 0, 'INFINITE_REVIVE': 0, 'DAILY_REROLL': 0},
-            shopLastRefresh: 0, 
-            dailyShopItems: [],
-            dailyGiftLastCollected: 0 // Initialisation
-        };
-        totalQCMCompleted=0;
-        generateDailyShop(); 
-        saveUser();
-        document.getElementById("auth").classList.add("hidden");
-        showMenu();
-    }
-    
-    function login(){
-        const e=document.getElementById("pseudo").value.trim(),t=document.getElementById("password").value,s=localStorage.getItem("user_"+e);
-        if(!s)return alert("Pseudo inconnu");
-        const n=JSON.parse(s);
-        if(n.pass!==t)return alert("Mot de passe incorrect");
-        
-        currentUser=n;
-        
-        // Initialisation/Correction des propriétés manquantes 
+       
         currentUser.dailyQuizLastPlayed = currentUser.dailyQuizLastPlayed || 0;
         currentUser.totalQCMCompleted = currentUser.totalQCMCompleted || 0;
         currentUser.points = currentUser.points || 0;
         currentUser.ownedItems = currentUser.ownedItems || {'XP_BOOST_X2': 0, 'HINT_TOKEN': 0, 'INFINITE_REVIVE': 0, 'DAILY_REROLL': 0};
         currentUser.shopLastRefresh = currentUser.shopLastRefresh || 0;
-        currentUser.dailyShopItems = currentUser.dailyShopItems || []; 
-        currentUser.dailyGiftLastCollected = currentUser.dailyGiftLastCollected || 0; // Nouvelle propriété
-        
+        currentUser.dailyShopItems = currentUser.dailyShopItems || [];
+        currentUser.dailyGiftLastCollected = currentUser.dailyGiftLastCollected || 0;
+       
         totalQCMCompleted=currentUser.totalQCMCompleted;
-        
-        generateDailyShop(); 
+        generateDailyShop();
+       
+        document.getElementById("auth").classList.add("hidden");
+        showMenu();
+    }
+   
+    function saveUser(){
+        currentUser.totalQCMCompleted=totalQCMCompleted;
+        localStorage.setItem("user_"+currentUser.pseudo,JSON.stringify(currentUser));
+        localStorage.setItem("currentUser",JSON.stringify(currentUser));
+    }
+   
+    function register(){
+        const e=document.getElementById("pseudo").value.trim(),t=document.getElementById("password").value;
+        if(e.length<3||t.length<4)return alert("Pseudo ≥3 | Mot de passe ≥4");
+        if(localStorage.getItem("user_"+e))return alert("Pseudo déjà pris");
+       
+        currentUser={
+            pseudo:e,pass:t,level:1,xp:0,totalXp:0,streak:0,best:0,totalCorrect:0,totalQuestions:0,achievements:Array(12).fill(0),dailyQuizLastPlayed:0,totalQCMCompleted:0,
+            points: 1000,
+            ownedItems: {'XP_BOOST_X2': 0, 'HINT_TOKEN': 0, 'INFINITE_REVIVE': 0, 'DAILY_REROLL': 0},
+            shopLastRefresh: 0,
+            dailyShopItems: [],
+            dailyGiftLastCollected: 0
+        };
+        totalQCMCompleted=0;
+        generateDailyShop();
         saveUser();
         document.getElementById("auth").classList.add("hidden");
         showMenu();
     }
-    
+   
+    function login(){
+        const e=document.getElementById("pseudo").value.trim(),t=document.getElementById("password").value,s=localStorage.getItem("user_"+e);
+        if(!s)return alert("Pseudo inconnu");
+        const n=JSON.parse(s);
+        if(n.pass!==t)return alert("Mot de passe incorrect");
+       
+        currentUser=n;
+       
+        currentUser.dailyQuizLastPlayed = currentUser.dailyQuizLastPlayed || 0;
+        currentUser.totalQCMCompleted = currentUser.totalQCMCompleted || 0;
+        currentUser.points = currentUser.points || 0;
+        currentUser.ownedItems = currentUser.ownedItems || {'XP_BOOST_X2': 0, 'HINT_TOKEN': 0, 'INFINITE_REVIVE': 0, 'DAILY_REROLL': 0};
+        currentUser.shopLastRefresh = currentUser.shopLastRefresh || 0;
+        currentUser.dailyShopItems = currentUser.dailyShopItems || [];
+        currentUser.dailyGiftLastCollected = currentUser.dailyGiftLastCollected || 0;
+       
+        totalQCMCompleted=currentUser.totalQCMCompleted;
+       
+        generateDailyShop();
+        saveUser();
+        document.getElementById("auth").classList.add("hidden");
+        showMenu();
+    }
+   
     function logout(){localStorage.removeItem("currentUser"),location.reload()}
     function resetAccount(){confirm("Tout supprimer ? (niveau, XP, succès…)")&&(localStorage.removeItem("user_"+currentUser.pseudo),localStorage.removeItem("currentUser"),location.reload())}
-    
+   
     function showScreen(e){["auth","menu","game","settings","achievements","leaderboard","difficultyMenu","shop"].forEach(t=>document.getElementById(t).classList.add("hidden")),document.getElementById(e).classList.remove("hidden")}
-    
+   
     function updateStats(){
         if(!currentUser)return;
-        
-        // Logique de Level Up automatique si l'XP dépasse le max (peut arriver via Daily Gift)
+       
         xpToNextLevel=calculateXpToNextLevel(currentUser.level);
         while(currentUser.xp >= xpToNextLevel) {
             document.getElementById("levelup").play();
@@ -977,7 +1034,6 @@
             currentUser.xp -= xpToNextLevel;
             xpToNextLevel=calculateXpToNextLevel(currentUser.level);
         }
-
         document.getElementById("username").textContent=currentUser.pseudo,
         document.getElementById("levelNum").textContent=currentUser.level,
         document.getElementById("streak").textContent=currentUser.streak,
@@ -988,39 +1044,36 @@
         document.getElementById("username2").textContent=currentUser.pseudo,
         document.getElementById("levelNum2").textContent=currentUser.level,
         document.getElementById("totalXp").textContent=Math.round(currentUser.totalXp);
-        
-        // Affichage des points et de l'inventaire// document.getElementById("userPoints").textContent = currentUser.points.toLocaleString();      document.getElementById("hintCount").textContent = currentUser.ownedItems['HINT_TOKEN'];
+       
         document.getElementById("rerollCount").textContent = currentUser.ownedItems['DAILY_REROLL'];
-        
+        document.getElementById("hintCount").textContent = currentUser.ownedItems['HINT_TOKEN'];
+       
         checkAchievements();
-        saveUser(); // Sauvegarde après un potentiel Level Up
+        saveUser();
     }
-    
+   
     function showMenu(){
         showScreen("menu"),updateStats();
-        
-        // 🚨 NOUVEL APPEL : Vérifier et collecter le cadeau quotidien
+       
         checkAndCollectDailyGift();
-        
+       
         checkDailyQuizAvailability();
         const e=document.getElementById("answers");
         e.innerHTML=`<div class="ans vrai" onclick="answer(true)">VRAI</div><div class="ans faux" onclick="answer(false)">FAUX</div>`;
         e.classList.remove("qcm-style");
-        
-        // Arrête le chrono du shop s'il est en cours
+       
         if(shopTimerInterval) clearInterval(shopTimerInterval);
+        
+        if (!document.getElementById('countdownTimer').dataset.started) {
+            startRamadanCountdown();
+            document.getElementById('countdownTimer').dataset.started = "true";
+        }
     }
-    
+   
     function showSettings(){showScreen("settings"),updateStats()}
     function showAchievements(){showScreen("achievements"),updateStats()}
     function showDifficultyMenu(){showScreen("difficultyMenu")}
-    
-    /**
-     * Affiche le pop-up pour les succès ou les récompenses.
-     * @param {string} emoji - L'emoji à afficher (ex: "🏆", "💰").
-     * @param {string} title - Le titre du pop-up.
-     * @param {string} text - Le corps du texte (supporte les retours à la ligne grâce au CSS).
-     */
+   
     function showPopup(emoji, title, text){
         document.getElementById("popupEmoji").textContent=emoji;
         document.getElementById("popupTitle").textContent=title;
@@ -1029,30 +1082,21 @@
         setTimeout(()=>{document.getElementById("popup").classList.remove("show")},4e3);
     }
 
-    // --- NOUVELLE FONCTION CADEAU QUOTIDIEN ---
     function checkAndCollectDailyGift() {
-        
-        // Vérification de l'existence du champ (pour les anciens utilisateurs)
         if (typeof currentUser.dailyGiftLastCollected === 'undefined') {
-            currentUser.dailyGiftLastCollected = 0; 
+            currentUser.dailyGiftLastCollected = 0;
         }
-
-        // Vérification si le cadeau est disponible
         if (Date.now() - currentUser.dailyGiftLastCollected < DAILY_COOLDOWN_MS) {
-            return; 
+            return;
         }
-
-        // --- Cadeau disponible : Démarrer la collection ---
-        
-        let collectedRewards = []; 
+       
+        let collectedRewards = [];
         let totalXpGained = 0;
-
         DAILY_GIFT_REWARDS.forEach(reward => {
             const roll = getRandomInt(1, 100);
-            
+           
             if (roll <= reward.probability) {
                 const amount = getRandomInt(reward.min, reward.max);
-
                 switch (reward.type) {
                     case 'points':
                         currentUser.points += amount;
@@ -1060,129 +1104,111 @@
                     case 'xp':
                         currentUser.xp += amount;
                         currentUser.totalXp += amount;
-                        totalXpGained += amount; // Pour le message
+                        totalXpGained += amount;
                         break;
                     case 'item':
                         currentUser.ownedItems[reward.id] = (currentUser.ownedItems[reward.id] || 0) + amount;
                         break;
                 }
-
                 collectedRewards.push(`${amount.toLocaleString()} ${reward.label}`);
             }
         });
-
-        // Mise à jour du timestamp et sauvegarde
         currentUser.dailyGiftLastCollected = Date.now();
         saveUser();
-        updateStats(); // Mise à jour de l'affichage (XP, points, niveau)
-
-        // Affichage du pop-up
+        updateStats();
         if (collectedRewards.length > 0) {
             const rewardMessage = collectedRewards.join('\n');
             let title = "Cadeau Quotidien !";
             let text = `MashaAllah ! Vous avez gagné :\n${rewardMessage}`;
-            
-            showPopup('🎁', title, text); 
+           
+            showPopup('🎁', title, text);
         }
     }
-    // --- FIN NOUVELLE FONCTION CADEAU QUOTIDIEN ---
-
-
-    
+   
     function getMidnightTime(date) {
         const d = new Date(date);
         d.setHours(0, 0, 0, 0);
         return d.getTime();
     }
-
     function generateDailyShop() {
         const now = Date.now();
-        const midnightToday = getMidnightTime(now); 
+        const midnightToday = getMidnightTime(now);
         const midnightTomorrow = getMidnightTime(now + DAILY_COOLDOWN_MS);
-
         if (currentUser.shopLastRefresh < midnightToday || currentUser.dailyShopItems.length === 0) {
             console.log("Génération du nouveau shop...");
-            
+           
             const allItemKeys = Object.keys(SHOP_ITEMS);
-            const selectedKeys = shuffleArray(allItemKeys).slice(0, 3); 
-            
+            const selectedKeys = shuffleArray(allItemKeys).slice(0, 3);
+           
             currentUser.dailyShopItems = [];
-
             selectedKeys.forEach(key => {
                 const item = SHOP_ITEMS[key];
                 const basePrice = item[1];
-                
-                const randomModifier = Math.floor(Math.random() * 66) - 50; 
+               
+                const randomModifier = Math.floor(Math.random() * 66) - 50;
                 const finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
-                
-                const maxStock = (key === 'HINT_TOKEN' ? 5 : 
-                                  key === 'XP_BOOST_X2' ? 3 : 
+               
+                const maxStock = (key === 'HINT_TOKEN' ? 5 :
+                                  key === 'XP_BOOST_X2' ? 3 :
                                   key === 'INFINITE_REVIVE' ? 1 : 1);
-                const stock = Math.floor(Math.random() * maxStock) + 1; 
-
+                const stock = Math.floor(Math.random() * maxStock) + 1;
                 currentUser.dailyShopItems.push({
                     code: key,
                     name: item[0],
                     price: finalPrice,
                     originalPrice: basePrice,
-                    stock: stock, 
+                    stock: stock,
                     description: item[2],
                 });
             });
-
-            currentUser.shopLastRefresh = midnightToday; 
+            currentUser.shopLastRefresh = midnightToday;
             saveUser();
         }
-        
+       
         return midnightTomorrow - now;
     }
-
     function updateShopTimerDisplay(ms) {
         const t = document.getElementById("shopChrono");
-        
+       
         const seconds = Math.floor(ms / 1000);
         if (seconds <= 0) {
             t.textContent = "Actualisation en cours... (Retournez au menu)";
             if(shopTimerInterval) clearInterval(shopTimerInterval);
             return;
         }
-        
+       
         const h = Math.floor(seconds / 3600);
         const m = Math.floor(seconds % 3600 / 60);
         const s = seconds % 60;
-        
+       
         const i = String(h).padStart(2, "0"), c = String(m).padStart(2, "0"), r = String(s).padStart(2, "0");
         t.textContent = `Actualisation dans : ${i}h ${c}m ${r}s`;
     }
-
     function showShop() {
         showScreen("shop");
-        
+       
         if(shopTimerInterval) clearInterval(shopTimerInterval);
-        
-        let timeLeft = generateDailyShop(); 
-
+       
+        let timeLeft = generateDailyShop();
         const shopContainer = document.getElementById("shopItemsContainer");
-        shopContainer.innerHTML = ''; 
-
+        shopContainer.innerHTML = '';
         updateShopTimerDisplay(timeLeft);
-        shopTimerInterval = setInterval(() => {            
-            timeLeft = generateDailyShop(); 
+        shopTimerInterval = setInterval(() => {
+            timeLeft = generateDailyShop();
             updateShopTimerDisplay(timeLeft);
             if (timeLeft <= 0) {
                 clearInterval(shopTimerInterval);
-                showShop(); 
+                showShop();
             }
         }, 1000);
-
         currentUser.dailyShopItems.forEach(item => {
             const modifier = Math.round(((item.price - item.originalPrice) / item.originalPrice) * 100);
             const modifierText = modifier !== 0 ? (modifier > 0 ? `+${modifier}%` : `${modifier}%`) : '';
             const discountText = modifier < 0
-                ? `<span style="color:#f87171;text-decoration:line-through;margin-right:8px;">${item.originalPrice.toLocaleString()}</span>` 
+                ? `<span style="color:#f87171;text-decoration:line-through;margin-right:8px;">${item.originalPrice.toLocaleString()}</span>`
                 : '';
             const priceColor = modifier < 0 ? '#FFD700' : '#C0C0C0';
-            
+           
             const itemDiv = document.createElement('div');
             itemDiv.className = 'shop-item';
             itemDiv.innerHTML = `
@@ -1193,9 +1219,9 @@
                 <p class="item-desc">${item.description}</p>
                 <div class="item-footer">
                     <p class="price">${discountText} <span style="color:${priceColor};">${item.price.toLocaleString()}</span> points</p>
-                    <button class="buy-btn menu-btn" 
+                    <button class="buy-btn menu-btn"
                             id="buy-${item.code}"
-                            data-code="${item.code}" 
+                            data-code="${item.code}"
                             data-price="${item.price}"
                             onclick="buyItem('${item.code}', ${item.price})">Acheter</button>
                 </div>
@@ -1205,11 +1231,11 @@
         updateOwnedItemsDisplay();
         updateBuyButtons();
     }
-    
+   
     function updateOwnedItemsDisplay() {
         const ownedContainer = document.getElementById("ownedItemsList");
         ownedContainer.innerHTML = '';
-        
+       
         let found = false;
         Object.keys(currentUser.ownedItems).forEach(key => {
             const count = currentUser.ownedItems[key];
@@ -1221,14 +1247,12 @@
                 found = true;
             }
         });
-
         if (!found) {
             ownedContainer.innerHTML = '<li>Inventaire vide.</li>';
         }
         document.getElementById("rerollCount").textContent = currentUser.ownedItems['DAILY_REROLL'];
         document.getElementById("hintCount").textContent = currentUser.ownedItems['HINT_TOKEN'];
     }
-
     function updateBuyButtons() {
         currentUser.dailyShopItems.forEach(item => {
             const button = document.getElementById(`buy-${item.code}`);
@@ -1238,156 +1262,128 @@
             }
         });
     }
-
     function buyItem(code, price) {
         if (currentUser.points < price) {
             alert("Vous n'avez pas assez de points !");
             return;
         }
-
         const shopItem = currentUser.dailyShopItems.find(item => item.code === code);
         if (!shopItem || shopItem.stock <= 0) {
             alert("Article épuisé ou non trouvé.");
             if(shopItem.stock <= 0) { updateBuyButtons(); }
             return;
         }
-
         currentUser.points -= price;
-        shopItem.stock--; 
-
+        shopItem.stock--;
         currentUser.ownedItems[code] = (currentUser.ownedItems[code] || 0) + 1;
-        
+       
         document.getElementById(`stock-${code}`).textContent = shopItem.stock;
         updateStats();
         updateOwnedItemsDisplay();
         updateBuyButtons();
-        
+       
         saveUser();
-        
+       
         showPopup("💰", "Achat Réussi !", `${SHOP_ITEMS[code][0]} acheté pour ${price} points !`);
     }
-    
+   
     function useDailyReroll() {
         if (currentUser.ownedItems['DAILY_REROLL'] > 0) {
             if(!confirm("Êtes-vous sûr de vouloir consommer un Reroll pour rejouer au Défi du Jour ?")) return;
-
             currentUser.ownedItems['DAILY_REROLL']--;
-            currentUser.dailyQuizLastPlayed = 0; 
+            currentUser.dailyQuizLastPlayed = 0;
             saveUser();
-            updateStats(); 
+            updateStats();
             showPopup("🔄", "Reroll Utilisé !", "Le Défi du Jour est prêt à être rejoué !");
             checkDailyQuizAvailability();
         } else {
             alert("Vous n'avez pas de ticket de réinitialisation.");
         }
     }
-
     function getLeaderboardData(){let e=[];initialBots.forEach(t=>{const s=(.1*Math.random()-.05)*t.totalXp,n=Math.max(0,Math.round(t.totalXp+s));e.push({pseudo:t.pseudo,totalXp:n})}),currentUser&&currentUser.totalXp>0&&e.push({pseudo:currentUser.pseudo,totalXp:Math.round(currentUser.totalXp)}),e.sort((e,t)=>t.totalXp-e.totalXp);const t=[],s=new Set;for(const n of e)s.has(n.pseudo)||t.push(n);return t.slice(0,10)}
     function showLeaderboard(){showScreen("leaderboard");const e=getLeaderboardData(),t=document.getElementById("leaderboardTable").querySelector("tbody");t.innerHTML="",e.forEach((e,s)=>{const n=document.createElement("tr");let o="";currentUser&&e.pseudo===currentUser.pseudo&&(o="user-row"),n.className=o,n.innerHTML=`<td>${s+1}</td><td>${e.pseudo}</td><td>${e.totalXp.toLocaleString()} XP</td>`,t.appendChild(n)})}
-    
+   
     function checkDailyQuizAvailability(){clearTimeout(dailyTimerInterval);const e=Date.now(),t=currentUser.dailyQuizLastPlayed||0,s=t+DAILY_COOLDOWN_MS,n=s-e,o=document.getElementById("dailyQuizBtn"),a=document.getElementById("dailyTimerDisplay");
     const c=document.getElementById("dailyQuizBtnContainer");
-    
+   
     return n<=0?(a.style.display="none",o.onclick=startDailyQuiz,o.classList.remove("disabled"),o.classList.add("play-button"),c.style.opacity="1",o.textContent="JOUER","available"):(a.style.display="block",o.onclick=null,o.classList.add("disabled"),c.style.opacity=".6",o.textContent="REVENIR PLUS TARD",updateDailyTimerDisplay(n),dailyTimerInterval=setInterval(()=>{const e=s-Date.now();updateDailyTimerDisplay(e),e<=0&&checkDailyQuizAvailability()},1e3),"unavailable")}
-
     function updateDailyTimerDisplay(e){const t=document.getElementById("dailyTimerDisplay");if(e<=0)return t.textContent="",void checkDailyQuizAvailability();const s=Math.floor(e/1e3),n=Math.floor(s/3600),o=Math.floor(s%3600/60),a=s%60,i=String(n).padStart(2,"0"),c=String(o).padStart(2,"0"),r=String(a).padStart(2,"0");t.textContent=`Prochaine partie dans : ${i}h ${c}m ${r}s`}
-
     function startDailyQuiz(){return"unavailable"===checkDailyQuizAvailability()?(alert("Le Défi du Jour n'est pas encore disponible."),void showMenu()):(isInfiniteMode=!1,isChronoMode=!1,isQCMMode=!1,xpPerCorrect=0,
     quiz=buildQuizForDifficulty([{diff:1,count:2},{diff:2,count:2},{diff:3,count:1}]),
     quiz.length<5&&(quiz=quiz.concat(shuffleArray([...questions.filter(e=>!quiz.includes(e))]).slice(0,5-quiz.length))),
     quiz.length!==5?(alert("Erreur: Impossible de générer 5 questions pour le Défi du Jour."),void showMenu()):void launchGame(0,"DÉFI DU JOUR (5 Q.) - Objectif 5/5 !","daily"))}
-    
+   
     function buildQuizForDifficulty(e){let t=[...questions],s=[];return e.forEach(e=>{const n=t.filter(t=>t.diff===e.diff);n.length<e.count?s=s.concat(shuffleArray(n).slice(0,n.length)):s=s.concat(shuffleArray(n).slice(0,e.count))}),shuffleArray(s)}
-    
-    function startQCM(){
-        isInfiniteMode=false;
-        isChronoMode=false;
-        isQCMMode=true; 
-        xpPerCorrect=10;
-        const config=[{diff:2,count:10}];
-        quiz=buildQuizForDifficulty(config);
-        launchGame(0,"Mode QCM (10 Questions)","qcm");
-    }
+   
+    // ================================================================
+    // MODE QCM - VERSION CLASSIQUE (question + 4 choix A/B/C/D)
+    // ================================================================
 
-    function startClassic(e){isInfiniteMode=!1,isChronoMode=!1,isQCMMode=!1;let t=0,s,n;if(1===e)xpPerCorrect=1,s=[{diff:1,count:10}],n="Classique : Facile (1 XP/Q)";else if(2===e)xpPerCorrect=10,s=[{diff:1,count:5},{diff:2,count:5}],n="Classique : Normal (10 XP/Q)";else{if(3!==e)return;xpPerCorrect=15,s=[{diff:2,count:5},{diff:3,count:5}],n="Classique : Difficile (15 XP/Q)"}const o=1e3*t;quiz=buildQuizForDifficulty(s),launchGame(o,n,"classic")}
-    function startChrono(){isInfiniteMode=!1,isChronoMode=!0,isQCMMode=!1,xpPerCorrect=10;const e=1e4,t=[{diff:1,count:5},{diff:2,count:5}];quiz=buildQuizForDifficulty(t),launchGame(e,"Mode Chrono (10 Q. - 10s/Q)","chrono")}
-    function startInfinite(){isInfiniteMode=!0,isChronoMode=!1,isQCMMode=!1,xpPerCorrect=10,quiz=shuffleArray([...questions]),launchGame(0,"Mode Infini : 1 Faute = Perdu","infinite")}
-    
-    function launchGame(e=0,t,s){
-        showScreen("game"),current=0,score=0,clearTimeout(timer),document.getElementById("nextBtn").classList.add("hidden"),document.getElementById("gameTitle").textContent=t,document.getElementById("game").setAttribute("data-mode",s);
-        
-        const answersContainer=document.getElementById("answers");
-        
-        const hintBtn = document.getElementById("hintBtn");
-        if (!isQCMMode && s !== 'daily' && !isInfiniteMode && currentUser.ownedItems['HINT_TOKEN'] > 0) { 
-            hintBtn.classList.remove("hidden");
-            hintBtn.textContent = `Utiliser Indice (Possédé : ${currentUser.ownedItems['HINT_TOKEN']})`;
-        } else {
-             hintBtn.classList.add("hidden");
+    function startQCM() {
+        isInfiniteMode = false;
+        isChronoMode = false;
+        isQCMMode = true;
+        xpPerCorrect = 10;
+
+        quiz = shuffleArray([...qcmQuestions]).slice(0, 10);
+
+        if (quiz.length < 5) {
+            alert("Pas assez de questions QCM pour le moment. Ajoute-en plus !");
+            showMenu();
+            return;
         }
 
+        launchGame(0, "Mode QCM (10 Questions - 4 Choix)", "qcm");
+    }
 
-        if(isQCMMode){
-            answersContainer.innerHTML=`
-                <button class="ans" id="ans1" data-correct="false" onclick="answerQCM(this)"></button>
-                <button class="ans" id="ans2" data-correct="false" onclick="answerQCM(this)"></button>
-                <button class="ans" id="ans3" data-correct="false" onclick="answerQCM(this)"></button>
-                <button class="ans" id="ans4" data-correct="false" onclick="answerQCM(this)"></button>
+    function launchGame(delay = 0, title, mode) {
+        showScreen("game");
+        current = 0;
+        score = 0;
+        clearTimeout(timer);
+        document.getElementById("nextBtn").classList.add("hidden");
+        document.getElementById("gameTitle").textContent = title;
+        document.getElementById("game").setAttribute("data-mode", mode);
+
+        const answersContainer = document.getElementById("answers");
+        const hintBtn = document.getElementById("hintBtn");
+
+        hintBtn.classList.add("hidden");
+
+        if (isQCMMode) {
+            answersContainer.innerHTML = `
+                <button class="ans" id="ansA" data-index="0" onclick="answerQCM(this)">A</button>
+                <button class="ans" id="ansB" data-index="1" onclick="answerQCM(this)">B</button>
+                <button class="ans" id="ansC" data-index="2" onclick="answerQCM(this)">C</button>
+                <button class="ans" id="ansD" data-index="3" onclick="answerQCM(this)">D</button>
             `;
-            answersContainer.classList.add("qcm-style"); 
-        }else{
-            answersContainer.innerHTML=`<div class="ans vrai" onclick="answer(true)">VRAI</div><div class="ans faux" onclick="answer(false)">FAUX</div>`;
+            answersContainer.classList.add("qcm-style");
+        } else {
+            answersContainer.innerHTML = `<div class="ans vrai" onclick="answer(true)">VRAI</div><div class="ans faux" onclick="answer(false)">FAUX</div>`;
             answersContainer.classList.remove("qcm-style");
         }
-        
-        isChronoMode&&e>0?(document.getElementById("timerContainer").classList.remove("hidden"),document.getElementById("timerContainer").setAttribute("data-time-limit",e)):document.getElementById("timerContainer").classList.add("hidden"),document.getElementById("result").textContent="",document.getElementById("exp").textContent="",document.getElementById("levelUp").classList.add("hidden"),document.getElementById("restartBtn").classList.add("hidden"),answersContainer.querySelectorAll(".ans").forEach(e=>e.classList.remove("disabled")),currentUser&&0===currentUser.achievements[0]&&(currentUser.achievements[0]=1,document.getElementById("unlock").play(),showPopup("👶","Succès Débloqué !","Premier pas : Jouer sa première partie"),saveUser()),nextQuestion();
-    }
-    
-    function generateQCMOptions(currentQuestion) {
-        const allQuestions = [...questions];
-        
-        let finalOptions = [];
-        let correctOptionText = "";
-        
-        let correctQuestion = currentQuestion.a === true ? currentQuestion : allQuestions.find(q => q.a === true && q !== currentQuestion);
-        if (!correctQuestion) correctQuestion = currentQuestion;
-        
-        finalOptions.push({text: correctQuestion.q, isCorrect: true});
-        correctOptionText = correctQuestion.q;
 
-        
-        let distractorsPool = allQuestions.filter(q => q.a === false && q.q !== correctOptionText);
-        
-        if(distractorsPool.length < 3) {
-             distractorsPool = distractorsPool.concat(allQuestions.filter(q => q.a === true && q.q !== correctOptionText));
-        }
-        
-        distractorsPool = shuffleArray(distractorsPool);
-        
-        let count = 0;
-        while (finalOptions.length < 4 && count < distractorsPool.length) {
-            let distract = distractorsPool[count];
-            if (!finalOptions.some(opt => opt.text === distract.q)) {
-                finalOptions.push({text: distract.q, isCorrect: false});
-            }
-            count++;
-        }
-        
-        while (finalOptions.length < 4) {
-             finalOptions.push({text: "Affirmation manquante", isCorrect: false});
-        }
-        
-        return shuffleArray(finalOptions);
+        isChronoMode && delay > 0 ? (document.getElementById("timerContainer").classList.remove("hidden"), document.getElementById("timerContainer").setAttribute("data-time-limit", delay)) : document.getElementById("timerContainer").classList.add("hidden");
+
+        document.getElementById("result").textContent = "";
+        document.getElementById("exp").textContent = "";
+        document.getElementById("levelUp").classList.add("hidden");
+        document.getElementById("restartBtn").classList.add("hidden");
+        answersContainer.querySelectorAll(".ans").forEach(e => e.classList.remove("disabled"));
+
+        currentUser && currentUser.achievements[0] === 0 && (currentUser.achievements[0] = 1, document.getElementById("unlock").play(), showPopup("👶", "Succès Débloqué !", "Premier pas : Jouer sa première partie"), saveUser());
+
+        nextQuestion();
     }
-    
+   
     function nextQuestion(){
         clearTimeout(timer),isAnswered=!1,
-        
+       
         document.getElementById("timerFill").style.transition="none";
         document.getElementById("timerFill").style.width="100%";
-        
+       
         document.getElementById("result").textContent="",document.getElementById("exp").textContent="",document.getElementById("nextBtn").classList.add("hidden"),document.getElementById("levelup").classList.add("hidden"),document.getElementById("restartBtn").classList.add("hidden");
-        
+       
         const hintBtn = document.getElementById("hintBtn");
         const mode = document.getElementById("game").getAttribute("data-mode");
         if (isQCMMode || mode === 'daily' || isInfiniteMode || currentUser.ownedItems['HINT_TOKEN'] === 0) {
@@ -1395,48 +1391,63 @@
         } else {
              hintBtn.classList.remove("hidden");
         }
-        
+       
         const answersContainer = document.getElementById("answers");
         answersContainer.querySelectorAll(".ans").forEach(e => {
             e.classList.remove("disabled", "vrai", "faux");
-            e.style.backgroundColor = ''; 
-            e.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)'; 
+            e.style.backgroundColor = '';
+            e.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)';
+            e.disabled = false;
         });
-        
+       
         let e;
         const t=document.getElementById("game").getAttribute("data-mode");
-        
-        if("infinite"===t?(current>=quiz.length&&(quiz=shuffleArray([...questions]),current=0),e=quiz[current],document.getElementById("q").innerHTML=`Score actuel: **${score}**<br>${e.q}`,document.getElementById("gameProgress").textContent=""):"daily"===t||"chrono"===t||"classic"===t||"qcm"===t){if(current<quiz.length)e=quiz[current],document.getElementById("gameProgress").textContent=`Question ${current+1}/${quiz.length}`,document.getElementById("q").innerHTML=isQCMMode ? "Quelle est l'affirmation VRAIE ?" : e.q;else return void endQuiz()}
-        
-        if(isQCMMode){
-            const qcmOptions = generateQCMOptions(e);
-            e.qcmOptions = qcmOptions;
-            
-            qcmOptions.forEach((option, index) => {
-                const button = document.getElementById(`ans${index + 1}`);
-                button.textContent = option.text;
-                button.setAttribute("data-correct", option.isCorrect); 
-            });
-            
-        } else {
-             if(answersContainer.children.length !== 2 || !answersContainer.children[0].textContent.includes("VRAI")){
-                 answersContainer.innerHTML=`<div class="ans vrai" onclick="answer(true)">VRAI</div><div class="ans faux" onclick="answer(false)">FAUX</div>`;
-             }
-             document.getElementById("q").innerHTML = e.q;
+       
+        if("infinite"===t){
+            if(current>=quiz.length){
+                quiz=shuffleArray([...questions]);
+                current=0;
+            }
+            e=quiz[current];
+            document.getElementById("q").innerHTML=`Score actuel: **${score}**<br>${e.q}`;
+            document.getElementById("gameProgress").textContent="";
+        } else if("daily"===t || "chrono"===t || "classic"===t){
+            if(current<quiz.length){
+                e=quiz[current];
+                document.getElementById("gameProgress").textContent=`Question ${current+1}/${quiz.length}`;
+                document.getElementById("q").innerHTML = isQCMMode ? e.question : e.q;
+            } else {
+                return endQuiz();
+            }
+        } else if(isQCMMode){
+            if(current<quiz.length){
+                e=quiz[current];
+                document.getElementById("gameProgress").textContent=`Question ${current+1}/${quiz.length}`;
+                document.getElementById("q").innerHTML = e.question;
+
+                const labels = ["A", "B", "C", "D"];
+                e.options.forEach((option, index) => {
+                    const btn = document.getElementById(`ans${labels[index]}`);
+                    btn.textContent = `${labels[index]}) ${option}`;
+                    btn.dataset.index = index;
+                });
+            } else {
+                return endQuiz();
+            }
         }
-        
+
         current++,isChronoMode&&startTimer()
     }
-    
+   
     function useHint() {
         if(isAnswered) return;
         if(currentUser.ownedItems['HINT_TOKEN'] > 0) {
             const currentQuestion = quiz[current - 1];
-            
+           
             if (currentQuestion) {
                 const correct = currentQuestion.a;
                 const correctAns = correct ? "VRAI" : "FAUX";
-                
+               
                 if(confirm(`Utiliser un indice pour révéler la bonne réponse VRAI/FAUX ? (Possédé : ${currentUser.ownedItems['HINT_TOKEN']})`)){
                     currentUser.ownedItems['HINT_TOKEN']--;
                     document.getElementById("hintBtn").textContent = `Utiliser Indice (Possédé : ${currentUser.ownedItems['HINT_TOKEN']})`;
@@ -1450,73 +1461,86 @@
         }
     }
 
-
     function startTimer(){const e=parseInt(document.getElementById("timerContainer").getAttribute("data-time-limit"))||1e4;let t=Math.ceil(e/1e3);const s=document.getElementById("timerFill"),n=document.getElementById("timerText");
-    
+   
     requestAnimationFrame(() => {
         s.style.transition=`width ${e}ms linear`,s.style.width="100%"
     });
+    n.textContent=`${t}s`;const o=()=>{t--,n.textContent=`${t}s`,t<=0?(clearTimeout(timer),isAnswered||(isAnswered=!1,s.style.transition="none",s.style.width="0%",document.getElementById("timeout").play(),processAnswer(false,true))):timer=setTimeout(o,1e3)};timer=setTimeout(o,1e3)}
 
-    n.textContent=`${t}s`;const o=()=>{t--,n.textContent=`${t}s`,t<=0?(clearTimeout(timer),isAnswered||(isAnswered=!0,s.style.transition="none",s.style.width="0%",document.getElementById("timeout").play(),processAnswer(false,true))):timer=setTimeout(o,1e3)};timer=setTimeout(o,1e3)}
-    
-    function answerQCM(e){
-        if(isAnswered)return;
-        isAnswered=true;
-        clearTimeout(timer);
-        document.getElementById("timerFill").style.transition="none";
-        
-        const isCorrect=e.getAttribute("data-correct")==="true";
-        processAnswerQCM(isCorrect, e);
-    }
-    
     function answer(e){if(isAnswered)return;isAnswered=!0,clearTimeout(timer),document.getElementById("timerFill").style.transition="none",processAnswer(e,!1)}
-    
-    function processAnswerQCM(e, btnClicked){
-        if(!currentUser)return;
-        const s=current-1,n=quiz[s];
-        
-        currentUser.totalQuestions++;
-        
-        const correctButton = document.getElementById("answers").querySelector('[data-correct="true"]');
+   
+    function answerQCM(btn) {
+        if (isAnswered) return;
+        isAnswered = true;
+        clearTimeout(timer);
 
-        document.getElementById("answers").querySelectorAll(".ans").forEach(btn => {
-            btn.classList.add("disabled");
-            if (btn.getAttribute("data-correct") === "true") {
-                btn.style.backgroundColor = '#388E3C'; 
-                btn.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
-            } else if (btn === btnClicked && !e) { 
-                 btn.style.backgroundColor = '#D32F2F'; 
-                 btn.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
+        const selectedIndex = parseInt(btn.dataset.index);
+        const currentQ = quiz[current - 1];
+        const isCorrect = selectedIndex === currentQ.correctIndex;
+
+        document.getElementById("answers").querySelectorAll(".ans").forEach(b => {
+            b.disabled = true;
+            b.classList.add("disabled");
+
+            const idx = parseInt(b.dataset.index);
+            if (idx === currentQ.correctIndex) {
+                b.style.backgroundColor = '#388E3C';
+                b.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
+            } else if (idx === selectedIndex && !isCorrect) {
+                b.style.backgroundColor = '#D32F2F';
+                b.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
             }
         });
-        
-        e?(document.getElementById("good").play(),document.getElementById("result").style.color="#388E3C",document.getElementById("result").textContent="✔ Correct !",score++,currentUser.totalCorrect++,currentUser.streak++,currentUser.streak>currentUser.best&&(currentUser.best=currentUser.streak),
-        
-        (e=>{let t=e;t+=Math.floor(currentUser.streak/5);
-            if (currentUser.ownedItems['XP_BOOST_X2'] > 0) t *= 2;
 
-            currentUser.xp+=t,currentUser.totalXp+=t;
-            currentUser.points+=10;
-            
-            document.getElementById("exp").innerHTML=`+${t} XP ! (+10 Points) (Série : ${currentUser.streak})`;
-            updateStats(); // Mise à jour des stats après XP/Level
-        })(xpPerCorrect)
-        
-        ):(document.getElementById("bad").play(),document.getElementById("result").style.color="#D32F2F",document.getElementById("result").textContent="❌ Faux !",document.getElementById("exp").textContent=`Explication: L'affirmation correcte était: "${correctButton.textContent}"`,
-        
-        (e => {
-            const t = Math.ceil(e / 2);
-            if (currentUser.xp -= t, currentUser.totalXp = Math.max(0, currentUser.totalXp - t), currentUser.xp < 0) {
-                currentUser.xp = 0;
-            }
-            document.getElementById("exp").textContent += ` | ⚠️ -${t} XP de pénalité !`;
-        })(xpPerCorrect),
-        
-        currentUser.streak=0,document.getElementById("exp").textContent+=` | Série interrompue.`);
-         
-        current<quiz.length?setTimeout(()=>{nextQuestion()},NEXT_QUESTION_DELAY):endQuiz();
-        
-        saveUser(),updateStats();
+        processAnswerQCM(isCorrect);
+    }
+   
+    function processAnswerQCM(isCorrect) {
+        if (!currentUser) return;
+
+        currentUser.totalQuestions++;
+
+        const q = quiz[current - 1];
+
+        if (isCorrect) {
+            document.getElementById("good").play();
+            document.getElementById("result").style.color = "#388E3C";
+            document.getElementById("result").textContent = "✔ Correct !";
+            score++;
+            currentUser.totalCorrect++;
+            currentUser.streak++;
+            if (currentUser.streak > currentUser.best) currentUser.best = currentUser.streak;
+
+            let xpGain = xpPerCorrect;
+            if (currentUser.ownedItems['XP_BOOST_X2'] > 0) xpGain *= 2;
+
+            currentUser.xp += xpGain;
+            currentUser.totalXp += xpGain;
+            currentUser.points += 10;
+
+            document.getElementById("exp").innerHTML = `+${xpGain} XP ! (+10 Points) (Série : ${currentUser.streak})`;
+        } else {
+            document.getElementById("bad").play();
+            document.getElementById("result").style.color = "#D32F2F";
+            document.getElementById("result").textContent = "❌ Faux !";
+            document.getElementById("exp").textContent = `Explication : ${q.explanation}`;
+
+            currentUser.streak = 0;
+            const penalty = Math.ceil(xpPerCorrect / 2);
+            currentUser.xp = Math.max(0, currentUser.xp - penalty);
+            currentUser.totalXp = Math.max(0, currentUser.totalXp - penalty);
+            document.getElementById("exp").textContent += ` | ⚠️ -${penalty} XP de pénalité !`;
+        }
+
+        updateStats();
+        saveUser();
+
+        if (current < quiz.length) {
+            setTimeout(nextQuestion, NEXT_QUESTION_DELAY);
+        } else {
+            endQuiz();
+        }
     }
 
     function processAnswer(e,t){
@@ -1527,59 +1551,57 @@
                 document.getElementById("answers").querySelectorAll(".ans").forEach(btn=>{
                     btn.classList.add("disabled");
                     if(btn.textContent.includes(o ? 'VRAI' : 'FAUX')){
-                        btn.style.backgroundColor = '#388E3C'; 
+                        btn.style.backgroundColor = '#388E3C';
                         btn.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
                     } else if (btn.textContent.includes(e ? 'VRAI' : 'FAUX') && !c) {
-                        btn.style.backgroundColor = '#D32F2F'; 
+                        btn.style.backgroundColor = '#D32F2F';
                         btn.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
                     }
                 });
-        
+       
         document.getElementById("hintBtn").classList.add("hidden");
-              
+             
         if(c) {document.getElementById("good"),document.getElementById("result").style.color="#388E3C",document.getElementById("result").textContent="✔ Correct !",score++,currentUser.totalCorrect++,currentUser.streak++,currentUser.streak>currentUser.best&&(currentUser.best=currentUser.streak);
             if(!i){
                 (e=>{
                     let t=e;
                     isInfiniteMode||(t+=Math.floor(currentUser.streak/5));
-                    
+                   
                     if (currentUser.ownedItems['XP_BOOST_X2'] > 0) t *= 2;
-
                     currentUser.xp+=t,currentUser.totalXp+=t;
                     if (!isInfiniteMode) currentUser.points+=10;
-                    else currentUser.points+=Math.max(1, Math.floor(t/2)); 
-
+                    else currentUser.points+=Math.max(1, Math.floor(t/2));
                     document.getElementById("exp").innerHTML=`+${t} XP ! (+${!isInfiniteMode ? 10 : Math.max(1, Math.floor(t/2))} Points) (Série : ${currentUser.streak})`;
-                    updateStats(); // Mise à jour des stats après XP/Level
+                    updateStats();
                 })(xpPerCorrect);
             }
             i&&((document.getElementById("exp").innerHTML=`Bonne réponse ! (Série : ${currentUser.streak})`),!0);
         } else {t||document.getElementById("bad").play(),document.getElementById("result").style.color="#D32F2F",document.getElementById("result").textContent=t&&isChronoMode?"❌ Temps écoulé !":"❌ Faux !",document.getElementById("exp").textContent=`Explication: ${n.e}`;
-            
+           
             if ("infinite" === a && currentUser.ownedItems['INFINITE_REVIVE'] > 0) {
-                currentUser.ownedItems['INFINITE_REVIVE']--; 
-                document.getElementById("unlock").play(); 
+                currentUser.ownedItems['INFINITE_REVIVE']--;
+                document.getElementById("unlock").play();
                 document.getElementById("result").textContent = "❌ Faux ! | REVIVE UTILISÉ !";
                 document.getElementById("exp").textContent = `Explication: ${n.e} | REVIVE UTILISÉ ! (${currentUser.ownedItems['INFINITE_REVIVE']} restants)`;
-                
+               
                 current++;
                 setTimeout(()=>{nextQuestion()}, NEXT_QUESTION_DELAY);
                 saveUser();
                 updateStats();
-                return; 
+                return;
             }
-            
+           
             i || (e => {
-                const t = Math.ceil(e / 2); 
+                const t = Math.ceil(e / 2);
                 if (currentUser.xp -= t, currentUser.totalXp = Math.max(0, currentUser.totalXp - t), currentUser.xp < 0) {
-                    currentUser.xp = 0; 
+                    currentUser.xp = 0;
                 }
                 document.getElementById("exp").textContent += ` | ⚠️ -${t} XP de pénalité !`;
             })(xpPerCorrect);
-            
+           
             currentUser.streak=0,document.getElementById("exp").textContent+=` | Série interrompue.`;
         }
-        
+       
         if (c && ("infinite" === a || current < quiz.length)) {
             setTimeout(() => { nextQuestion() }, NEXT_QUESTION_DELAY);
         } else if (!c && "infinite" === a) {
@@ -1589,15 +1611,14 @@
         } else {
             endQuiz();
         }
-
                 saveUser(),updateStats();
     }
-    
+   
     function endQuiz(){
         clearTimeout(timer);
         const e=document.getElementById("game").getAttribute("data-mode"),t="daily"===e,s="qcm"===e;
         document.getElementById("q").textContent="Partie terminée !",document.getElementById("result").style.color="#FFD700",document.getElementById("result").textContent=`Ton score: ${score} / ${quiz.length}`;
-        
+       
         const isFiniteMode = !isInfiniteMode;
         if (isFiniteMode && currentUser.ownedItems['XP_BOOST_X2'] > 0) {
             if (e === 'classic' || e === 'chrono' || e === 'qcm') {
@@ -1605,8 +1626,8 @@
                 alert(`Boost XP x2 consommé ! ${currentUser.ownedItems['XP_BOOST_X2']} charge(s) restante(s).`);
             }
         }
-        
-        if(s){ 
+       
+        if(s){
             totalQCMCompleted++;
             if(score===quiz.length){
                 if(0===currentUser.achievements[11]){
@@ -1622,7 +1643,7 @@
                  showPopup("🧠","Succès Débloqué !","QCM Initié : Terminer 5 parties QCM");
             }
         }
-        else if(t){ 
+        else if(t){
             currentUser.dailyQuizLastPlayed=Date.now(),200;
             if (5===score){
                 currentUser.xp+=200,currentUser.totalXp+=200;
@@ -1644,7 +1665,7 @@
                   document.getElementById("exp").textContent=`Record Infini : ${currentUser.best}.`;
              }
         }
-        else if(score===quiz.length&&quiz.length>0){ 
+        else if(score===quiz.length&&quiz.length>0){
             document.getElementById("exp").textContent="Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
             const t=document.getElementById("gameTitle").textContent,n=document.getElementById("timerContainer").getAttribute("data-time-limit"),o=n&&parseInt(n)>0;
             t.includes("Classique : Difficile")&&0===currentUser.achievements[8]&&(currentUser.achievements[8]=1,document.getElementById("unlock").play(),showPopup("📿","Succès Débloqué !","Hafiz : 10/10 en Difficulté Difficile")),
@@ -1654,12 +1675,11 @@
         else {
             document.getElementById("exp").textContent="Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
         }
-
         currentUser.streak=0,saveUser(),document.getElementById("restartBtn").classList.remove("hidden"),document.getElementById("nextBtn").classList.add("hidden"),document.getElementById("timerContainer").classList.add("hidden"),updateStats()
     }
-        
+       
     function checkAchievements(){if(!currentUser)return;
-    
+   
     const goals=[
         {id:"a1",goal:1,current:currentUser.totalQuestions>0?1:0,text:"Jouer sa première partie",idx:0},
         {id:"a2",goal:1,current:currentUser.achievements[1],text:"Faire un sans-faute en Classique",idx:1},
@@ -1670,18 +1690,18 @@
         {id:"a7",goal:500,current:currentUser.totalCorrect,text:"500 bonnes réponses",idx:6},
         {id:"a8",goal:1e3,current:currentUser.totalQuestions,text:"1000 questions répondues",idx:7},
         {id:"a9",goal:1,current:currentUser.achievements[8],text:"10/10 en Difficulté Difficile",idx:8},
-        {id:"a11",goal:5,current:totalQCMCompleted,text:"Terminer 5 parties QCM",idx:9}, 
+        {id:"a11",goal:5,current:totalQCMCompleted,text:"Terminer 5 parties QCM",idx:9},
         {id:"a12",goal:1,current:currentUser.achievements[11],text:"Faire un 10/10 parfait en mode QCM",idx:11},
         {id:"a10",goal:1,current:currentUser.achievements.slice(0,9).every(e=>1===e) && currentUser.achievements[9] === 1 && currentUser.achievements[11] === 1 ? 1 : 0,text:"Tous les succès débloqués",idx:10}
     ];
-    
+   
     goals.forEach((e,t)=>{
         const s=document.getElementById(e.id),o=document.getElementById(e.id).querySelector("div");
         const originalTitle = o.querySelector("strong").textContent;
-        
+       
         if(e.current>=e.goal){
             s.classList.add("unlocked"),o.innerHTML=`<strong>${originalTitle}</strong><br>✅ Débloqué !`;
-            
+           
             if(0===currentUser.achievements[e.idx]){
                 currentUser.achievements[e.idx]=1;
                 document.getElementById("unlock").play();
@@ -1689,17 +1709,17 @@
             }
         }else{
             s.classList.remove("unlocked");
-            
+           
             let t=e.goal-e.current;
             let a=e.current;
             let i=e.goal;
             let c="";
-            
-            o.innerHTML=`<strong>${originalTitle}</strong><br><span id="${e.id}-prog"></span>`; 
+           
+            o.innerHTML=`<strong>${originalTitle}</strong><br><span id="${e.id}-prog"></span>`;
             const n = document.getElementById(`${e.id}-prog`);
-            
-            if("a1"===e.id){n.textContent="Jouer ta première partie"} 
-            else if("a2"===e.id||"a5"===e.id||"a9"===e.id||"a12"===e.id||"a10"===e.id){n.textContent=e.text} 
+           
+            if("a1"===e.id){n.textContent="Jouer ta première partie"}
+            else if("a2"===e.id||"a5"===e.id||"a9"===e.id||"a12"===e.id||"a10"===e.id){n.textContent=e.text}
             else{
                 if("a3"===e.id){a=currentUser.streak;c="👍 Bonnes Réponses";}
                 else if("a4"===e.id){a=currentUser.best;c=" Points Infini";}
@@ -1707,68 +1727,54 @@
                 else if("a7"===e.id){c=" Bonnes Réponses";}
                 else if("a8"===e.id){c=" Questions";}
                 else if("a11"===e.id){a=totalQCMCompleted;c=" Parties terminées";}
-                
+               
                 let r=i-a;
-                if(r<0)r=0; 
-                
+                if(r<0)r=0;
+               
                 n.textContent=`${Math.round(a).toLocaleString()}/${i.toLocaleString()}${c} (${Math.round(r).toLocaleString()} restants)`
             }
         }
     }),
-    
+   
     currentUser.achievements.slice(0,9).every(e=>1===e) && currentUser.achievements[9] === 1 && currentUser.achievements[11] === 1 && 0===currentUser.achievements[10] && (currentUser.achievements[10]=1,document.getElementById("unlock").play(),showPopup("💎","FÉLICITATIONS !","Légende de la oumma : Tous les succès débloqués")),saveUser()}
-    // Countdown Ramadan (premier jour de jeûne estimé : 18 février 2026)
-function startRamadanCountdown() {
-    // Date cible : 18 février 2026 à 00:00 (premier Fajr/jeûne)
-    const ramadanStart = new Date('2026-02-18T00:00:00');
-    
-    function updateCountdown() {
-        const now = new Date();
-        const diff = ramadanStart - now;
-        
-        if (diff <= 0) {
-            document.getElementById('countdownTimer').textContent = "Ramadan a commencé ! Ramadan Mubarak 🌙";
-            return;
-        }
-        
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-        
-        let text = "";
-        if (days > 0) {
-            text = `${days} jour${days > 1 ? 's' : ''} ${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-        } else if (hours > 0) {
-            text = `${hours}h ${minutes.toString().padStart(2,'0')}min ${seconds.toString().padStart(2,'0')}s`;
-        } else {
-            text = `${minutes}min ${seconds.toString().padStart(2,'0')}s`;
-        }
-        
-        document.getElementById('countdownTimer').textContent = text;
-    }
-    
-    // Mise à jour immédiate + toutes les secondes
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-}
 
-// Lancer seulement quand on affiche le menu
-function showMenu() {
-    showScreen("menu");
-    updateStats();
-    
-    // ... ton code existant ...
-    
-    // Lancement du countdown (une seule fois suffit)
-    if (!document.getElementById('countdownTimer').dataset.started) {
-        startRamadanCountdown();
-        document.getElementById('countdownTimer').dataset.started = "true";
+    function startRamadanCountdown() {
+        const ramadanStart = new Date('2026-02-18T00:00:00');
+       
+        function updateCountdown() {
+            const now = new Date();
+            const diff = ramadanStart - now;
+           
+            if (diff <= 0) {
+                document.getElementById('countdownTimer').textContent = "Ramadan a commencé ! Ramadan Mubarak 🌙";
+                return;
+            }
+           
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+           
+            let text = "";
+            if (days > 0) {
+                text = `${days} jour${days > 1 ? 's' : ''} ${hours.toString().padStart(2,'0')}:${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
+            } else if (hours > 0) {
+                text = `${hours}h ${minutes.toString().padStart(2,'0')}min ${seconds.toString().padStart(2,'0')}s`;
+            } else {
+                text = `${minutes}min ${seconds.toString().padStart(2,'0')}s`;
+            }
+           
+            document.getElementById('countdownTimer').textContent = text;
+        }
+       
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     }
-    
-    // ... suite de ton code ...
-}
-    
+
+    function startClassic(e){isInfiniteMode=!1,isChronoMode=!1,isQCMMode=!1;let t=0,s,n;if(1===e)xpPerCorrect=1,s=[{diff:1,count:10}],n="Classique : Facile (1 XP/Q)";else if(2===e)xpPerCorrect=10,s=[{diff:1,count:5},{diff:2,count:5}],n="Classique : Normal (10 XP/Q)";else{if(3!==e)return;xpPerCorrect=15,s=[{diff:2,count:5},{diff:3,count:5}],n="Classique : Difficile (15 XP/Q)"}const o=1e3*t;quiz=buildQuizForDifficulty(s),launchGame(o,n,"classic")}
+function startChrono(){isInfiniteMode=!1,isChronoMode=!0,isQCMMode=!1,xpPerCorrect=10;const e=1e4,t=[{diff:1,count:5},{diff:2,count:5}];quiz=buildQuizForDifficulty(t),launchGame(e,"Mode Chrono (10 Q. - 10s/Q)","chrono")}
+function startInfinite(){isInfiniteMode=!0,isChronoMode=!1,isQCMMode=!1,xpPerCorrect=10,quiz=shuffleArray([...questions]),launchGame(0,"Mode Infini : 1 Faute = Perdu","infinite")}
+
 </script>
 </body>
-</html>    
+</html>
