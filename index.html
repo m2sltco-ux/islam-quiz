@@ -32,7 +32,41 @@
     50% { transform: scale(1.3); color: #FFD700; }
     100% { transform: scale(1); }
 }
+#ramadanMiniCalendar .day {
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: bold;
+    background: rgba(107, 142, 35, 0.25);
+    border: 1.5px solid #6B8E2380;
+    color: #e2e8f0;
+}
 
+#ramadanMiniCalendar .day.today {
+    background: #FFD700;
+    color: #143C30;
+    border-color: #DAA520;
+    box-shadow: 0 0 18px #FFD700AA;
+    transform: scale(1.12);
+}
+
+#ramadanMiniCalendar .day.past {
+    opacity: 0.45;
+    background: rgba(100,100,100,0.35);
+}
+
+#ramadanMiniCalendar .day.future {
+    background: rgba(255,215,0,0.12);
+}
+
+#claimRamadanGiftBtn:disabled {
+    background: linear-gradient(135deg, #475569, #64748b) !important;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
         /* Minuteur Ramadan - en haut à droite du menu */
         #ramadanCountdown {
             position: absolute;
@@ -686,6 +720,50 @@
                 Event du ramadan 2026 dans...
                 <span id="countdownTimer">Calcul en cours...</span>
             </div>
+        <!-- Bouton qui ouvre le calendrier cadeau -->
+<!-- Bouton collé tout à gauche, sans marge inutile -->
+<div style="width:100%; padding: 0; margin: 12px 0 20px; text-align: left;">
+    <button id="ramadanGiftBtn" class="menu-btn" style="
+        margin: 0 0 0 12px;           /* juste un petit décalage à gauche pour ne pas être collé au bord absolu */
+        width: auto;                  /* plus large que 240px si besoin */
+        min-width: 100px;
+        padding: 14px 10px;
+        font-size: 1.55rem;
+        background: linear-gradient(135deg, #FFDD57, #FFAA00);
+        border: 2px solid #D4A017;
+        box-shadow: 0 7px 22px rgba(255, 215, 0, 0.55);
+        border-radius: 60px;
+    ">
+        🎁 Calendrier Cadeaux Ramadan
+    </button>
+</div>
+
+<!-- Popup Calendrier Interactif -->
+<div class="popup" id="ramadanGiftPopup" style="max-width:460px; padding:25px 20px; overflow-y:auto; max-height:85vh;">
+    <div class="emoji" style="font-size:5rem;">🎁📅🌙</div>
+    <h2 style="color:#FFD700; margin:15px 0 5px;">Calendrier Cadeaux Pré-Ramadan 2026</h2>
+    <p id="giftDaysLeft" style="font-size:1.4rem; font-weight:bold; margin-bottom:20px;"></p>
+
+    <!-- Grille calendrier responsive -->
+    <div id="ramadanCalendarGrid" style="
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 10px;
+        margin: 20px 0 30px;
+        font-size: 1.1rem;
+        text-align: center;
+    "></div>
+
+    <p id="selectedDayReward" style="font-size:1.3rem; line-height:1.5; white-space:pre-line; margin:20px 0; min-height:80px;"></p>
+
+    <button id="claimSelectedDayBtn" class="menu-btn success-btn" style="width:100%; padding:18px; font-size:1.4rem;" disabled>
+        Claim ce jour
+    </button>
+
+    <button class="menu-btn settings-btn" onclick="document.getElementById('ramadanGiftPopup').classList.remove('show')" style="margin-top:15px; width:100%;">
+        Fermer
+    </button>
+</div>
             <div class="user-info">
                 Bienvenue <strong id="username"></strong> • Niveau <strong id="levelNum">1</strong>
                 <br>💰 Points : <strong id="userPoints">0</strong>
@@ -712,6 +790,33 @@
             <button class="menu-btn success-btn" onclick="showAchievements()">Succès</button>
             <button class="menu-btn settings-btn" onclick="showSettings()">Paramètres</button>
         </div>
+        <!-- Popup Cadeau Ramadan -->
+<div class="popup" id="ramadanGiftPopup" style="max-width:420px; padding:25px 20px;">
+    <div class="emoji" style="font-size:5.5rem;">🎁🌙</div>
+    <h2 style="color:#FFD700; margin:15px 0;">Préparation Ramadan 2026</h2>
+    
+    <p id="giftDaysLeft" style="font-size:1.5rem; font-weight:bold; margin-bottom:18px;"></p>
+    
+    <!-- Mini calendrier -->
+    <div id="ramadanMiniCalendar" style="
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        margin: 20px 0 30px;
+        font-size: 1.15rem;
+        text-align: center;
+    "></div>
+    
+    <p id="giftRewardText" style="font-size:1.35rem; line-height:1.6; white-space:pre-line; margin-bottom:25px;"></p>
+    
+    <button id="claimRamadanGiftBtn" class="menu-btn success-btn" style="width:100%; padding:18px; font-size:1.5rem;">
+        Claim la récompense
+    </button>
+    
+    <button class="menu-btn settings-btn" onclick="document.getElementById('ramadanGiftPopup').classList.remove('show')" style="margin-top:15px; width:100%;">
+        Fermer
+    </button>
+</div>
 
         <div id="shop" class="hidden">
             <h1>🛍️ Shop Quotidien</h1>
@@ -3651,6 +3756,178 @@
         function startInfinite() {
             isInfiniteMode = !0, isChronoMode = !1, isQCMMode = !1, xpPerCorrect = 10, quiz = shuffleArray([...questions]), launchGame(0, "Mode Infini : 1 Faute = Perdu", "infinite")
         }
+       // ─────────────────────────────────────────────
+//     CALENDRIER CADEAUX RAMADAN v4.1 – commence 30 jours avant
+//     - Visible à partir du 30e jour avant Ramadan
+//     - Rattrapage possible sur les jours passés
+//     - Futur bloqué
+// ─────────────────────────────────────────────
+
+const RAMADAN_START_2026 = new Date(2026, 1, 18); // 18 février 2026
+const DAYS_BEFORE_VISIBLE = 30;
+const START_VISIBLE_DATE = new Date(RAMADAN_START_2026);
+START_VISIBLE_DATE.setDate(RAMADAN_START_2026.getDate() - DAYS_BEFORE_VISIBLE);
+
+function getDayIndex(date) {
+    const diff = date - START_VISIBLE_DATE;
+    return Math.floor(diff / 86400000);
+}
+
+function isPast(date) {
+    return date < new Date().setHours(0,0,0,0);
+}
+
+function isToday(date) {
+    const today = new Date();
+    return date.getFullYear() === today.getFullYear() &&
+           date.getMonth() === today.getMonth() &&
+           date.getDate() === today.getDate();
+}
+
+function isFuture(date) {
+    return date > new Date().setHours(0,0,0,0);
+}
+
+function hasClaimedDay(dayIndex) {
+    const claimed = JSON.parse(localStorage.getItem('ramadanClaimedDays') || '[]');
+    return claimed.includes(dayIndex);
+}
+
+function markDayClaimed(dayIndex) {
+    let claimed = JSON.parse(localStorage.getItem('ramadanClaimedDays') || '[]');
+    if (!claimed.includes(dayIndex)) {
+        claimed.push(dayIndex);
+        localStorage.setItem('ramadanClaimedDays', JSON.stringify(claimed));
+    }
+}
+
+function getRewardForDay(dayIndex) {
+    // Plus on est proche → plus la récompense est grosse
+    let baseXP = 50 + Math.max(0, DAYS_BEFORE_VISIBLE - dayIndex) * 6;
+    let basePoints = 30 + Math.max(0, DAYS_BEFORE_VISIBLE - dayIndex) * 4;
+
+    const daysLeft = Math.max(0, Math.ceil((RAMADAN_START_2026 - new Date()) / 86400000));
+
+    if (daysLeft <= 7)  { baseXP = Math.round(baseXP * 2.5); basePoints *= 2.2; }
+    if (daysLeft <= 3)  { baseXP = Math.round(baseXP * 1.6); basePoints = Math.round(basePoints * 1.5); }
+
+    return { xp: baseXP, points: basePoints };
+}
+
+function showRamadanGiftPopup() {
+    const popup = document.getElementById('ramadanGiftPopup');
+    const daysLeftEl = document.getElementById('giftDaysLeft');
+    const rewardEl = document.getElementById('selectedDayReward');
+    const grid = document.getElementById('ramadanCalendarGrid');
+    const claimBtn = document.getElementById('claimSelectedDayBtn');
+
+    const now = new Date();
+    const daysLeft = Math.max(0, Math.ceil((RAMADAN_START_2026 - now) / 86400000));
+    daysLeftEl.textContent = daysLeft <= 0 
+        ? "Ramadan 2026 est arrivé ! 🌙" 
+        : `Plus que ${daysLeft} jour${daysLeft > 1 ? 's' : ''} • Commence le ${START_VISIBLE_DATE.toLocaleDateString('fr-FR')}`;
+
+    grid.innerHTML = '';
+
+    // On commence exactement 30 jours avant
+    const start = new Date(START_VISIBLE_DATE);
+    const totalDaysToShow = daysLeft + 5; // +5 jours après pour le futur proche
+
+    for (let i = 0; i < totalDaysToShow; i++) {
+        const d = new Date(start);
+        d.setDate(start.getDate() + i);
+
+        const dayDiv = document.createElement('div');
+        dayDiv.className = 'day';
+        dayDiv.textContent = d.getDate();
+
+        const dayIndex = getDayIndex(d);
+
+        // Style selon statut
+        if (isToday(d)) {
+            dayDiv.classList.add('today');
+            dayDiv.title = "Aujourd'hui – clique pour réclamer";
+        } else if (isPast(d)) {
+            dayDiv.classList.add('past');
+            dayDiv.title = "Jour passé – rattrapable";
+        } else {
+            dayDiv.classList.add('future');
+            dayDiv.style.opacity = '0.55';
+            dayDiv.style.cursor = 'not-allowed';
+            dayDiv.title = "Jour futur – pas encore disponible";
+        }
+
+        if (d >= RAMADAN_START_2026) {
+            dayDiv.style.background = 'linear-gradient(135deg, #FFD70040, #FFAA0040)';
+        }
+
+        // Déjà claimé ?
+        if (hasClaimedDay(dayIndex)) {
+            dayDiv.innerHTML += ' ✓';
+            dayDiv.style.opacity = '0.75';
+            dayDiv.style.background = 'rgba(50,205,50,0.25)';
+        }
+
+        // Clic sur la case
+        dayDiv.onclick = () => {
+            if (isFuture(d)) {
+                rewardEl.textContent = "Pas encore arrivé... patience akhi 🌙";
+                claimBtn.disabled = true;
+                claimBtn.textContent = "Jour futur";
+                return;
+            }
+
+            const reward = getRewardForDay(dayIndex);
+            rewardEl.innerHTML = `Jour du ${d.toLocaleDateString('fr-FR')} :\n` +
+                                 `+${reward.xp} XP\n` +
+                                 `+${reward.points} points boutique`;
+
+            claimBtn.disabled = hasClaimedDay(dayIndex);
+            claimBtn.textContent = hasClaimedDay(dayIndex) ? "Déjà réclamé ✓" : "Claim cette récompense";
+
+            if (!hasClaimedDay(dayIndex)) {
+                claimBtn.onclick = () => {
+                    if (!currentUser) {
+                        alert("Connecte-toi pour réclamer !");
+                        return;
+                    }
+
+                    currentUser.xp += reward.xp;
+                    currentUser.totalXp += reward.xp;
+                    currentUser.points += reward.points;
+                    saveUser();
+                    updateStats();
+
+                    markDayClaimed(dayIndex);
+                    dayDiv.innerHTML += ' ✓';
+                    dayDiv.style.background = 'rgba(50,205,50,0.3)';
+
+                    showPopup('🌟🎁', 'Alhamdulillah !', 
+                        `Récompense du ${d.toLocaleDateString('fr-FR')} réclamée !\n\n` +
+                        `+${reward.xp} XP\n+${reward.points} points boutique`);
+
+                    rewardEl.textContent = "Récompense réclamée ✓";
+                    claimBtn.disabled = true;
+                    claimBtn.textContent = "Déjà réclamé";
+                };
+            }
+        };
+
+        grid.appendChild(dayDiv);
+    }
+
+    rewardEl.textContent = "Clique sur une case pour voir / réclamer la récompense";
+    claimBtn.disabled = true;
+    claimBtn.textContent = "Choisis un jour";
+
+    popup.classList.add('show');
+}
+
+// Initialisation du bouton
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('ramadanGiftBtn');
+    if (btn) btn.onclick = showRamadanGiftPopup;
+});
     </script>
 </body>
 
