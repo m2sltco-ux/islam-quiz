@@ -406,24 +406,24 @@
             font-size: 1.3rem
         }
 
-        .leaderboard-table td:first-child {
-            font-weight: 700
-        }
+        /* Couleurs podium dans le classement */
+.leaderboard-table tr:nth-child(1) td {
+    color: #FFD700; /* Or pour le 1ER */
+    font-weight: bold;
+}
 
-        .leaderboard-table tr:nth-child(2) td {
-            color: #FFD700;
-            /* Or pour le 2e */
-        }
+.leaderboard-table tr:nth-child(2) td {
+    color: #C0C0C0; /* Argent pour le 2ème */
+}
 
-        .leaderboard-table tr:nth-child(3) td {
-            color: #C0C0C0;
-            /* Argent pour le 3e */
-        }
+.leaderboard-table tr:nth-child(3) td {
+    color: #CD7F32; /* Bronze pour le 3ème */
+}
 
-        .leaderboard-table tr:nth-child(4) td {
-            color: #CD7F32;
-            /* Bronze pour le 4e */
-        }
+/* Plus rien pour le 4ème et au-delà */
+.leaderboard-table tr:nth-child(n+4) td {
+    color: #e2e8f0; /* couleur normale, pas de médaille */
+}
 
         .user-row {
             background: rgba(20, 60, 48, 0.96);
