@@ -832,19 +832,53 @@
             <button class="menu-btn settings-btn" onclick="showMenu()">Retour au menu</button>
         </div>
         <div id="leaderboard" class="hidden">
-            <h1>Classement</h1>
-            <table class="leaderboard-table" id="leaderboardTable">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Joueur</th>
-                        <th>Total XP</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <button class="menu-btn" onclick="showMenu()">Retour</button>
-        </div>
+    <h1>Classement</h1>
+    <table class="leaderboard-table" id="leaderboardTable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Joueur</th>
+                <th style="position: relative; padding: 0;">
+                    <div id="currentCategoryBtn" style="
+                        cursor: pointer;
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: #6B8E23;
+                        color: #fff;
+                        font-size: 1.3rem;
+                        font-weight: bold;
+                        padding: 12px;
+                    ">
+                        Total XP ▼
+                    </div>
+
+                    <div id="categoryList" style="
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        right: 0;
+                        background: rgba(20, 60, 48, 0.98);
+                        border: 2px solid #6B8E23;
+                        border-top: none;
+                        border-radius: 0 0 12px 12px;
+                        box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+                        z-index: 10;
+                    ">
+                        <div onclick="selectCategory('totalXp')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;border-bottom:1px solid #6B8E2344;background:#6B8E23;">Total XP</div>
+                        <div onclick="selectCategory('infiniteBest')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;border-bottom:1px solid #6B8E2344;background:#6B8E23;">Meilleur Mode Infini</div>
+                        <div onclick="selectCategory('points')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;background:#6B8E23;">Points Boutique</div>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="leaderboardBody"></tbody>
+    </table>
+    <button class="menu-btn" onclick="showMenu()">Retour</button>
+</div>
         <div id="achievements" class="hidden">
             <h1>Succès</h1>
             <div class="achievement" id="a1"><span class="emoji">👶</span>
@@ -2846,36 +2880,7 @@
             }
         }
 
-        function getLeaderboardData() {
-            let e = [];
-            initialBots.forEach(t => {
-                const s = (.1 * Math.random() - .05) * t.totalXp,
-                    n = Math.max(0, Math.round(t.totalXp + s));
-                e.push({
-                    pseudo: t.pseudo,
-                    totalXp: n
-                })
-            }), currentUser && currentUser.totalXp > 0 && e.push({
-                pseudo: currentUser.pseudo,
-                totalXp: Math.round(currentUser.totalXp)
-            }), e.sort((e, t) => t.totalXp - e.totalXp);
-            const t = [],
-                s = new Set;
-            for (const n of e) s.has(n.pseudo) || t.push(n);
-            return t.slice(0, 10)
-        }
-
-        function showLeaderboard() {
-            showScreen("leaderboard");
-            const e = getLeaderboardData(),
-                t = document.getElementById("leaderboardTable").querySelector("tbody");
-            t.innerHTML = "", e.forEach((e, s) => {
-                const n = document.createElement("tr");
-                let o = "";
-                currentUser && e.pseudo === currentUser.pseudo && (o = "user-row"), n.className = o, n.innerHTML = `<td>${s+1}</td><td>${e.pseudo}</td><td>${e.totalXp.toLocaleString()} XP</td>`, t.appendChild(n)
-            })
-        }
-
+       
         function checkDailyQuizAvailability() {
             clearTimeout(dailyTimerInterval);
             const e = Date.now(),
@@ -3927,6 +3932,103 @@ function showRamadanGiftPopup() {
 document.addEventListener('DOMContentLoaded', () => {
     const btn = document.getElementById('ramadanGiftBtn');
     if (btn) btn.onclick = showRamadanGiftPopup;
+});
+// ─────────────────────────────────────────────
+// CLASSEMENT AVEC MENU DÉROULANT DANS L'EN-TÊTE
+// ─────────────────────────────────────────────
+
+let currentCategory = 'totalXp';
+
+function toggleCategoryList() {
+    const list = document.getElementById('categoryList');
+    list.style.display = list.style.display === 'none' ? 'block' : 'none';
+}
+
+function selectCategory(category) {
+    currentCategory = category;
+    
+    // Met à jour le texte du bouton
+    document.getElementById('currentCategoryBtn').firstChild.nodeValue = 
+        (category === 'totalXp' ? 'Total XP' :
+         category === 'infiniteBest' ? 'Meilleur Infini' :
+         'Points Boutique') + ' ▼';
+
+    // Recharge le tableau
+    loadLeaderboard(category);
+
+    // Ferme la liste
+    document.getElementById('categoryList').style.display = 'none';
+}
+
+function loadLeaderboard(category = 'totalXp') {
+    const tbody = document.getElementById('leaderboardBody');
+    tbody.innerHTML = '';
+
+    const data = getLeaderboardData(category);
+
+    data.forEach((entry, index) => {
+        const tr = document.createElement('tr');
+        if (entry.isUser) tr.className = 'user-row';
+
+        tr.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${entry.pseudo}</td>
+            <td>${entry.value.toLocaleString()}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+function getLeaderboardData(category = 'totalXp') {
+    let entries = [];
+
+    initialBots.forEach(bot => {
+        let value;
+        if (category === 'totalXp') {
+            value = bot.totalXp + Math.floor(Math.random() * 2000 - 1000);
+        } else if (category === 'infiniteBest') {
+            value = Math.floor(Math.random() * 60) + 20;
+        } else if (category === 'points') {
+            value = Math.floor(Math.random() * 50000) + 5000;
+        }
+        entries.push({ pseudo: bot.pseudo, value: Math.max(0, value) });
+    });
+
+    if (currentUser) {
+        let value = 0;
+        if (category === 'totalXp') value = Math.round(currentUser.totalXp || 0);
+        else if (category === 'infiniteBest') value = currentUser.infiniteBest || currentUser.best || 0;
+        else if (category === 'points') value = currentUser.points || 0;
+
+        entries.push({ pseudo: currentUser.pseudo, value, isUser: true });
+    }
+
+    entries.sort((a, b) => b.value - a.value);
+
+    const seen = new Set();
+    return entries.filter(e => {
+        if (seen.has(e.pseudo)) return false;
+        seen.add(e.pseudo);
+        return true;
+    }).slice(0, 10);
+}
+
+function showLeaderboard() {
+    showScreen("leaderboard");
+    loadLeaderboard('totalXp');  // ouvre sur Total XP par défaut
+}
+
+// Active le clic + ferme si clic ailleurs
+document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('currentCategoryBtn');
+    if (btn) btn.onclick = toggleCategoryList;
+
+    document.addEventListener('click', e => {
+        const list = document.getElementById('categoryList');
+        if (list && list.style.display === 'block' && !document.getElementById('currentCategoryBtn').contains(e.target)) {
+            list.style.display = 'none';
+        }
+    });
 });
     </script>
 </body>
