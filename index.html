@@ -32,6 +32,92 @@
     50% { transform: scale(1.3); color: #FFD700; }
     100% { transform: scale(1); }
 }
+/* ───────────────────────────────────────────── */
+/* THÈME RAMADAN – Activé automatiquement pendant la période */
+/* ───────────────────────────────────────────── */
+
+.ramadan-theme {
+    background: linear-gradient(135deg, #0a2f1f 0%, #143c30 50%, #0a2f1f 100%) !important;
+    color: #f5e8c7 !important;
+}
+
+.ramadan-theme .box {
+    background: rgba(10, 47, 31, 0.94) !important;
+    border: 2px solid #FFD70088 !important;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.35) !important;
+}
+
+.ramadan-theme h1 {
+    color: #FFEB3B !important;
+    text-shadow: 0 0 25px #FFD700, 0 0 40px #FFEB3B80 !important;
+}
+
+.ramadan-theme .menu-btn {
+    background: linear-gradient(135deg, #FFD700, #D4A017, #B8860B) !important;
+    color: #0a2f1f !important;
+    border: 1px solid #FFD700 !important;
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.45) !important;
+}
+
+.ramadan-theme .menu-btn:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 35px rgba(255, 215, 0, 0.65) !important;
+}
+
+.ramadan-theme .question {
+    background: rgba(20, 60, 48, 0.92) !important;
+    border: 2px solid #FFD70055 !important;
+    color: #f5e8c7 !important;
+}
+
+.ramadan-theme .vrai {
+    background: #2e7d32 !important; /* vert plus doux */
+    box-shadow: 0 12px 35px rgba(46, 125, 50, 0.6) !important;
+}
+
+.ramadan-theme .faux {
+    background: #c62828 !important;
+    box-shadow: 0 12px 35px rgba(198, 40, 40, 0.6) !important;
+}
+
+.ramadan-theme .stats,
+.ramadan-theme .user-info {
+    background: rgba(107, 142, 35, 0.35) !important;
+    color: #f5e8c7 !important;
+}
+
+.ramadan-theme .user-info strong {
+    color: #FFEB3B !important;
+}
+
+/* Petit décor lune + lanternes (optionnel mais très joli) */
+.ramadan-theme::before {
+    content: "Ramadan Mubarak🌙";
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    opacity: 0.7;
+    z-index: 5;
+    pointer-events: none;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Bouton Défi Ramadan stylé Ramadan */
+#ramadanChallengeBtn {
+    background: linear-gradient(135deg, #006400, #228b22) !important;
+    border: 2px solid #FFD70088 !important;
+    color: #f5e8c7 !important;
+}
+
+#ramadanChallengeBtn:hover {
+    background: linear-gradient(135deg, #228b22, #006400) !important;
+}
 #ramadanMiniCalendar .day {
     aspect-ratio: 1 / 1;
     display: flex;
@@ -780,7 +866,9 @@
                 <button class="play-button" id="dailyQuizBtn" onclick="checkDailyQuizAvailability()">JOUER</button>
                 <span id="dailyTimerDisplay" style="display:none;font-size:1.1rem;color:#f87171;font-weight:700;margin-top:15px;display:block;"></span>
             </div>
-
+            <button id="ramadanChallengeBtn" class="menu-btn success-btn" onclick="startRamadanChallenge()">
+    🌙 Défi Ramadan (7 questions/jour)
+</button>
             <button class="menu-btn leaderboard-btn" onclick="showShop()">🛍️ Shop Quotidien</button>
             <button class="menu-btn" onclick="showDifficultyMenu()">Mode Classique (Difficulté)</button>
             <button class="menu-btn qcm-btn" onclick="startQCM()">Mode QCM (10 Q. - 4 Choix)</button>
@@ -2617,24 +2705,59 @@
     checkAchievements();
     saveUser();
 }
-        function showMenu() {
-            showScreen("menu"), updateStats();
+       function showMenu() {
+    showScreen("menu");
+    updateStats();
+    checkAndCollectDailyGift();
+    checkDailyQuizAvailability();
 
-            checkAndCollectDailyGift();
+    // Gestion du bouton Défi Ramadan
+    const ramadanBtn = document.getElementById("ramadanChallengeBtn");
 
-            checkDailyQuizAvailability();
-            const e = document.getElementById("answers");
-            e.innerHTML = `<div class="ans vrai" onclick="answer(true)">VRAI</div><div class="ans faux" onclick="answer(false)">FAUX</div>`;
-            e.classList.remove("qcm-style");
+    if (ramadanBtn) {
+        if (!isRamadanPeriod()) {
+            // On cache le bouton si on n'est pas dans la période Ramadan
+            ramadanBtn.style.display = "none";
+        } else {
+            // On affiche le bouton pendant la période
+            ramadanBtn.style.display = "block";
 
-            if (shopTimerInterval) clearInterval(shopTimerInterval);
+            const lastPlay = currentUser?.lastRamadanPlay || 0;
+            const todayMidnight = new Date().setHours(0, 0, 0, 0);
 
-            if (!document.getElementById('countdownTimer').dataset.started) {
-                startRamadanCountdown();
-                document.getElementById('countdownTimer').dataset.started = "true";
+            if (lastPlay === todayMidnight) {
+                // Déjà joué aujourd'hui
+                ramadanBtn.disabled = true;
+                ramadanBtn.innerHTML = "Déjà joué aujourd'hui ✓";
+                ramadanBtn.style.opacity = "0.65";
+                ramadanBtn.style.cursor = "not-allowed";
+            } else {
+                // Disponible
+                ramadanBtn.disabled = false;
+                ramadanBtn.innerHTML = "🌙 Défi Ramadan (7 questions/jour)";
+                ramadanBtn.style.opacity = "1";
+                ramadanBtn.style.cursor = "pointer";
             }
         }
+    }
 
+    // Réinitialisation des éléments du jeu (au cas où)
+    const answers = document.getElementById("answers");
+    answers.innerHTML = `
+        <div class="ans vrai" onclick="answer(true)">VRAI</div>
+        <div class="ans faux" onclick="answer(false)">FAUX</div>
+    `;
+    answers.classList.remove("qcm-style");
+
+    // Arrêt du timer du shop si actif
+    if (shopTimerInterval) clearInterval(shopTimerInterval);
+
+    // Lancement du compte à rebours Ramadan (s'il n'est pas déjà lancé)
+    if (!document.getElementById('countdownTimer').dataset.started) {
+        startRamadanCountdown();
+        document.getElementById('countdownTimer').dataset.started = "true";
+    }
+}
         function showSettings() {
             showScreen("settings"), updateStats()
         }
@@ -2998,66 +3121,87 @@
         }
 
         function nextQuestion() {
-            clearTimeout(timer), isAnswered = !1,
+    clearTimeout(timer);
+    isAnswered = false;
 
-                document.getElementById("timerFill").style.transition = "none";
-            document.getElementById("timerFill").style.width = "100%";
+    // Reset visuel du timer
+    const timerFill = document.getElementById("timerFill");
+    if (timerFill) {
+        timerFill.style.transition = "none";
+        timerFill.style.width = "100%";
+    }
 
-            document.getElementById("result").textContent = "", document.getElementById("exp").textContent = "", document.getElementById("nextBtn").classList.add("hidden"), document.getElementById("levelup").classList.add("hidden"), document.getElementById("restartBtn").classList.add("hidden");
+    document.getElementById("result").textContent = "";
+    document.getElementById("exp").textContent = "";
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("levelUp").classList.add("hidden");
+    document.getElementById("restartBtn").classList.add("hidden");
 
-            const hintBtn = document.getElementById("hintBtn");
-            const mode = document.getElementById("game").getAttribute("data-mode");
-            if (isQCMMode || mode === 'daily' || isInfiniteMode || currentUser.ownedItems['HINT_TOKEN'] === 0) {
-                hintBtn.classList.add("hidden");
-            } else {
-                hintBtn.classList.remove("hidden");
-            }
+    const hintBtn = document.getElementById("hintBtn");
+    const currentMode = document.getElementById("game").getAttribute("data-mode");
 
-            const answersContainer = document.getElementById("answers");
-            answersContainer.querySelectorAll(".ans").forEach(e => {
-                e.classList.remove("disabled", "vrai", "faux");
-                e.style.backgroundColor = '';
-                e.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)';
-                e.disabled = false;
-            });
+    // Affichage ou masquage de l'indice selon le mode
+    if (isQCMMode || currentMode === "daily" || isInfiniteMode || currentUser.ownedItems['HINT_TOKEN'] === 0) {
+        hintBtn.classList.add("hidden");
+    } else {
+        hintBtn.classList.remove("hidden");
+    }
 
-            let e;
-            const t = document.getElementById("game").getAttribute("data-mode");
+    // Reset des boutons réponses
+    const answersContainer = document.getElementById("answers");
+    answersContainer.querySelectorAll(".ans").forEach(btn => {
+        btn.classList.remove("disabled", "vrai", "faux");
+        btn.style.backgroundColor = '';
+        btn.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)';
+        btn.disabled = false;
+    });
 
-            if ("infinite" === t) {
-                if (current >= quiz.length) {
-                    quiz = shuffleArray([...questions]);
-                    current = 0;
-                }
-                e = quiz[current];
-                document.getElementById("q").innerHTML = `Score actuel: **${score}**<br>${e.q}`;
-                document.getElementById("gameProgress").textContent = "";
-            } else if ("daily" === t || "chrono" === t || "classic" === t) {
-                if (current < quiz.length) {
-                    e = quiz[current];
-                    document.getElementById("gameProgress").textContent = `Question ${current+1}/${quiz.length}`;
-                    document.getElementById("q").innerHTML = isQCMMode ? e.question : e.q;
-                } else {
-                    return endQuiz();
-                }
-            } else if (isQCMMode) {
-                if (current < quiz.length) {
-                    e = quiz[current];
-                    document.getElementById("gameProgress").textContent = `Question ${current+1}/${quiz.length}`;
-                    document.getElementById("q").innerHTML = e.question;
-                    const labels = ["A", "B", "C", "D"];
-                    e.options.forEach((option, index) => {
-                        const btn = document.getElementById(`ans${labels[index]}`);
-                        btn.textContent = `${labels[index]}) ${option}`;
-                        btn.dataset.index = index;
-                    });
-                } else {
-                    return endQuiz();
-                }
-            }
-            current++, isChronoMode && startTimer()
+    let questionObj;
+
+    if (currentMode === "infinite") {
+        if (current >= quiz.length) {
+            quiz = shuffleArray([...questions]);
+            current = 0;
         }
+        questionObj = quiz[current];
+        document.getElementById("q").innerHTML = `Score actuel: <strong>${score}</strong><br>${questionObj.q}`;
+        document.getElementById("gameProgress").textContent = "";
+    } 
+    else if (["daily", "chrono", "classic", "ramadan"].includes(currentMode)) {
+        if (current < quiz.length) {
+            questionObj = quiz[current];
+            document.getElementById("gameProgress").textContent = `Question ${current + 1}/${quiz.length}`;
+            document.getElementById("q").innerHTML = isQCMMode ? questionObj.question : questionObj.q;
+        } else {
+            return endQuiz();
+        }
+    } 
+    else if (isQCMMode) {
+        if (current < quiz.length) {
+            questionObj = quiz[current];
+            document.getElementById("gameProgress").textContent = `Question ${current + 1}/${quiz.length}`;
+            document.getElementById("q").innerHTML = questionObj.question;
 
+            const labels = ["A", "B", "C", "D"];
+            questionObj.options.forEach((option, index) => {
+                const btn = document.getElementById(`ans${labels[index]}`);
+                if (btn) {
+                    btn.textContent = `${labels[index]}) ${option}`;
+                    btn.dataset.index = index;
+                }
+            });
+        } else {
+            return endQuiz();
+        }
+    }
+
+    current++;
+
+    if (isChronoMode) {
+        startTimer();
+    }
+}
+    
      function useHint() {
     if (isAnswered) return;
     if (currentUser.ownedItems['HINT_TOKEN'] <= 0) {
@@ -3362,75 +3506,142 @@
         }
 
         function endQuiz() {
-            clearTimeout(timer);
-            const e = document.getElementById("game").getAttribute("data-mode"),
-                t = "daily" === e,
-                s = "qcm" === e;
-            document.getElementById("q").textContent = "Partie terminée !", document.getElementById("result").style.color = "#FFD700", document.getElementById("result").textContent = `Ton score: ${score} / ${quiz.length}`;
+    clearTimeout(timer);
 
-            const isFiniteMode = !isInfiniteMode;
-            if (isFiniteMode && currentUser.ownedItems['XP_BOOST_X2'] > 0) {
-                if (e === 'classic' || e === 'chrono' || e === 'qcm') {
-                    currentUser.ownedItems['XP_BOOST_X2']--;
-                    alert(`Boost XP x2 consommé ! ${currentUser.ownedItems['XP_BOOST_X2']} charge(s) restante(s).`);
-                }
-            }
+    const mode = document.getElementById("game").getAttribute("data-mode");
 
-            if (s) {
-                totalQCMCompleted++;
-                if (score === quiz.length) {
-                    currentUser.qcmPerfects++;
-                    if (0 === currentUser.achievements[11]) {
-                        currentUser.achievements[11] = 1;
-                        document.getElementById("unlock").play();
-                        showPopup("✅", "Succès Débloqué !", "Maître QCM : 10/10 parfait en mode QCM");
-                    }
-                }
-                document.getElementById("exp").textContent = "Bravo pour cette partie QCM. Retourne au menu pour voir tes stats !";
-                if (totalQCMCompleted >= 5 && currentUser.achievements[9] === 0) {
-                    currentUser.achievements[9] = 1;
-                    document.getElementById("unlock").play();
-                    showPopup("🧠", "Succès Débloqué !", "QCM Initié : Terminer 5 parties QCM");
-                }
-            } else if (t) {
-                currentUser.dailyQuizLastPlayed = Date.now();
-                currentUser.dailyQuizzesCompleted++;
-                if (5 === score) {
-                    currentUser.xp += 200, currentUser.totalXp += 200;
-                    document.getElementById("exp").innerHTML = "🎉 **FÉLICITATIONS !** Tu as fait un 5/5 !<br>+200 XP de bonus quotidien !";
-                } else {
-                    document.getElementById("exp").textContent = "Dommage ! Il te fallait un 5/5 pour le bonus de 200 XP quotidien. Reviens demain !";
-                }
-            } else if (e === "infinite") {
-                if (score > currentUser.infiniteBest) {
-                    currentUser.infiniteBest = score;
-                    document.getElementById("exp").textContent = `Nouveau record Infini : ${score} !`;
-                    if (score >= 50 && currentUser.achievements[3] === 0) {
-                        currentUser.achievements[3] = 1;
-                        document.getElementById("unlock").play();
-                        showPopup("♾️", "Succès Débloqué !", "Infini 50 : Atteindre 50 points en Mode Infini");
-                    }
-                } else {
-                    document.getElementById("exp").textContent = `Record Infini : ${currentUser.best}.`;
-                }
-            } else if (e === "chrono") {
-                currentUser.chronoGamesPlayed++;
-                if (score === quiz.length) {
-                    currentUser.chronoPerfects++;
-                }
-            } else if (score === quiz.length && quiz.length > 0) {
-                document.getElementById("exp").textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
-                const t = document.getElementById("gameTitle").textContent,
-                    n = document.getElementById("timerContainer").getAttribute("data-time-limit"),
-                    o = n && parseInt(n) > 0;
-                t.includes("Classique : Difficile") && 0 === currentUser.achievements[8] && (currentUser.achievements[8] = 1, document.getElementById("unlock").play(), showPopup("📿", "Succès Débloqué !", "Hafiz : 10/10 en Difficulté Difficile")),
-                    o && 0 === currentUser.achievements[4] && (currentUser.achievements[4] = 1, document.getElementById("unlock").play(), showPopup("⏱️", "Succès Débloqué !", "Vitesse Éclair : Finir le Mode Chrono sans erreur")),
-                    !o && !t.includes("Classique : Difficile") && 0 === currentUser.achievements[1] && (currentUser.achievements[1] = 1, document.getElementById("unlock").play(), showPopup("💯", "Succès Débloqué !", "10/10 Parfait ! : Faire un sans-faute en Classique"));
-            } else {
-                document.getElementById("exp").textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
-            }
-            currentUser.streak = 0, saveUser(), document.getElementById("restartBtn").classList.remove("hidden"), document.getElementById("nextBtn").classList.add("hidden"), document.getElementById("timerContainer").classList.add("hidden"), updateStats()
+    document.getElementById("q").textContent = "Partie terminée !";
+    document.getElementById("result").style.color = "#FFD700";
+    document.getElementById("result").textContent = `Ton score: ${score} / ${quiz.length}`;
+
+    const isFiniteMode = !isInfiniteMode;
+
+    // Consommation du boost XP x2 si utilisé dans un mode fini
+    if (isFiniteMode && currentUser.ownedItems['XP_BOOST_X2'] > 0) {
+        if (mode === 'classic' || mode === 'chrono' || mode === 'qcm' || mode === 'ramadan') {
+            currentUser.ownedItems['XP_BOOST_X2']--;
+            alert(`Boost XP x2 consommé ! ${currentUser.ownedItems['XP_BOOST_X2']} charge(s) restante(s).`);
         }
+    }
+
+    if (mode === "qcm") {
+        totalQCMCompleted++;
+        if (score === quiz.length) {
+            currentUser.qcmPerfects++;
+            if (currentUser.achievements[11] === 0) {
+                currentUser.achievements[11] = 1;
+                document.getElementById("unlock").play();
+                showPopup("✅", "Succès Débloqué !", "Maître QCM : 10/10 parfait en mode QCM");
+            }
+        }
+        document.getElementById("exp").textContent = "Bravo pour cette partie QCM. Retourne au menu pour voir tes stats !";
+
+        if (totalQCMCompleted >= 5 && currentUser.achievements[9] === 0) {
+            currentUser.achievements[9] = 1;
+            document.getElementById("unlock").play();
+            showPopup("🧠", "Succès Débloqué !", "QCM Initié : Terminer 5 parties QCM");
+        }
+    } 
+    else if (mode === "daily") {
+        currentUser.dailyQuizLastPlayed = Date.now();
+        currentUser.dailyQuizzesCompleted++;
+        if (score === 5) {
+            currentUser.xp += 200;
+            currentUser.totalXp += 200;
+            document.getElementById("exp").innerHTML = "🎉 **FÉLICITATIONS !** Tu as fait un 5/5 !<br>+200 XP de bonus quotidien !";
+        } else {
+            document.getElementById("exp").textContent = "Dommage ! Il te fallait un 5/5 pour le bonus de 200 XP quotidien. Reviens demain !";
+        }
+    } 
+    else if (mode === "ramadan") {
+        // Sauvegarde que le défi du jour a été joué
+        currentUser.lastRamadanPlay = new Date().setHours(0, 0, 0, 0);
+
+        let message = "";
+        if (score >= 6) {
+            currentUser.xp += 150;
+            currentUser.totalXp += 150;
+            currentUser.points += 200;
+            message = "🎉 Jour validé ! +150 XP + 200 points boutique";
+
+            if (score === 7) {
+                currentUser.xp += 350;
+                currentUser.totalXp += 350;
+                currentUser.points += 300;
+                message += "<br>✨ 7/7 PARFAIT ! +350 XP + 300 points bonus !";
+            }
+        } else {
+            message = "Dommage… Il fallait au moins 6/7 pour valider le jour.";
+        }
+
+        document.getElementById("exp").innerHTML = message;
+        document.getElementById("result").innerHTML = `Score : <strong>${score}/7</strong> – Jour ${getCurrentRamadanDay()}`;
+
+        // Désactiver le bouton jusqu'à demain
+        const ramadanBtn = document.getElementById("ramadanChallengeBtn");
+        if (ramadanBtn) {
+            ramadanBtn.disabled = true;
+            ramadanBtn.innerHTML = "Déjà joué aujourd'hui ✓";
+            ramadanBtn.style.opacity = "0.65";
+            ramadanBtn.style.cursor = "not-allowed";
+        }
+
+        // Sauvegarde
+        saveUser();
+        updateStats();
+    } 
+    else if (mode === "infinite") {
+        if (score > currentUser.infiniteBest) {
+            currentUser.infiniteBest = score;
+            document.getElementById("exp").textContent = `Nouveau record Infini : ${score} !`;
+            if (score >= 50 && currentUser.achievements[3] === 0) {
+                currentUser.achievements[3] = 1;
+                document.getElementById("unlock").play();
+                showPopup("♾️", "Succès Débloqué !", "Infini 50 : Atteindre 50 points en Mode Infini");
+            }
+        } else {
+            document.getElementById("exp").textContent = `Record Infini : ${currentUser.best}.`;
+        }
+    } 
+    else if (mode === "chrono") {
+        currentUser.chronoGamesPlayed++;
+        if (score === quiz.length) {
+            currentUser.chronoPerfects++;
+        }
+    } 
+    else if (score === quiz.length && quiz.length > 0) {
+        document.getElementById("exp").textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
+        const title = document.getElementById("gameTitle").textContent;
+        const timeLimit = document.getElementById("timerContainer").getAttribute("data-time-limit");
+        const hasTimer = timeLimit && parseInt(timeLimit) > 0;
+
+        if (title.includes("Difficile") && currentUser.achievements[8] === 0) {
+            currentUser.achievements[8] = 1;
+            document.getElementById("unlock").play();
+            showPopup("📿", "Succès Débloqué !", "Hafiz : 10/10 en Difficulté Difficile");
+        }
+        if (hasTimer && currentUser.achievements[4] === 0) {
+            currentUser.achievements[4] = 1;
+            document.getElementById("unlock").play();
+            showPopup("⏱️", "Succès Débloqué !", "Vitesse Éclair : Finir le Mode Chrono sans erreur");
+        }
+        if (!hasTimer && !title.includes("Difficile") && currentUser.achievements[1] === 0) {
+            currentUser.achievements[1] = 1;
+            document.getElementById("unlock").play();
+            showPopup("💯", "Succès Débloqué !", "10/10 Parfait ! : Faire un sans-faute en Classique");
+        }
+    } else {
+        document.getElementById("exp").textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
+    }
+
+    currentUser.streak = 0;
+    document.getElementById("restartBtn").classList.remove("hidden");
+    document.getElementById("nextBtn").classList.add("hidden");
+    document.getElementById("timerContainer").classList.add("hidden");
+
+    saveUser();
+    updateStats();
+}
 
         function checkAchievements() {
             if (!currentUser) return;
@@ -4041,6 +4252,84 @@ document.addEventListener('DOMContentLoaded', () => {
             list.style.display = 'none';
         }
     });
+});
+// ─────────────────────────────────────────────
+// MODE DÉFI RAMADAN – 7 questions par jour
+// ─────────────────────────────────────────────
+
+function isRamadanPeriod() {
+    const now = new Date();
+    const ramadanStart = new Date(2026, 1, 18);   // 18 février 2026
+    const ramadanEnd   = new Date(2026, 2, 20);   // fin mars – ajuste selon tes dates exactes
+    return now >= ramadanStart && now <= ramadanEnd;
+}
+
+function getCurrentRamadanDay() {
+    const ramadanStart = new Date(2026, 1, 18);
+    const now = new Date();
+    const diff = Math.floor((now - ramadanStart) / 86400000) + 1;
+    return Math.max(1, Math.min(30, diff));
+}
+
+function startRamadanChallenge() {
+    if (!isRamadanPeriod()) {
+        alert("Le Défi Ramadan n'est disponible que pendant le mois de Ramadan 2026 🌙");
+        return;
+    }
+
+    // Vérifier si déjà joué aujourd'hui
+    const lastPlay = currentUser.lastRamadanPlay || 0;
+    const todayMidnight = new Date().setHours(0,0,0,0);
+
+    if (lastPlay === todayMidnight) {
+        alert("Tu as déjà joué au Défi Ramadan aujourd'hui ! Reviens demain inshaAllah 🌟");
+        return;
+    }
+
+    // Configuration
+    isInfiniteMode = false;
+    isChronoMode = false;
+    isQCMMode = false;
+    xpPerCorrect = 25;
+
+    // Génération 7 questions (2 faciles + 3 moyennes + 2 difficiles)
+    const sources = [
+        { diff: 1, count: 2 },
+        { diff: 2, count: 3 },
+        { diff: 3, count: 2 }
+    ];
+
+    quiz = buildQuizForDifficulty(sources);
+
+    // Sécurité : compléter si jamais pas assez
+    while (quiz.length < 7) {
+        const extra = shuffleArray([...questions]).slice(0, 7 - quiz.length);
+        quiz.push(...extra);
+    }
+    quiz = quiz.slice(0, 7);
+
+    // Lancement
+    launchGame(0, `Défi Ramadan – Jour ${getCurrentRamadanDay()} (7 questions)`, "ramadan");
+}
+function applyRamadanTheme() {
+    document.body.classList.add("ramadan-theme");
+    localStorage.setItem("ramadanThemeActive", "true");
+}
+
+function removeRamadanTheme() {
+    document.body.classList.remove("ramadan-theme");
+    localStorage.removeItem("ramadanThemeActive");
+}
+
+// Au chargement de la page (ajoute ceci dans le bloc d’initialisation)
+document.addEventListener("DOMContentLoaded", () => {
+    if (isRamadanPeriod()) {
+        applyRamadanTheme();
+    } else {
+        removeRamadanTheme();
+    }
+
+    // ... ton code existant (auth, login, showMenu, etc.) ...
 });
     </script>
 </body>
