@@ -1123,8 +1123,8 @@ let currentLang = localStorage.getItem('lang') || 'fr';
 async function loadTranslations() {
     try {
         const fr = await fetch('lang/fr.json').then(r => r.json());
-        const en = await fetch('lang/en.json').then(r => r.json());
-        const ar = await fetch('lang/ar.json').then(r => r.json());
+        const en = await fetch('en.json').then(r => r.json());
+        const ar = await fetch('ar.json').then(r => r.json());
         translations = { fr, en, ar };
     } catch (err) {
         console.error("Erreur chargement traductions", err);
