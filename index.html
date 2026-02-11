@@ -800,6 +800,9 @@
             <button class="menu-btn" onclick="login()">Se connecter</button>
             <button class="menu-btn settings-btn" onclick="register()">Créer un compte</button>
         </div>
+        <div style="margin: 15px 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+     
+    
         <div id="menu" class="hidden">
             <h1>Quiz Islam</h1>
             <div id="ramadanCountdown">
@@ -1053,6 +1056,11 @@
             <h1>Paramètres</h1>
             <div class="user-info">Connecté : <strong id="username2"></strong><br>Niveau <strong id="levelNum2">1</strong> • XP total : <strong id="totalXp">0</strong></div>
             <button class="menu-btn infinite-btn" onclick="useDailyReroll()">Utiliser Daily Reroll (Possédé : <span id="rerollCount">0</span>)</button>
+            <div style="margin: 15px 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+        <button class="menu-btn settings-btn lang-btn" data-lang="fr" onclick="setLanguage('fr')">Français</button>
+        <button class="menu-btn settings-btn lang-btn" data-lang="en" onclick="setLanguage('en')">English</button>
+        <button class="menu-btn settings-btn lang-btn" data-lang="ar" onclick="setLanguage('ar')">العربية</button>
+    </div>
             <button class="menu-btn" onclick="showMenu()">Retour au menu</button>
             <button class="menu-btn danger-btn" onclick="resetAccount()">Réinitialiser mon compte</button>
             <button class="menu-btn settings-btn" onclick="logout()">Déconnexion</button>
@@ -1105,6 +1113,88 @@
     </div>
 
     <script>
+        // ─────────────────────────────────────────────
+// GESTION MULTILINGUE - FR / EN / AR
+// ─────────────────────────────────────────────
+
+let translations = {};
+let currentLang = localStorage.getItem('lang') || 'fr';
+
+async function loadTranslations() {
+    try {
+        const fr = await fetch('lang/fr.json').then(r => r.json());
+        const en = await fetch('lang/en.json').then(r => r.json());
+        const ar = await fetch('lang/ar.json').then(r => r.json());
+        translations = { fr, en, ar };
+    } catch (err) {
+        console.error("Erreur chargement traductions", err);
+        translations = { fr: {}, en: {}, ar: {} };
+    }
+}
+
+function t(key) {
+    return translations[currentLang]?.[key] || translations['fr']?.[key] || key;
+}
+
+function setLanguage(lang) {
+    if (!['fr', 'en', 'ar'].includes(lang)) return;
+
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+
+    // Appliquer la direction du texte (RTL pour arabe)
+    if (lang === 'ar') {
+        document.documentElement.setAttribute('dir', 'rtl');
+        document.body.style.textAlign = 'right';
+    } else {
+        document.documentElement.setAttribute('dir', 'ltr');
+        document.body.style.textAlign = 'left';
+    }
+
+    // Traduire tous les éléments
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (key) el.textContent = t(key);
+    });
+
+    // Traduire les placeholders
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.dataset.i18nPlaceholder;
+        if (key) el.placeholder = t(key);
+    });
+
+    // Cas spéciaux
+    document.title = t('title');
+
+    // Recharger les écrans dynamiques si besoin
+    if (document.getElementById('menu').classList.contains('hidden') === false) {
+        updateStats();
+    }
+    if (document.getElementById('shop').classList.contains('hidden') === false) {
+        showShop();
+    }
+
+    // Mettre en évidence le bouton de la langue actuelle
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+}
+
+// Charger au démarrage
+loadTranslations().then(() => {
+    setLanguage(currentLang);
+});
+
+// Optionnel : style pour le bouton actif
+const style = document.createElement('style');
+style.textContent = `
+    .lang-btn.active {
+        background: #FFD700 !important;
+        color: #143C30 !important;
+        box-shadow: 0 0 15px #FFD700AA !important;
+    }
+`;
+document.head.appendChild(style);
         const questions = [{
                 q: "La sourate la plus courte du Coran est Al-Kawthar.",
                 a: true,
