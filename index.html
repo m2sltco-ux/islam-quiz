@@ -979,13 +979,14 @@
 <div style="margin-top: 40px; padding: 20px 0; text-align: center; font-size: 1.1rem; color: #94a3b8; border-top: 1px solid #6B8E2340;">
     <p style="margin-bottom: 15px;" data-i18n="clickable_link">LIEN CLIQUABLE🌙</p>
     
-    <a href="https://github.com/m2sltco-ux/islam-quiz/wiki/Accueil" target="_blank" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
-        📖 <span data-i18n="wiki">Lire le Wiki</span>
-    </a>
+    <a href="#" onclick="openWikiHome(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
+    📖 <span data-i18n="wiki">Lire le Wiki</span>
+</a>
     
-    <a href="https://github.com/m2sltco-ux/islam-quiz/discussions/1" target="_blank" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
-        <span data-i18n="bugs">Bugs / Questions / Suggestions</span>
-    </a>
+    <a href="#" onclick="openDiscussions(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
+    <span data-i18n="bugs">Bugs / Questions / Suggestions</span>
+</a>
+    
 </div>
         
         <!-- POPUP SUCCÈS -->
@@ -4547,6 +4548,24 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
             const list = document.getElementById('categoryList');
             if (list) list.style.display = 'none';
         }
+        
+        
+        // ================================================================
+// REDIRECTION VERS LES DISCUSSIONS SELON LA LANGUE
+// ================================================================
+function openDiscussions() {
+    const baseUrl = "https://github.com/m2sltco-ux/islam-quiz/discussions/";
+    
+    let discussionNumber = "1"; // Français par défaut
+    
+    if (currentLang === 'en') {
+        discussionNumber = "2";  // Anglais
+    } else if (currentLang === 'ar') {
+        discussionNumber = "3";  // Arabe
+    }
+    
+    window.open(baseUrl + discussionNumber, '_blank');
+}
 
         // ================================================================
         // FONCTIONS UTILITAIRES
@@ -6004,6 +6023,23 @@ function startRamadanCountdown() {
                 localStorage.setItem('ramadanClaimedDays', JSON.stringify(claimed));
             }
         }
+        
+        // ================================================================
+// REDIRECTION VERS L'ACCUEIL DU WIKI SELON LA LANGUE
+// ================================================================
+function openWikiHome() {
+    const wikiBase = "https://github.com/m2sltco-ux/islam-quiz/wiki/";
+    
+    let wikiPage = "Accueil"; // Français par défaut
+    
+    if (currentLang === 'en') {
+        wikiPage = "H0ME";  // Avec un ZÉRO pour l'anglais
+    } else if (currentLang === 'ar') {
+        wikiPage = "%D8%A7%D9%84%D8%B1%D8%A6%D9%8A%D8%B3%D9%8A%D8%A9";  // Arabe encodé
+    }
+    
+    window.open(wikiBase + wikiPage, '_blank');
+}
 
         function getRewardForDay(dayIndex) {
             let baseXP = 50 + Math.max(0, DAYS_BEFORE_VISIBLE - dayIndex) * 6;
