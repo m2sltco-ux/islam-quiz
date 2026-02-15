@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -71,16 +71,7 @@
             color: #f5e8c7 !important;
         }
 
-        .ramadan-theme .vrai {
-            background: #2e7d32 !important;
-            box-shadow: 0 12px 35px rgba(46, 125, 50, 0.6) !important;
-        }
-
-        .ramadan-theme .faux {
-            background: #c62828 !important;
-            box-shadow: 0 12px 35px rgba(198, 40, 40, 0.6) !important;
-        }
-
+       
         .ramadan-theme .stats,
         .ramadan-theme .user-info {
             background: rgba(107, 142, 35, 0.35) !important;
@@ -284,6 +275,40 @@
             color: #e2e8f0;
         }
 
+        /* Boutons du shop */
+        .shop-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0 25px;
+            justify-content: center;
+        }
+        
+        .shop-tab {
+            flex: 1;
+            max-width: 180px;
+            padding: 12px 5px;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, #6B8E23, #556B2F);
+            border: 2px solid #FFD70088;
+            border-radius: 40px;
+            color: #f5e8c7;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        
+        .shop-tab.active {
+            background: linear-gradient(135deg, #FFD700, #B8860B);
+            color: #143C30;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+        }
+        
+        .shop-tab.ramadan {
+            background: linear-gradient(135deg, #0a2f1f, #143c30);
+            border: 2px solid #FFD700;
+        }
+
         .hidden {
             display: none
         }
@@ -415,11 +440,11 @@
         }
 
         .vrai {
-            background: #388E3C;
+            background: #0A3020;
         }
 
         .faux {
-            background: #D32F2F;
+            background: #0A3020;
         }
 
         .question {
@@ -743,6 +768,39 @@
             color: #143C30 !important;
             box-shadow: 0 0 15px #FFD700AA !important;
         }
+        
+        /* Style pour le bouton Ramadan normal (même couleur que les autres) */
+        #ramadanChallengeBtn {
+            background: linear-gradient(135deg, #006400, #228b22) !important;
+            color: #f5e8c7 !important;
+        }
+        
+.answers .qcm-option {
+    display: none; 
+    background: #2d5a4a !important;
+    border: 2px solid #FFD700 !important;
+    color: #ffffff !important;
+}
+
+.answers .qcm-option:hover {
+    background: #3a6f5c !important;
+    transform: translateY(-4px);
+}
+
+
+.qcm-style .qcm-option {
+    display: flex !important;
+}
+
+.qcm-style .vrai,
+.qcm-style .faux {
+    display: none !important;
+}
+
+
+
+
+
     </style>
 </head>
 
@@ -773,13 +831,6 @@
         <span id="countdownTimer">Calcul en cours...</span>
     </div>
     
-    <!-- Bouton Calendrier Ramadan -->
-    <div style="width:100%; padding: 0; margin: 12px 0 20px; text-align: left;">
-        <button id="ramadanGiftBtn" class="menu-btn ramadan-gift-btn">
-            🎁 <span data-i18n="ramadan_gift">Calendrier Cadeaux Ramadan</span>
-        </button>
-    </div>
-    
     <div class="user-info">
         <span data-i18n="welcome">Bienvenue</span> <strong id="username"></strong> • <span data-i18n="level">Niveau</span> <strong id="levelNum">1</strong>
         <br>💰 <span data-i18n="points">Points</span> : <strong id="userPoints">0</strong>
@@ -804,8 +855,8 @@
                 <span id="dailyTimerDisplay" style="display:none;font-size:1.1rem;color:#f87171;font-weight:700;margin-top:15px;display:block;"></span>
             </div>
             
-            <button id="ramadanChallengeBtn" class="menu-btn success-btn" onclick="startRamadanChallenge()">
-                🌙 Défi Ramadan (7 questions/jour)
+            <button id="ramadanChallengeBtn" class="menu-btn" onclick="startRamadanChallenge()">
+                🌙 Défi Ramadan (Mix de tous les modes)
             </button>
             
             <button class="menu-btn leaderboard-btn" onclick="showShop()">🛍️ Shop Quotidien</button>
@@ -824,6 +875,12 @@
     <p style="font-size:1.4rem;margin-bottom:20px;color:#FFD700;" data-i18n="shop_desc">Les offres changent tous les jours !</p>
     
     <div id="shopChrono" style="font-size: 1.3rem; font-weight: bold; color: #f87171; margin-bottom: 20px;"></div>
+    
+    <!-- Onglets du shop -->
+    <div class="shop-tabs">
+        <button class="shop-tab active" id="shopTabNormal" onclick="switchShopTab('normal')">🛍️ Normal</button>
+        <button class="shop-tab ramadan" id="shopTabRamadan" onclick="switchShopTab('ramadan')">🌙 Ramadan</button>
+    </div>
     
     <div id="shopItemsContainer" style="display:flex;flex-direction:column;gap:20px;"></div>
     
@@ -950,30 +1007,41 @@
         </div>
         
         <!-- ÉCRAN DE JEU -->
-        <div id="game" class="hidden">
-            <h1 id="gameTitle">Quiz Islam</h1>
-            <div class="stats" id="gameProgress"></div>
-            
-            <div id="timerContainer" class="hidden">
-                <div class="timer-text" id="timerText"></div>
-                <div class="timer-bar">
-                    <div class="timer-fill" id="timerFill"></div>
-                </div>
-            </div>
-            
-            <div class="question" id="q">Prêt ?</div>
-            
-            <div class="answers" id="answers"></div>
-            
-            <div class="result" id="result"></div>
-            <div class="levelup hidden" id="levelUp">NIVEAU UP !</div>
-            <div class="exp" id="exp"></div>
-            
-            <button class="menu-btn chrono-btn" id="hintBtn" onclick="useHint()" style="width:50%;margin-top:10px;">Utiliser Indice (<span id="hintCount">0</span>)</button>
-            
-            <button class="menu-btn hidden" id="nextBtn" onclick="nextQuestion()">Question Suivante</button>
-            <button class="menu-btn hidden" id="restartBtn" onclick="showMenu()">Retour au menu principal</button>
+<div id="game" class="hidden">
+    <h1 id="gameTitle">Quiz Islam</h1>
+    <div class="stats" id="gameProgress"></div>
+    
+    <div id="timerContainer" class="hidden">
+        <div class="timer-text" id="timerText"></div>
+        <div class="timer-bar">
+            <div class="timer-fill" id="timerFill"></div>
         </div>
+    </div>
+    
+    <div class="question" id="q">Prêt ?</div>
+    
+    <!-- CONTAINER DES RÉPONSES - TOUS LES BOUTONS SONT À L'INTÉRIEUR -->
+    <div class="answers" id="answers">
+        <!-- Boutons Vrai/Faux (visibles par défaut) -->
+        <div class="ans vrai" id="vraiBtn" onclick="answer(true)">VRAI</div>
+        <div class="ans faux" id="fauxBtn" onclick="answer(false)">FAUX</div>
+        
+        <!-- Boutons QCM (cachés par défaut) -->
+        <div class="ans qcm-option" id="ansA" data-index="0" onclick="answerQCM(this)" style="display: none;">A</div>
+        <div class="ans qcm-option" id="ansB" data-index="1" onclick="answerQCM(this)" style="display: none;">B</div>
+        <div class="ans qcm-option" id="ansC" data-index="2" onclick="answerQCM(this)" style="display: none;">C</div>
+        <div class="ans qcm-option" id="ansD" data-index="3" onclick="answerQCM(this)" style="display: none;">D</div>
+    </div>
+    
+    <div class="result" id="result"></div>
+    <div class="levelup hidden" id="levelUp">NIVEAU UP !</div>
+    <div class="exp" id="exp"></div>
+    
+    <button class="menu-btn chrono-btn" id="hintBtn" onclick="useHint()" style="width:50%;margin-top:10px;">Utiliser Indice (<span id="hintCount">0</span>)</button>
+    
+    <button class="menu-btn hidden" id="nextBtn" onclick="nextQuestion()">Question Suivante</button>
+    <button class="menu-btn hidden" id="restartBtn" onclick="showMenu()">Retour au menu principal</button>
+</div>
         
        <!-- FOOTER -->
 <div style="margin-top: 40px; padding: 20px 0; text-align: center; font-size: 1.1rem; color: #94a3b8; border-top: 1px solid #6B8E2340;">
@@ -1234,7 +1302,7 @@ let currentLang = localStorage.getItem('lang') || 'fr';
     },
     { 
         fr: { q: "La sourate Al-Fatiha est la première sourate du Coran.", e: "Elle ouvre le Coran et est appelée Umm al-Kitab." },
-        en: { q: "Surah Al-Fatiha is the first surah of the Quran.", e: "It opens the Quran and is called Umm al-Kitab." },
+        en: { q: "Surah Al-Fatihah is the first surah of the Quran.", e: "It opens the Quran and is called Umm al-Kitab." },
         ar: { q: "سورة الفاتحة هي أول سورة في القرآن.", e: "تفتتح القرآن وتسمى أم الكتاب." },
         a: true, 
         diff: 1 
@@ -3189,7 +3257,7 @@ let translations = {
         "daily_challenge": "DÉFI DU JOUR",
         "daily_desc": "5 questions → +200 XP si 5/5",
         "play": "JOUER",
-        "ramadan_challenge": "🌙 Défi Ramadan (7 questions/jour)",
+        "ramadan_challenge": "🌙 Défi Ramadan (Mix de tous les modes)",
         "shop": "🛍️ Shop Quotidien",
         "classic_mode": "Mode Classique (Difficulté)",
         "qcm_mode": "Mode QCM (10 Q. - 4 Choix)",
@@ -3392,7 +3460,7 @@ let translations = {
         "daily_challenge": "DAILY CHALLENGE",
         "daily_desc": "5 questions → +200 XP if 5/5",
         "play": "PLAY",
-        "ramadan_challenge": "🌙 Ramadan Challenge (7 questions/day)",
+        "ramadan_challenge": "🌙 Ramadan Challenge (Mix of all modes)",
         "shop": "🛍️ Daily Shop",
         "classic_mode": "Classic Mode (Difficulty)",
         "qcm_mode": "QCM Mode (10 Q. - 4 Choices)",
@@ -3613,7 +3681,7 @@ let translations = {
         "daily_challenge": "تحدي اليوم",
         "daily_desc": "5 أسئلة → +200 XP إذا 5/5",
         "play": "العب",
-        "ramadan_challenge": "🌙 تحدي رمضان (7 أسئلة/يوم)",
+        "ramadan_challenge": "🌙 تحدي رمضان (مزيج من جميع الأوضاع)",
         "shop": "🛍️ المتجر اليومي",
         "classic_mode": "الوضع الكلاسيكي (الصعوبة)",
         "qcm_mode": "وضع الاختيار (10 أسئلة - 4 خيارات)",
@@ -4045,13 +4113,17 @@ function updateMenuTexts() {
         }
     }
     
-    // Ramadan gift button
-    const giftBtn = document.getElementById('ramadanGiftBtn');
-    if (giftBtn) giftBtn.innerHTML = `🎁 ${t('ramadan_gift')}`;
-    
-    // ✅ CORRIGÉ : Bouton Shop
-    const shopBtn = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).find(btn => btn.textContent.includes('Shop') || btn.textContent.includes('🛍️'));
-    if (shopBtn) shopBtn.innerHTML = `🛍️ ${t('shop')}`;
+    // ✅ CORRIGÉ : Bouton Shop avec un seul emoji
+    const shopBtn = document.getElementById('shopBtn');
+    if (!shopBtn) {
+        // Si le bouton n'existe pas avec cet ID, on cherche autrement
+        const shopBtns = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).filter(btn => 
+            btn.textContent.includes('Shop') || btn.textContent.includes('🛍️')
+        );
+        shopBtns.forEach(btn => {
+            btn.innerHTML = `🛍️ ${t('shop')}`;
+        });
+    }
     
     // ✅ CORRIGÉ : Bouton Classique
     const classicBtn = Array.from(menuScreen.querySelectorAll('.menu-btn')).find(btn => 
@@ -4224,6 +4296,9 @@ function updateDifficultyTexts() {
             { type: 'item', id: 'XP_BOOST_X2', min: 1, max: 1, probability: 10, label: 'Boost XP x2' },
             { type: 'item', id: 'DAILY_REROLL', min: 1, max: 1, probability: 5, label: 'Reroll Quotidien' },
         ];
+
+        // Variable pour l'onglet actif du shop
+        let currentShopTab = 'normal';
 
         // ================================================================
 // AUTH STATE LISTENER - COEUR DE FIREBASE
@@ -4622,7 +4697,7 @@ function openDiscussions() {
                             ramadanBtn.style.cursor = "not-allowed";
                         } else {
                             ramadanBtn.disabled = false;
-                            ramadanBtn.innerHTML = "🌙 Défi Ramadan (7 questions/jour)";
+                            ramadanBtn.innerHTML = "🌙 Défi Ramadan (Mix de tous les modes)";
                             ramadanBtn.style.opacity = "1";
                             ramadanBtn.style.cursor = "pointer";
                         }
@@ -4718,9 +4793,29 @@ function openDiscussions() {
                 selectedKeys.forEach(key => {
                     const item = SHOP_ITEMS[key];
                     const basePrice = item[1];
-                    const randomModifier = Math.floor(Math.random() * 66) - 50;
-                    const finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
-                    const maxStock = key === 'HINT_TOKEN' ? 5 : key === 'XP_BOOST_X2' ? 3 : key === 'INFINITE_REVIVE' ? 1 : 1;
+                    
+                    // Pendant le Ramadan, réductions plus importantes (45-75%) et stock doublé
+                    const isRamadanActive = isRamadanPeriod() && currentShopTab === 'ramadan';
+                    
+                    let finalPrice = basePrice;
+                    let stockModifier = 1;
+                    
+                    if (isRamadanActive) {
+                        // Réduction aléatoire entre 45% et 75%
+                        const discountPercent = 45 + Math.floor(Math.random() * 31); // 45-75%
+                        finalPrice = Math.round(basePrice * (1 - discountPercent / 100));
+                        stockModifier = 2; // Stock doublé
+                    } else {
+                        // Réduction normale (0-60%)
+                        const randomModifier = Math.floor(Math.random() * 66) - 50;
+                        finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
+                    }
+                    
+                    const maxStock = key === 'HINT_TOKEN' ? 5 * stockModifier : 
+                                    key === 'XP_BOOST_X2' ? 3 * stockModifier : 
+                                    key === 'INFINITE_REVIVE' ? 1 * stockModifier : 
+                                    1 * stockModifier;
+                    
                     const stock = Math.floor(Math.random() * maxStock) + 1;
                     
                     currentUser.dailyShopItems.push({
@@ -4730,6 +4825,7 @@ function openDiscussions() {
                         originalPrice: basePrice,
                         stock: stock,
                         description: item[2],
+                        ramadanSpecial: isRamadanActive
                     });
                 });
                 currentUser.shopLastRefresh = midnightToday;
@@ -4744,6 +4840,20 @@ function openDiscussions() {
             const d = new Date(date);
             d.setHours(0, 0, 0, 0);
             return d.getTime();
+        }
+
+        function switchShopTab(tab) {
+            if (tab === currentShopTab) return;
+            
+            currentShopTab = tab;
+            
+            // Mettre à jour les classes des onglets
+            document.getElementById('shopTabNormal').classList.toggle('active', tab === 'normal');
+            document.getElementById('shopTabRamadan').classList.toggle('active', tab === 'ramadan');
+            
+            // Régénérer le shop avec le nouveau tab
+            currentUser.shopLastRefresh = 0; // Forcer la régénération
+            showShop();
         }
 
 function showShop() {
@@ -4771,6 +4881,11 @@ function showShop() {
             const discountText = modifier < 0 ? `<span style="color:#f87171;text-decoration:line-through;margin-right:8px;">${item.originalPrice.toLocaleString()}</span>` : '';
             const priceColor = modifier < 0 ? '#FFD700' : '#C0C0C0';
             
+            // Ajouter une indication Ramadan si spécial
+            if (item.ramadanSpecial) {
+                modifierText += ' 🌙 Ramadan';
+            }
+            
             // Traduire le nom et la description
             let itemName = item.name;
             let itemDesc = item.description;
@@ -4792,7 +4907,7 @@ function showShop() {
             itemDiv.className = 'shop-item';
             itemDiv.innerHTML = `
                 <div class="item-header">
-                    <h3>${itemName}</h3>
+                    <h3>${itemName} ${item.ramadanSpecial ? '🌙' : ''}</h3>
                     <p class="stock">${t('stock')}: <span id="stock-${item.code}">${item.stock}</span> (${modifierText})</p>
                 </div>
                 <p class="item-desc">${itemDesc}</p>
@@ -5164,37 +5279,32 @@ function launchGame(delay = 0, mode, difficulty = null) {
     const nextBtn = document.getElementById("nextBtn");
     if (nextBtn) nextBtn.classList.add("hidden");
     
-    // ✅ Utiliser la nouvelle fonction pour obtenir le titre
     const gameTitle = document.getElementById("gameTitle");
     if (gameTitle) gameTitle.textContent = getGameTitle(mode, difficulty);
     
     const gameEl = document.getElementById("game");
     if (gameEl) gameEl.setAttribute("data-mode", mode);
     
-    const answersContainer = document.getElementById("answers");
     const hintBtn = document.getElementById("hintBtn");
-    
     if (hintBtn) hintBtn.classList.add("hidden");
     
-    if (isQCMMode && answersContainer) {
-        answersContainer.innerHTML = `
-            <button class="ans" id="ansA" data-index="0" onclick="answerQCM(this)">A</button>
-            <button class="ans" id="ansB" data-index="1" onclick="answerQCM(this)">B</button>
-            <button class="ans" id="ansC" data-index="2" onclick="answerQCM(this)">C</button>
-            <button class="ans" id="ansD" data-index="3" onclick="answerQCM(this)">D</button>
-        `;
-        answersContainer.classList.add("qcm-style");
-    } else if (answersContainer) {
-        // Traduire VRAI/FAUX selon la langue
-        const vraiTexte = currentLang === 'fr' ? 'VRAI' : (currentLang === 'en' ? 'TRUE' : 'صحيح');
-        const fauxTexte = currentLang === 'fr' ? 'FAUX' : (currentLang === 'en' ? 'FALSE' : 'خطأ');
-        
-        answersContainer.innerHTML = `
-            <div class="ans vrai" onclick="answer(true)">${vraiTexte}</div>
-            <div class="ans faux" onclick="answer(false)">${fauxTexte}</div>
-        `;
-        answersContainer.classList.remove("qcm-style");
-    }
+    // NE PAS recréer les boutons, juste les réinitialiser
+    const vraiBtn = document.querySelector('.ans.vrai');
+    const fauxBtn = document.querySelector('.ans.faux');
+    const ansA = document.getElementById('ansA');
+    const ansB = document.getElementById('ansB');
+    const ansC = document.getElementById('ansC');
+    const ansD = document.getElementById('ansD');
+    
+    // Réinitialiser tous les boutons
+    [vraiBtn, fauxBtn, ansA, ansB, ansC, ansD].forEach(btn => {
+        if (btn) {
+            btn.classList.remove("disabled");
+            btn.style.backgroundColor = '';
+            btn.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)';
+            btn.disabled = false;
+        }
+    });
     
     const timerContainer = document.getElementById("timerContainer");
     if (timerContainer) {
@@ -5218,15 +5328,10 @@ function launchGame(delay = 0, mode, difficulty = null) {
     const restartBtn = document.getElementById("restartBtn");
     if (restartBtn) restartBtn.classList.add("hidden");
     
-    if (answersContainer) {
-        answersContainer.querySelectorAll(".ans").forEach(e => e.classList.remove("disabled"));
-    }
-    
     if (currentUser && currentUser.achievements && currentUser.achievements[0] === 0) {
         currentUser.achievements[0] = 1;
         document.getElementById("unlock")?.play();
         
-        // Traduire le popup du premier succès
         const popupTitle = currentLang === 'fr' ? "Succès Débloqué !" : 
                           (currentLang === 'en' ? "Achievement Unlocked!" : "تم فتح إنجاز!");
         const popupText = currentLang === 'fr' ? "Premier pas : Jouer sa première partie" :
@@ -5243,7 +5348,7 @@ function launchGame(delay = 0, mode, difficulty = null) {
         // ================================================================
         // GESTION DES QUESTIONS
         // ================================================================
-       function nextQuestion() {
+     function nextQuestion() {
     clearTimeout(timer);
     isAnswered = false;
     
@@ -5271,41 +5376,71 @@ function launchGame(delay = 0, mode, difficulty = null) {
     const hintBtn = document.getElementById("hintBtn");
     const currentMode = document.getElementById("game")?.getAttribute("data-mode");
     
-    if (hintBtn) {
-    if (isQCMMode || currentMode === "daily" || isInfiniteMode || !currentUser?.ownedItems?.['HINT_TOKEN']) {
-        hintBtn.classList.add("hidden");
-    } else {
-        hintBtn.classList.remove("hidden");
-        hintBtn.innerHTML = `${t('use_hint')} (${currentUser?.ownedItems?.['HINT_TOKEN'] || 0})`;
-    }
-}
-    
+    // Récupérer tous les boutons de façon plus robuste
     const answersContainer = document.getElementById("answers");
-    if (answersContainer) {
-        answersContainer.querySelectorAll(".ans").forEach(btn => {
-            btn.classList.remove("disabled", "vrai", "faux");
+    const vraiBtn = document.querySelector('.ans.vrai');
+    const fauxBtn = document.querySelector('.ans.faux');
+    
+    // Chercher les boutons QCM - ils peuvent être avec différents sélecteurs
+    let ansA = document.getElementById('ansA');
+    let ansB = document.getElementById('ansB');
+    let ansC = document.getElementById('ansC');
+    let ansD = document.getElementById('ansD');
+    
+    // Si les IDs ne fonctionnent pas, chercher par d'autres moyens
+    if (!ansA) ansA = document.querySelector('.ans[data-index="0"]');
+    if (!ansB) ansB = document.querySelector('.ans[data-index="1"]');
+    if (!ansC) ansC = document.querySelector('.ans[data-index="2"]');
+    if (!ansD) ansD = document.querySelector('.ans[data-index="3"]');
+    
+    // Réinitialiser tous les boutons
+    const allButtons = [vraiBtn, fauxBtn, ansA, ansB, ansC, ansD].filter(btn => btn);
+    allButtons.forEach(btn => {
+        if (btn) {
+            btn.classList.remove("disabled");
             btn.style.backgroundColor = '';
             btn.style.boxShadow = '0 12px 35px rgba(0,0,0,0.5)';
             btn.disabled = false;
-        });
+            btn.style.pointerEvents = 'auto';
+            btn.style.opacity = '1';
+        }
+    });
+    
+    if (hintBtn) {
+        if (currentMode === "qcm" || currentMode === "daily" || isInfiniteMode || currentMode === "ramadan" || !currentUser?.ownedItems?.['HINT_TOKEN']) {
+            hintBtn.classList.add("hidden");
+        } else {
+            hintBtn.classList.remove("hidden");
+            hintBtn.innerHTML = `${t('use_hint')} (${currentUser?.ownedItems?.['HINT_TOKEN'] || 0})`;
+        }
     }
     
     let questionObj;
+    
+    if (currentMode === "ramadan" && current >= quiz.length) {
+        return endQuiz();
+    }
     
     if (currentMode === "infinite") {
         if (current >= quiz.length) {
             quiz = shuffleArray([...questions]);
             current = 0;
-            // Dans nextQuestion(), mode infinite
-
         }
         questionObj = quiz[current];
         const qEl = document.getElementById("q");
-        // Dans nextQuestion(), mode infinite
-if (qEl) qEl.innerHTML = `${t('current_score')}: <strong>${score}</strong><br>${getQuestionText(questionObj)}`;
+        if (qEl) qEl.innerHTML = `${t('current_score')}: <strong>${score}</strong><br>${getQuestionText(questionObj)}`;
         
         const progressEl = document.getElementById("gameProgress");
         if (progressEl) progressEl.textContent = "";
+        
+        // Mode Infini = toujours Vrai/Faux
+        if (vraiBtn) vraiBtn.style.display = "flex";
+        if (fauxBtn) fauxBtn.style.display = "flex";
+        if (ansA) ansA.style.display = "none";
+        if (ansB) ansB.style.display = "none";
+        if (ansC) ansC.style.display = "none";
+        if (ansD) ansD.style.display = "none";
+        
     } else if (["daily", "chrono", "classic", "ramadan", "qcm"].includes(currentMode)) {
         if (current < quiz.length) {
             questionObj = quiz[current];
@@ -5314,23 +5449,75 @@ if (qEl) qEl.innerHTML = `${t('current_score')}: <strong>${score}</strong><br>${
             
             const qEl = document.getElementById("q");
             if (qEl) {
-                if (isQCMMode) {
+                if (questionObj.correctIndex !== undefined) {
                     qEl.innerHTML = getQCMQuestionText(questionObj);
                 } else {
                     qEl.innerHTML = getQuestionText(questionObj);
                 }
             }
             
-            if (isQCMMode) {
-                const labels = ["A", "B", "C", "D"];
+            // Vérifier si c'est une question QCM
+            if (questionObj.correctIndex !== undefined) {
+                console.log("Question QCM détectée, affichage des options...");
+                
+                // Cacher les boutons Vrai/Faux
+                if (vraiBtn) vraiBtn.style.display = "none";
+                if (fauxBtn) fauxBtn.style.display = "none";
+                
+                // Obtenir les options
                 const options = getQCMOptions(questionObj);
-                options.forEach((option, index) => {
-                    const btn = document.getElementById(`ans${labels[index]}`);
+                console.log("Options QCM:", options);
+                
+                // Afficher et mettre à jour les boutons QCM
+                const qcmButtons = [ansA, ansB, ansC, ansD];
+                qcmButtons.forEach((btn, index) => {
                     if (btn) {
-                        btn.textContent = `${labels[index]}) ${option}`;
+                        btn.style.display = "flex";
+                        btn.textContent = `${String.fromCharCode(65 + index)}) ${options[index]}`;
                         btn.dataset.index = index;
+                        console.log(`Bouton ${String.fromCharCode(65 + index)} affiché avec:`, btn.textContent);
+                    } else {
+                        console.log(`Bouton ${String.fromCharCode(65 + index)} non trouvé!`);
                     }
                 });
+                
+                // Si les boutons n'existent pas, les créer dynamiquement
+                if (!ansA && answersContainer) {
+                    console.log("Création dynamique des boutons QCM");
+                    for (let i = 0; i < 4; i++) {
+                        const letter = String.fromCharCode(65 + i);
+                        const btn = document.createElement('div');
+                        btn.className = 'ans';
+                        btn.id = `ans${letter}`;
+                        btn.setAttribute('data-index', i);
+                        btn.onclick = function() { answerQCM(this); };
+                        btn.style.display = "flex";
+                        btn.textContent = `${letter}) ${options[i]}`;
+                        answersContainer.appendChild(btn);
+                    }
+                }
+            } else {
+                // Question Vrai/Faux
+                console.log("Question Vrai/Faux détectée");
+                
+                // Traduire VRAI/FAUX
+                const vraiTexte = currentLang === 'fr' ? 'VRAI' : (currentLang === 'en' ? 'TRUE' : 'صحيح');
+                const fauxTexte = currentLang === 'fr' ? 'FAUX' : (currentLang === 'en' ? 'FALSE' : 'خطأ');
+                
+                if (vraiBtn) {
+                    vraiBtn.style.display = "flex";
+                    vraiBtn.textContent = vraiTexte;
+                }
+                if (fauxBtn) {
+                    fauxBtn.style.display = "flex";
+                    fauxBtn.textContent = fauxTexte;
+                }
+                
+                // Cacher les boutons QCM
+                if (ansA) ansA.style.display = "none";
+                if (ansB) ansB.style.display = "none";
+                if (ansC) ansC.style.display = "none";
+                if (ansD) ansD.style.display = "none";
             }
         } else {
             return endQuiz();
@@ -5421,44 +5608,44 @@ if (qEl) qEl.innerHTML = `${t('current_score')}: <strong>${score}</strong><br>${
         }
 
         function answerQCM(btn) {
-            if (isAnswered) return;
-            isAnswered = true;
-            clearTimeout(timer);
-            
-            const fill = document.getElementById("timerFill");
-            if (fill) {
-                fill.style.transition = "none";
-                fill.style.width = "100%";
+    if (isAnswered) return;
+    isAnswered = true;
+    clearTimeout(timer);
+    
+    const fill = document.getElementById("timerFill");
+    if (fill) {
+        fill.style.transition = "none";
+        fill.style.width = "100%";
+    }
+    
+    const timerText = document.getElementById("timerText");
+    if (timerText) {
+        timerText.style.animation = "none";
+        timerText.style.color = "#388E3C";
+    }
+    
+    const selectedIndex = parseInt(btn.dataset.index);
+    const currentQ = quiz[current - 1];
+    const isCorrect = selectedIndex === currentQ.correctIndex;
+    
+    const answersContainer = document.getElementById("answers");
+    if (answersContainer) {
+        answersContainer.querySelectorAll(".ans").forEach(b => {
+            b.disabled = true;
+            b.classList.add("disabled");
+            const idx = parseInt(b.dataset.index);
+            if (idx === currentQ.correctIndex) {
+                b.style.backgroundColor = '#388E3C';
+                b.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
+            } else if (idx === selectedIndex && !isCorrect) {
+                b.style.backgroundColor = '#D32F2F';
+                b.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
             }
-            
-            const timerText = document.getElementById("timerText");
-            if (timerText) {
-                timerText.style.animation = "none";
-                timerText.style.color = "#388E3C";
-            }
-            
-            const selectedIndex = parseInt(btn.dataset.index);
-            const currentQ = quiz[current - 1];
-            const isCorrect = selectedIndex === currentQ.correctIndex;
-            
-            const answersContainer = document.getElementById("answers");
-            if (answersContainer) {
-                answersContainer.querySelectorAll(".ans").forEach(b => {
-                    b.disabled = true;
-                    b.classList.add("disabled");
-                    const idx = parseInt(b.dataset.index);
-                    if (idx === currentQ.correctIndex) {
-                        b.style.backgroundColor = '#388E3C';
-                        b.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
-                    } else if (idx === selectedIndex && !isCorrect) {
-                        b.style.backgroundColor = '#D32F2F';
-                        b.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
-                    }
-                });
-            }
-            
-            processAnswerQCM(isCorrect);
-        }
+        });
+    }
+    
+    processAnswerQCM(isCorrect);
+}
 
         function processAnswer(e, isTimeout) {
             if (!currentUser) return;
@@ -5892,7 +6079,7 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
         // ================================================================
         // RAMADAN - DÉFI ET CALENDRIER
         // ================================================================
-        const RAMADAN_START_2026 = new Date(2026, 1, 18);
+        const RAMADAN_START_2026 = new Date(2026, 1, 15);
         const DAYS_BEFORE_VISIBLE = 30;
         const START_VISIBLE_DATE = new Date(RAMADAN_START_2026);
         START_VISIBLE_DATE.setDate(RAMADAN_START_2026.getDate() - DAYS_BEFORE_VISIBLE);
@@ -5925,22 +6112,21 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
     
     isInfiniteMode = false;
     isChronoMode = false;
-    isQCMMode = false;
+    isQCMMode = false; // Important : on n'est PAS en mode QCM pur, mais en mode mixte
     xpPerCorrect = 25;
     
-    const sources = [
-        { diff: 1, count: 2 },
-        { diff: 2, count: 3 },
-        { diff: 3, count: 2 }
-    ];
+    // Mélange de tous les modes : questions classiques + QCM
+    const classicCount = 4;
+    const qcmCount = 3;
     
-    quiz = buildQuizForDifficulty(sources);
+    // Questions classiques
+    const classicQuiz = shuffleArray([...questions]).slice(0, classicCount);
     
-    while (quiz.length < 7) {
-        const extra = shuffleArray([...questions]).slice(0, 7 - quiz.length);
-        quiz.push(...extra);
-    }
-    quiz = quiz.slice(0, 7);
+    // Questions QCM
+    const qcmQuiz = shuffleArray([...qcmQuestions]).slice(0, qcmCount);
+    
+    // Fusion et mélange
+    quiz = shuffleArray([...classicQuiz, ...qcmQuiz]);
     
     launchGame(0, "ramadan", null);
 }
@@ -6274,7 +6460,7 @@ function openWikiHome() {
             startRamadanCountdown();
             
             const giftBtn = document.getElementById('ramadanGiftBtn');
-            if (giftBtn) giftBtn.onclick = showRamadanGiftPopup;
+            if (giftBtn) giftBtn.style.display = 'none'; // Cacher le bouton cadeau
             
             const categoryBtn = document.getElementById('currentCategoryBtn');
             if (categoryBtn) categoryBtn.onclick = toggleCategoryList;
@@ -6289,7 +6475,37 @@ function openWikiHome() {
             
         setLanguage(currentLang);
         });
+        // Fonction de débogage - à appeler quand une question QCM devrait apparaître
+function debugQCM() {
+    console.log("=== DÉBOGAGE QCM ===");
+    console.log("Mode actuel:", document.getElementById("game")?.getAttribute("data-mode"));
+    console.log("Question actuelle:", quiz[current-1]);
+    console.log("isQCMMode:", isQCMMode);
+    
+    const ansA = document.getElementById('ansA');
+    const ansB = document.getElementById('ansB');
+    const ansC = document.getElementById('ansC');
+    const ansD = document.getElementById('ansD');
+    const vraiBtn = document.getElementById('vraiBtn') || document.querySelector('.ans.vrai');
+    const fauxBtn = document.getElementById('fauxBtn') || document.querySelector('.ans.faux');
+    const answersContainer = document.getElementById("answers");
+    
+    console.log("ansA existe:", !!ansA);
+    console.log("ansB existe:", !!ansB);
+    console.log("ansC existe:", !!ansC);
+    console.log("ansD existe:", !!ansD);
+    console.log("vraiBtn existe:", !!vraiBtn);
+    console.log("fauxBtn existe:", !!fauxBtn);
+    console.log("answersContainer classes:", answersContainer?.className);
+    
+    if (ansA) console.log("ansA style display:", ansA.style.display);
+    if (ansB) console.log("ansB style display:", ansB.style.display);
+    if (ansC) console.log("ansC style display:", ansC.style.display);
+    if (ansD) console.log("ansD style display:", ansD.style.display);
+    
+    console.log("=== FIN DÉBOGAGE ===");
+}
         
     </script>
 </body>
-</html>
+</html> 
