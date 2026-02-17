@@ -798,8 +798,295 @@
 }
 
 
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
 
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px #FFD700; }
+    50% { text-shadow: 0 0 20px #FFD700, 0 0 30px #FFA500; }
+    100% { text-shadow: 0 0 5px #FFD700; }
+}
 
+.ramadan-badge-glow {
+    animation: pulse 2s infinite;
+    display: inline-block;
+}
+
+/* Styles pour le badge Ramadan */
+.ramadan-badge {
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.ramadan-badge:hover {
+    transform: scale(1.2);
+}
+
+/* Tooltip personnalisé pour le badge */
+[title] {
+    position: relative;
+    cursor: help;
+}
+
+[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(10, 47, 31, 0.95);
+    color: #FFD700;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border: 2px solid #FFD700;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.3);
+    z-index: 1000;
+    pointer-events: none;
+    animation: fadeIn 0.2s;
+    font-family: 'Amiri', serif;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* Animation pour le badge en période de Ramadan */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes pulse {
+    0% { text-shadow: 0 0 5px #FFD700; }
+    50% { text-shadow: 0 0 20px #FFD700, 0 0 30px #FFA500; }
+    100% { text-shadow: 0 0 5px #FFD700; }
+}
+
+/* Style pour la ligne de l'utilisateur dans le classement */
+.user-row .ramadan-badge {
+    filter: drop-shadow(0 0 5px gold);
+}
+
+/* Adaptation pour mobile */
+@media (max-width: 600px) {
+    [title]:hover::after {
+        white-space: normal;
+        width: 200px;
+        text-align: center;
+        font-size: 0.8rem;
+    }
+}
+
+#currentCategoryBtn {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6B8E23;
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 12px;
+    transition: background 0.3s;
+    user-select: none;
+}
+
+#currentCategoryBtn:hover {
+    background: #8BAA4F;
+}
+
+#categoryList {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(20, 60, 48, 0.98);
+    border: 2px solid #6B8E23;
+    border-top: none;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+#categoryList div {
+    cursor: pointer;
+    padding: 15px;
+    font-size: 1.25rem;
+    color: #e2e8f0;
+    border-bottom: 1px solid #6B8E2344;
+    background: rgba(107, 142, 35, 0.3);
+    transition: all 0.3s;
+    text-align: center;
+}
+
+#categoryList div:hover {
+    background: rgba(255, 215, 0, 0.3);
+    color: #FFD700;
+    padding-left: 20px;
+}
+
+#categoryList div:last-child {
+    border-bottom: none;
+}
+
+/* Assurer que le conteneur du th est positionné relativement */
+.leaderboard-table th {
+    position: relative;
+    padding: 0;
+}
+
+/* Style pour le tableau de classement */
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1.2rem
+}
+
+.leaderboard-table th,
+.leaderboard-table td {
+    padding: 12px;
+    border-bottom: 1px solid #1e293b
+}
+
+.leaderboard-table th {
+    background: #6B8E23;
+    color: #fff;
+    font-size: 1.3rem
+}
+
+.leaderboard-table tr:nth-child(1) td {
+    color: #FFD700;
+    font-weight: bold;
+}
+
+.leaderboard-table tr:nth-child(2) td {
+    color: #C0C0C0;
+}
+
+.leaderboard-table tr:nth-child(3) td {
+    color: #CD7F32;
+}
+
+.leaderboard-table tr:nth-child(n+4) td {
+    color: #e2e8f0;
+}
+
+.user-row {
+    background: rgba(20, 60, 48, 0.96);
+    border: 3px solid #FFD700;
+}
+
+/* À ajouter dans votre section <style> */
+.achievement .desc-text {
+    color: #94a3b8;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+.achievement .progress-text {
+    color: #e2e8f0;
+    font-size: 0.9rem;
+    display: block;
+    margin: 5px 0;
+}
+/* Style pour le compteur de score du mode infini */
+.score-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px 0;
+    padding: 10px;
+    border-radius: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.score-low {
+    color: #ff4444; /* Rouge pour petits scores */
+}
+
+.score-medium {
+    color: #ffaa00; /* Orange pour scores moyens */
+}
+
+.score-high {
+    color: #00ff88; /* Vert pour scores élevés */
+}
+
+.score-very-high {
+    color: #ff66ff; /* Violet pour très grands scores */
+    text-shadow: 0 0 15px #ff66ff;
+    animation: pulse-score 2s infinite;
+}
+
+@keyframes pulse-score {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); text-shadow: 0 0 20px currentColor; }
+    100% { transform: scale(1); }
+}
+/* Styles pour le slider de langue */
+#currentLangBtn {
+    transition: all 0.3s;
+}
+
+#currentLangBtn:hover {
+    background: linear-gradient(135deg, #8BAA4F, #5B7E2A) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 215, 0, 0.4) !important;
+}
+
+.lang-slider-option:hover {
+    background: rgba(255, 215, 0, 0.25) !important;
+    color: #FFD700 !important;
+    padding-left: 25px !important;
+    transform: scale(1.02);
+}
+
+.lang-slider-option.active {
+    background: rgba(255, 215, 0, 0.35) !important;
+    border-left: 6px solid #FFD700 !important;
+    color: #FFD700 !important;
+    font-weight: bold;
+}
+
+.lang-slider-option {
+    transition: all 0.3s;
+}
+
+/* Animation d'ouverture/fermeture */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#langSliderList.show {
+    display: block !important;
+    animation: slideDown 0.3s ease-out;
+}
+
+/* Pour le RTL (arabe) */
+[dir="rtl"] .lang-slider-option:hover {
+    padding-left: 18px !important;
+    padding-right: 25px !important;
+}
+
+[dir="rtl"] .lang-slider-option.active {
+    border-left: none !important;
+    border-right: 6px solid #FFD700 !important;
+}
 
     </style>
 </head>
@@ -824,20 +1111,20 @@
         
         <!-- ÉCRAN MENU PRINCIPAL -->
 <div id="menu" class="hidden">
-    <h1 data-i18n="title">Quiz Islam</h1>
+    <h1>Quiz Islam</h1>
     
     <div id="ramadanCountdown">
-        <span data-i18n="ramadan_event">Event du ramadan 2026 dans...</span>
+        <span>Event du ramadan 2026 dans...</span>
         <span id="countdownTimer">Calcul en cours...</span>
     </div>
     
     <div class="user-info">
-        <span data-i18n="welcome">Bienvenue</span> <strong id="username"></strong> • <span data-i18n="level">Niveau</span> <strong id="levelNum">1</strong>
-        <br>💰 <span data-i18n="points">Points</span> : <strong id="userPoints">0</strong>
+        <span>Bienvenue</span> <strong id="username"></strong> • <span>Niveau</span> <strong id="levelNum">1</strong>
+        <br>💰 <span>Points</span> : <strong id="userPoints">0</strong>
     </div>
     
     <div class="stats">
-        <span data-i18n="streak">Streak</span> : <span id="streak">0</span> | <span data-i18n="record_infinite">Record Infini</span> : <span id="best">0</span>
+        <span>Streak</span> : <span id="streak">0</span> | <span>Record Infini</span> : <span id="best">0</span>
     </div>
     
     <div class="xp-bar">
@@ -845,12 +1132,12 @@
     </div>
     
     <div style="margin:15px 0;color:#94a3b8;">
-        <span data-i18n="xp">XP</span>: <span id="xp">0</span>/<span id="xpMax">100</span>
+        <span>XP</span>: <span id="xp">0</span>/<span id="xpMax">100</span>
     </div>
             
             <div class="daily-challenge-box" id="dailyQuizBtnContainer">
                 <h2>DÉFI DU JOUR</h2>
-                <p>5 questions &rarr; **+200 XP si 5/5**</p>
+                <p>5 questions → +200 XP si 5/5</p>
                 <button class="play-button" id="dailyQuizBtn" onclick="checkDailyQuizAvailability()">JOUER</button>
                 <span id="dailyTimerDisplay" style="display:none;font-size:1.1rem;color:#f87171;font-weight:700;margin-top:15px;display:block;"></span>
             </div>
@@ -871,8 +1158,8 @@
         
        <!-- ÉCRAN SHOP -->
 <div id="shop" class="hidden">
-    <h1 data-i18n="shop_title">🛍️ Shop Quotidien</h1>
-    <p style="font-size:1.4rem;margin-bottom:20px;color:#FFD700;" data-i18n="shop_desc">Les offres changent tous les jours !</p>
+    <h1>🛍️ Shop Quotidien</h1>
+    <p style="font-size:1.4rem;margin-bottom:20px;color:#FFD700;">Les offres changent tous les jours !</p>
     
     <div id="shopChrono" style="font-size: 1.3rem; font-weight: bold; color: #f87171; margin-bottom: 20px;"></div>
     
@@ -884,36 +1171,36 @@
     
     <div id="shopItemsContainer" style="display:flex;flex-direction:column;gap:20px;"></div>
     
-    <h2 style="margin-top:40px;margin-bottom:15px;color:#6B8E23;" data-i18n="inventory">Inventaire</h2>
+    <h2 style="margin-top:40px;margin-bottom:15px;color:#6B8E23;">Inventaire</h2>
     <ul id="ownedItemsList" style="list-style:none;text-align:left;padding:0 20px;font-size:1.3rem;"></ul>
     
     <button class="menu-btn settings-btn" onclick="showMenu()">
-        <span data-i18n="back_to_menu">Retour au menu</span>
+        Retour au menu
     </button>
 </div>
         
         <!-- ÉCRAN CLASSEMENT -->
        <!-- ÉCRAN CLASSEMENT -->
 <div id="leaderboard" class="hidden">
-    <h1 data-i18n="leaderboard_title">Classement</h1>
+    <h1>Classement</h1>
     <table class="leaderboard-table" id="leaderboardTable">
         <thead>
             <tr>
                 <th>#</th>
-                <th data-i18n="player">Joueur</th>
+                <th>Joueur</th>
                 <th style="position: relative; padding: 0;">
                     <div id="currentCategoryBtn" style="cursor: pointer; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #6B8E23; color: #fff; font-size: 1.3rem; font-weight: bold; padding: 12px;">
-                        <span data-i18n="total_xp">Total XP</span> ▼
+                        <span>Total XP</span> ▼
                     </div>
                     <div id="categoryList" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(20, 60, 48, 0.98); border: 2px solid #6B8E23; border-top: none; border-radius: 0 0 12px 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.5); z-index: 10;">
                         <div onclick="selectCategory('totalXp')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;border-bottom:1px solid #6B8E2344;background:#6B8E23;">
-                            <span data-i18n="total_xp">Total XP</span>
+                            <span>Total XP</span>
                         </div>
                         <div onclick="selectCategory('infiniteBest')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;border-bottom:1px solid #6B8E2344;background:#6B8E23;">
-                            <span data-i18n="best_infinite">Meilleur Mode Infini</span>
+                            <span>Meilleur Mode Infini</span>
                         </div>
                         <div onclick="selectCategory('points')" style="cursor:pointer;padding:12px;font-size:1.25rem;color:#e2e8f0;background:#6B8E23;">
-                            <span data-i18n="shop_points">Points Boutique</span>
+                            <span>Points Boutique</span>
                         </div>
                     </div>
                 </th>
@@ -922,77 +1209,88 @@
         <tbody id="leaderboardBody"></tbody>
     </table>
     <button class="menu-btn" onclick="showMenu()">
-        <span data-i18n="back_to_menu">Retour</span>
+        Retour
     </button>
 </div>
         
-        <!-- ÉCRAN SUCCÈS -->
+     <!-- ÉCRAN SUCCÈS -->
 <div id="achievements" class="hidden">
     <h1 data-i18n="achievements_title">Succès</h1>
     
-    <div class="achievement" id="a1"><span class="emoji">👶</span><div><strong data-i18n="ach_first_step">Premier pas</strong><br><span id="a1-prog"></span></div></div>
-    <div class="achievement" id="a2"><span class="emoji">💯</span><div><strong data-i18n="ach_perfect_10">10/10 Parfait !</strong><br><span id="a2-prog"></span></div></div>
-    <div class="achievement" id="a3"><span class="emoji">🔥</span><div><strong data-i18n="ach_streak">Streak de feu</strong><br><span id="a3-prog"></span></div></div>
-    <div class="achievement" id="a4"><span class="emoji">♾️</span><div><strong data-i18n="ach_infinite_50">Infini 50</strong><br><span id="a4-prog"></span></div></div>
-    <div class="achievement" id="a5"><span class="emoji">⏱️</span><div><strong data-i18n="ach_speed">Vitesse Éclair</strong><br><span id="a5-prog"></span></div></div>
-    <div class="achievement" id="a6"><span class="emoji">⭐</span><div><strong data-i18n="ach_1000xp">1000 XP</strong><br><span id="a6-prog"></span></div></div>
-    <div class="achievement" id="a7"><span class="emoji">📚</span><div><strong data-i18n="ach_scholar">Savant en devenir</strong><br><span id="a7-prog"></span></div></div>
-    <div class="achievement" id="a8"><span class="emoji">🏆</span><div><strong data-i18n="ach_master_tf">Maître du Vrai/Faux</strong><br><span id="a8-prog"></span></div></div>
-    <div class="achievement" id="a9"><span class="emoji">📿</span><div><strong data-i18n="ach_hafiz">Hafiz</strong><br><span id="a9-prog"></span></div></div>
-    <div class="achievement" id="a11"><span class="emoji">🧠</span><div><strong data-i18n="ach_qcm_init">QCM Initié</strong><br><span id="a11-prog"></span></div></div>
-    <div class="achievement" id="a12"><span class="emoji">✅</span><div><strong data-i18n="ach_qcm_master">Maître QCM</strong><br><span id="a12-prog"></span></div></div>
-    <div class="achievement" id="a10"><span class="emoji">💎</span><div><strong data-i18n="ach_legend">Légende de la oumma</strong><br><span id="a10-prog"></span></div></div>
-    <div class="achievement" id="a13"><span class="emoji">⏱️</span><div><strong data-i18n="ach_chrono_fan">Chrono Passionné</strong><br><span id="a13-prog"></span></div></div>
-    <div class="achievement" id="a14"><span class="emoji">⚡</span><div><strong data-i18n="ach_chrono_master">Maître Chrono</strong><br><span id="a14-prog"></span></div></div>
-    <div class="achievement" id="a15"><span class="emoji">♾️</span><div><strong data-i18n="ach_survivor_25">Survivant 25</strong><br><span id="a15-prog"></span></div></div>
-    <div class="achievement" id="a16"><span class="emoji">🎯</span><div><strong data-i18n="ach_qcm_expert">Expert QCM</strong><br><span id="a16-prog"></span></div></div>
-    <div class="achievement" id="a17"><span class="emoji">🛍️</span><div><strong data-i18n="ach_shop_collector">Collectionneur Boutique</strong><br><span id="a17-prog"></span></div></div>
-    <div class="achievement" id="a18"><span class="emoji">💸</span><div><strong data-i18n="ach_big_spender">Grand Dépensier</strong><br><span id="a18-prog"></span></div></div>
-    <div class="achievement" id="a19"><span class="emoji">💰</span><div><strong data-i18n="ach_millionaire">Millionnaire Boutique</strong><br><span id="a19-prog"></span></div></div>
-    <div class="achievement" id="a20"><span class="emoji">🏅</span><div><strong data-i18n="ach_perfect_all">Parfait dans tous les niveaux</strong><br><span id="a20-prog"></span></div></div>
-    <div class="achievement" id="a21"><span class="emoji">🥉</span><div><strong data-i18n="ach_podium">Le Podium</strong><br><span id="a21-prog"></span></div></div>
-    <div class="achievement" id="a22"><span class="emoji">🥇</span><div><strong data-i18n="ach_world_number1">Numéro 1 Mondial</strong><br><span id="a22-prog"></span></div></div>
-    <div class="achievement" id="a23"><span class="emoji">📅</span><div><strong data-i18n="ach_daily_dedicated">Assidu Quotidien</strong><br><span id="a23-prog"></span></div></div>
-    <div class="achievement" id="a24"><span class="emoji">🔥</span><div><strong data-i18n="ach_triple_challenge">Triple Défi</strong><br><span id="a24-prog"></span></div></div>
-    <div class="achievement" id="a25"><span class="emoji">🔄</span><div><strong data-i18n="ach_reroll_stock">Stock de Rerolls</strong><br><span id="a25-prog"></span></div></div>
+    <div class="achievement" id="a1"><span class="emoji">👶</span><div><strong data-i18n="ach_first_step">Premier pas</strong><br><span id="a1-prog" class="progress-text"></span><br><span id="a1-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a2"><span class="emoji">💯</span><div><strong data-i18n="ach_perfect_10">10/10 Parfait !</strong><br><span id="a2-prog" class="progress-text"></span><br><span id="a2-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a3"><span class="emoji">🔥</span><div><strong data-i18n="ach_streak">Streak de feu</strong><br><span id="a3-prog" class="progress-text"></span><br><span id="a3-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a4"><span class="emoji">♾️</span><div><strong data-i18n="ach_infinite_50">Infini 50</strong><br><span id="a4-prog" class="progress-text"></span><br><span id="a4-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a5"><span class="emoji">⏱️</span><div><strong data-i18n="ach_speed">Vitesse Éclair</strong><br><span id="a5-prog" class="progress-text"></span><br><span id="a5-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a6"><span class="emoji">⭐</span><div><strong data-i18n="ach_1000xp">1000 XP</strong><br><span id="a6-prog" class="progress-text"></span><br><span id="a6-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a7"><span class="emoji">📚</span><div><strong data-i18n="ach_scholar">Savant en devenir</strong><br><span id="a7-prog" class="progress-text"></span><br><span id="a7-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a8"><span class="emoji">🏆</span><div><strong data-i18n="ach_master_tf">Maître du Vrai/Faux</strong><br><span id="a8-prog" class="progress-text"></span><br><span id="a8-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a9"><span class="emoji">📿</span><div><strong data-i18n="ach_hafiz">Hafiz</strong><br><span id="a9-prog" class="progress-text"></span><br><span id="a9-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a11"><span class="emoji">🧠</span><div><strong data-i18n="ach_qcm_init">QCM Initié</strong><br><span id="a11-prog" class="progress-text"></span><br><span id="a11-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a12"><span class="emoji">✅</span><div><strong data-i18n="ach_qcm_master">Maître QCM</strong><br><span id="a12-prog" class="progress-text"></span><br><span id="a12-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a10"><span class="emoji">💎</span><div><strong data-i18n="ach_legend">Légende de la oumma</strong><br><span id="a10-prog" class="progress-text"></span><br><span id="a10-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a13"><span class="emoji">⏱️</span><div><strong data-i18n="ach_chrono_fan">Chrono Passionné</strong><br><span id="a13-prog" class="progress-text"></span><br><span id="a13-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a14"><span class="emoji">⚡</span><div><strong data-i18n="ach_chrono_master">Maître Chrono</strong><br><span id="a14-prog" class="progress-text"></span><br><span id="a14-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a15"><span class="emoji">♾️</span><div><strong data-i18n="ach_survivor_25">Survivant 25</strong><br><span id="a15-prog" class="progress-text"></span><br><span id="a15-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a16"><span class="emoji">🎯</span><div><strong data-i18n="ach_qcm_expert">Expert QCM</strong><br><span id="a16-prog" class="progress-text"></span><br><span id="a16-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a17"><span class="emoji">🛍️</span><div><strong data-i18n="ach_shop_collector">Collectionneur Boutique</strong><br><span id="a17-prog" class="progress-text"></span><br><span id="a17-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a18"><span class="emoji">💸</span><div><strong data-i18n="ach_big_spender">Grand Dépensier</strong><br><span id="a18-prog" class="progress-text"></span><br><span id="a18-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a19"><span class="emoji">💰</span><div><strong data-i18n="ach_millionaire">Millionnaire Boutique</strong><br><span id="a19-prog" class="progress-text"></span><br><span id="a19-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a20"><span class="emoji">🏅</span><div><strong data-i18n="ach_perfect_all">Parfait dans tous les niveaux</strong><br><span id="a20-prog" class="progress-text"></span><br><span id="a20-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a21"><span class="emoji">🥉</span><div><strong data-i18n="ach_podium">Le Podium</strong><br><span id="a21-prog" class="progress-text"></span><br><span id="a21-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a22"><span class="emoji">🥇</span><div><strong data-i18n="ach_world_number1">Numéro 1 Mondial</strong><br><span id="a22-prog" class="progress-text"></span><br><span id="a22-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a23"><span class="emoji">📅</span><div><strong data-i18n="ach_daily_dedicated">Assidu Quotidien</strong><br><span id="a23-prog" class="progress-text"></span><br><span id="a23-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a24"><span class="emoji">🔥</span><div><strong data-i18n="ach_triple_challenge">Triple Défi</strong><br><span id="a24-prog" class="progress-text"></span><br><span id="a24-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
+    <div class="achievement" id="a25"><span class="emoji">🔄</span><div><strong data-i18n="ach_reroll_stock">Stock de Rerolls</strong><br><span id="a25-prog" class="progress-text"></span><br><span id="a25-desc" class="desc-text" style="color:#94a3b8;font-size:0.8rem;"></span></div></div>
     
-    <button class="menu-btn" onclick="showMenu()">
-        <span data-i18n="back_to_menu">Retour</span>
+    <button class="menu-btn" onclick="showMenu()" data-i18n="back">
+        Retour
     </button>
 </div>
         
        <!-- ÉCRAN PARAMÈTRES -->
 <div id="settings" class="hidden">
-    <h1 data-i18n="settings">Paramètres</h1>
+    <h1>Paramètres</h1>
     <div class="user-info">
-        <span data-i18n="connected">Connecté</span> : <strong id="username2"></strong><br>
-        <span data-i18n="level">Niveau</span> <strong id="levelNum2">1</strong> • <span data-i18n="xp">XP</span> total : <strong id="totalXp">0</strong>
+        <span>Connecté</span> : <strong id="username2"></strong><br>
+        <span>Niveau</span> <strong id="levelNum2">1</strong> • <span>XP</span> total : <strong id="totalXp">0</strong>
     </div>
     
     <button class="menu-btn infinite-btn" onclick="useDailyReroll()">
-        <span data-i18n="use_reroll">Utiliser Daily Reroll</span> (<span data-i18n="owned">Possédé</span> : <span id="rerollCount">0</span>)
+        Utiliser Daily Reroll (<span>Possédé</span> : <span id="rerollCount">0</span>)
     </button>
     
-    <div style="margin: 15px 0; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-        <button class="menu-btn settings-btn lang-btn" data-lang="fr" onclick="setLanguage('fr')">
-            <span data-i18n="french">Français</span>
-        </button>
-        <button class="menu-btn settings-btn lang-btn" data-lang="en" onclick="setLanguage('en')">
-            <span data-i18n="english">English</span>
-        </button>
-        <button class="menu-btn settings-btn lang-btn" data-lang="ar" onclick="setLanguage('ar')">
-            <span data-i18n="arabic">العربية</span>
-        </button>
+    <!-- BOUTON PRINCIPAL AVEC SLIDER DÉROULANT -->
+<div style="margin: 15px 0; position: relative;">
+    <div id="currentLangBtn" style="cursor: pointer; width: 100%; background: linear-gradient(135deg, #6B8E23, #4B6E1A); border: 2px solid #FFD70088; border-radius: 40px; padding: 15px; font-size: 1.5rem; color: #f5e8c7; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.3);">
+        <span id="currentLangText">Français</span>
+        <span style="font-size: 1.2rem;">▼</span>
     </div>
     
+    <div id="langSliderList" style="display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(20, 60, 48, 0.98); border: 2px solid #6B8E23; border-top: none; border-radius: 0 0 20px 20px; box-shadow: 0 15px 30px rgba(0,0,0,0.6); z-index: 1000; overflow: hidden; margin-top: 5px;">
+        <div class="lang-slider-option" data-lang="fr" style="cursor: pointer; padding: 18px; font-size: 1.5rem; color: #e2e8f0; border-bottom: 2px solid #6B8E2350; background: rgba(107, 142, 35, 0.2); transition: all 0.3s; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px;">
+            <span style="font-size: 2rem;">🇫🇷</span>
+            <span>Français</span>
+        </div>
+        <div class="lang-slider-option" data-lang="en" style="cursor: pointer; padding: 18px; font-size: 1.5rem; color: #e2e8f0; border-bottom: 2px solid #6B8E2350; background: rgba(107, 142, 35, 0.2); transition: all 0.3s; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px;">
+            <span style="font-size: 2rem;">🇬🇧</span>
+            <span>English</span>
+        </div>
+        <div class="lang-slider-option" data-lang="ar" style="cursor: pointer; padding: 18px; font-size: 1.5rem; color: #e2e8f0; background: rgba(107, 142, 35, 0.2); transition: all 0.3s; text-align: center; display: flex; align-items: center; justify-content: center; gap: 15px;">
+            <span style="font-size: 2rem;">🇸🇦</span>
+            <span>العربية</span>
+        </div>
+    </div>
+</div>
+    
     <button class="menu-btn" onclick="showMenu()">
-        <span data-i18n="back_to_menu">Retour au menu</span>
+        Retour au menu
     </button>
     <button class="menu-btn danger-btn" onclick="resetAccount()">
-        <span data-i18n="reset_account">Réinitialiser mon compte</span>
+        Réinitialiser mon compte
     </button>
     <button class="menu-btn settings-btn" onclick="logout()">
-        <span data-i18n="logout">Déconnexion</span>
+        Déconnexion
     </button>
 </div>
         
@@ -1047,14 +1345,13 @@
 <div style="margin-top: 40px; padding: 20px 0; text-align: center; font-size: 1.1rem; color: #94a3b8; border-top: 1px solid #6B8E2340;">
     <p style="margin-bottom: 15px;" data-i18n="clickable_link">LIEN CLIQUABLE🌙</p>
     
-    <a href="#" onclick="openWikiHome(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
-    📖 <span data-i18n="wiki">Lire le Wiki</span>
-</a>
+    <a href="#" onclick="openWikiHome(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;" data-i18n="wiki">
+    📖 Lire le Wiki
+    </a>
     
-    <a href="#" onclick="openDiscussions(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;">
-    <span data-i18n="bugs">Bugs / Questions / Suggestions</span>
-</a>
-    
+    <a href="#" onclick="openDiscussions(); return false;" style="color: #1a0dab; text-decoration: underline; margin: 0 15px; cursor: pointer;" data-i18n="bugs">
+    Bugs / Questions / Suggestions
+    </a>
 </div>
         
         <!-- POPUP SUCCÈS -->
@@ -1100,6 +1397,8 @@ db.enablePersistence({
         // VARIABLES GLOBALES
         // ================================================================
         let currentUser = null;
+        let ramadanChronoActive = false; // Indique si un chrono est actif pour la question actuelle
+        let ramadanChronoTime = 0; // Temps du chrono pour la question actuelle (6-10s)
         let unsubscribeAuth = null;
         let totalQCMCompleted = 0;
         let isInfiniteMode = false;
@@ -3258,7 +3557,7 @@ let translations = {
         "daily_desc": "5 questions → +200 XP si 5/5",
         "play": "JOUER",
         "ramadan_challenge": "🌙 Défi Ramadan (Mix de tous les modes)",
-        "shop": "🛍️ Shop Quotidien",
+        "shop": "️ Shop Quotidien",
         "classic_mode": "Mode Classique (Difficulté)",
         "qcm_mode": "Mode QCM (10 Q. - 4 Choix)",
         "chrono_mode": "Mode Chrono (10 Q. - 10s)",
@@ -3268,7 +3567,7 @@ let translations = {
         "settings": "Paramètres",
         
         // Shop
-        "shop_title": "🛍️ Shop Quotidien",
+        "shop_title": "️ Shop Quotidien",
         "shop_desc": "Les offres changent tous les jours !",
         "refresh_in": "Actualisation dans",
         "inventory": "Inventaire",
@@ -3434,7 +3733,86 @@ let translations = {
     "infinite": "Mode Infini : 1 Faute = Perdu",
     "qcm": "Mode QCM (10 Questions - 4 Choix)",
     "daily": "DÉFI DU JOUR (5 Q.) - Objectif 5/5 !",
-    "ramadan": "Défi Ramadan – Jour"
+    "ramadan": "Défi Ramadan – Jour",
+    "inventory": "Inventaire",
+"back_to_menu": "Retour au menu principal",
+"shop_normal_tab": "🛍️ Normal",
+"shop_ramadan_tab": "🌙 Ramadan",
+"refresh_in": "Actualisation dans",
+"shop_refresh_menu": "Reviens plus tard...",
+"you": "vous", // déjà présent normalement
+"bought_for": "acheté pour",
+"wiki": "Lire le Wiki",
+"bugs": "Bugs / Questions / Suggestions",
+"clickable_link": "LIEN CLIQUABLE🌙",
+"shop_desc": "Les offres changent tous les jours !",
+"points": "Points",
+"stock": "Stock",
+"player": "Joueur",
+"buy": "Acheter",
+"out_of_stock": "Stock Épuisé",
+"not_enough_points": "Pas Assez de Points",
+"purchase_success": "Achat Réussi !",
+"empty_inventory": "Inventaire vide.",
+"welcome": "Bienvenue", // déjà présent normalement
+"level": "Niveau", // déjà présent normalement
+"achievements_title": "Succès",
+"unlocked": "✅ Débloqué !",
+"remaining": "restants",
+"back": "Retour",
+
+// Succès individuels avec descriptions
+"ach_first_step": "Premier pas",
+"ach_first_step_desc": "Jouer sa première partie (n'importe quel mode)",
+"ach_perfect_10": "10/10 Parfait !",
+"ach_perfect_10_desc": "Faire un sans-faute (10/10) en mode Classique",
+"ach_streak": "Streak de feu",
+"ach_streak_desc": "Atteindre 10 bonnes réponses d'affilée (streak)",
+"ach_infinite_50": "Infini 50",
+"ach_infinite_50_desc": "Atteindre 50 points en Mode Infini",
+"ach_speed": "Vitesse Éclair",
+"ach_speed_desc": "Finir le Mode Chrono sans aucune erreur (10/10)",
+"ach_1000xp": "1000 XP",
+"ach_1000xp_desc": "Accumuler 1000 XP au total",
+"ach_scholar": "Savant en devenir",
+"ach_scholar_desc": "Répondre correctement à 500 questions",
+"ach_master_tf": "Maître du Vrai/Faux",
+"ach_master_tf_desc": "Répondre à 1000 questions (bonnes ou mauvaises)",
+"ach_hafiz": "Hafiz",
+"ach_hafiz_desc": "Faire un 10/10 parfait en Classique Difficile",
+"ach_qcm_init": "QCM Initié",
+"ach_qcm_init_desc": "Terminer 5 parties QCM",
+"ach_qcm_master": "Maître QCM",
+"ach_qcm_master_desc": "Faire un 10/10 parfait en mode QCM",
+"ach_legend": "Légende de la oumma",
+"ach_legend_desc": "Débloquer TOUS les succès précédents",
+"ach_chrono_fan": "Chrono Passionné",
+"ach_chrono_fan_desc": "Jouer 10 parties en Mode Chrono",
+"ach_chrono_master": "Maître Chrono",
+"ach_chrono_master_desc": "Faire 3 × 10/10 parfait en Mode Chrono",
+"ach_survivor_25": "Survivant 25",
+"ach_survivor_25_desc": "Atteindre 25 points en Mode Infini",
+"ach_qcm_expert": "Expert QCM",
+"ach_qcm_expert_desc": "Faire 5 × 10/10 parfait en mode QCM",
+"ach_shop_collector": "Collectionneur Boutique",
+"ach_shop_collector_desc": "Acheter au moins un exemplaire de chaque type d'objet boutique",
+"ach_big_spender": "Grand Dépensier",
+"ach_big_spender_desc": "Dépenser 10 000 points boutique au total",
+"ach_millionaire": "Millionnaire Boutique",
+"ach_millionaire_desc": "Accumuler 50 000 points boutique",
+"ach_perfect_all": "Parfait dans tous les niveaux",
+"ach_perfect_all_desc": "Faire 10/10 en Classique Facile + Normal + Difficile",
+"ach_podium": "Le Podium",
+"ach_podium_desc": "Être dans le top 3 du classement (n'importe quelle catégorie)",
+"ach_world_number1": "Numéro 1 Mondial",
+"ach_world_number1_desc": "Être numéro 1 du classement (n'importe quelle catégorie)",
+"ach_daily_dedicated": "Assidu Quotidien",
+"ach_daily_dedicated_desc": "Terminer 5 Défis du Jour",
+"ach_triple_challenge": "Triple Défi",
+"ach_triple_challenge_desc": "Faire 3 Défis du Jour dans la même journée",
+"ach_reroll_stock": "Stock de Rerolls",
+"ach_reroll_stock_desc": "Avoir possédé 5 Daily Rerolls en même temps",
+"not_unlocked": "Non débloqué",
 },
 
 
@@ -3461,7 +3839,7 @@ let translations = {
         "daily_desc": "5 questions → +200 XP if 5/5",
         "play": "PLAY",
         "ramadan_challenge": "🌙 Ramadan Challenge (Mix of all modes)",
-        "shop": "🛍️ Daily Shop",
+        "shop": "️ Daily Shop",
         "classic_mode": "Classic Mode (Difficulty)",
         "qcm_mode": "QCM Mode (10 Q. - 4 Choices)",
         "chrono_mode": "Chrono Mode (10 Q. - 10s)",
@@ -3471,7 +3849,7 @@ let translations = {
         "settings": "Settings",
         
         // Shop
-        "shop_title": "🛍️ Daily Shop",
+        "shop_title": "️ Daily Shop",
         "shop_desc": "Offers change every day!",
         "refresh_in": "Refresh in",
         "inventory": "Inventory",
@@ -3658,7 +4036,85 @@ let translations = {
     "infinite": "Infinite Mode: 1 Mistake = Game Over",
     "qcm": "QCM Mode (10 Questions - 4 Choices)",
     "daily": "DAILY CHALLENGE (5 Q.) - Goal 5/5 !",
-    "ramadan": "Ramadan Challenge – Day"
+    "ramadan": "Ramadan Challenge – Day",
+    "inventory": "Inventory",
+"back_to_menu": "Back to main menu",
+"shop_normal_tab": "🛍️ Normal",
+"shop_ramadan_tab": "🌙 Ramadan",
+"refresh_in": "Refresh in",
+"shop_refresh_menu": "Come back later...",
+"you": "you",
+"bought_for": "purchased for",
+"wiki": "Read the Wiki",
+"bugs": "Bugs / Questions / Suggestions",
+"clickable_link": "CLICKABLE LINK🌙",
+"shop_desc": "Offers change every day!",
+"points": "Points",
+"stock": "Stock",
+"player": "Player",
+"buy": "Buy",
+"out_of_stock": "Out of Stock",
+"not_enough_points": "Not Enough Points",
+"purchase_success": "Purchase Successful!",
+"empty_inventory": "Empty inventory.",
+"welcome": "Welcome",
+"level": "Level",
+"achievements_title": "Achievements",
+"unlocked": "✅ Unlocked!",
+"remaining": "remaining",
+"back": "Back",
+
+"ach_first_step": "First Step",
+"ach_first_step_desc": "Play your first game (any mode)",
+"ach_perfect_10": "10/10 Perfect!",
+"ach_perfect_10_desc": "Get a perfect score (10/10) in Classic mode",
+"ach_streak": "Fire Streak",
+"ach_streak_desc": "Reach 10 correct answers in a row (streak)",
+"ach_infinite_50": "Infinite 50",
+"ach_infinite_50_desc": "Reach 50 points in Infinite Mode",
+"ach_speed": "Lightning Speed",
+"ach_speed_desc": "Finish Chrono Mode with no mistakes (10/10)",
+"ach_1000xp": "1000 XP",
+"ach_1000xp_desc": "Accumulate 1000 total XP",
+"ach_scholar": "Becoming Scholar",
+"ach_scholar_desc": "Correctly answer 500 questions",
+"ach_master_tf": "True/False Master",
+"ach_master_tf_desc": "Answer 1000 questions (correct or incorrect)",
+"ach_hafiz": "Hafiz",
+"ach_hafiz_desc": "Get a perfect 10/10 in Hard Classic mode",
+"ach_qcm_init": "QCM Initiate",
+"ach_qcm_init_desc": "Complete 5 QCM games",
+"ach_qcm_master": "QCM Master",
+"ach_qcm_master_desc": "Get a perfect 10/10 in QCM mode",
+"ach_legend": "Ummah Legend",
+"ach_legend_desc": "Unlock ALL previous achievements",
+"ach_chrono_fan": "Chrono Enthusiast",
+"ach_chrono_fan_desc": "Play 10 games in Chrono Mode",
+"ach_chrono_master": "Chrono Master",
+"ach_chrono_master_desc": "Get 3 perfect 10/10 scores in Chrono Mode",
+"ach_survivor_25": "Survivor 25",
+"ach_survivor_25_desc": "Reach 25 points in Infinite Mode",
+"ach_qcm_expert": "QCM Expert",
+"ach_qcm_expert_desc": "Get 5 perfect 10/10 scores in QCM mode",
+"ach_shop_collector": "Shop Collector",
+"ach_shop_collector_desc": "Buy at least one of each shop item type",
+"ach_big_spender": "Big Spender",
+"ach_big_spender_desc": "Spend 10,000 shop points total",
+"ach_millionaire": "Shop Millionaire",
+"ach_millionaire_desc": "Accumulate 50,000 shop points",
+"ach_perfect_all": "Perfect in All Levels",
+"ach_perfect_all_desc": "Get 10/10 in Easy + Normal + Hard Classic",
+"ach_podium": "The Podium",
+"ach_podium_desc": "Be in the top 3 of the leaderboard (any category)",
+"ach_world_number1": "World Number 1",
+"ach_world_number1_desc": "Be number 1 on the leaderboard (any category)",
+"ach_daily_dedicated": "Daily Dedicated",
+"ach_daily_dedicated_desc": "Complete 5 Daily Challenges",
+"ach_triple_challenge": "Triple Challenge",
+"ach_triple_challenge_desc": "Complete 3 Daily Challenges in the same day",
+"ach_reroll_stock": "Reroll Stock",
+"ach_reroll_stock_desc": "Have owned 5 Daily Rerolls at the same time",
+"not_unlocked": "Not unlocked",
 },
     },
     
@@ -3682,7 +4138,7 @@ let translations = {
         "daily_desc": "5 أسئلة → +200 XP إذا 5/5",
         "play": "العب",
         "ramadan_challenge": "🌙 تحدي رمضان (مزيج من جميع الأوضاع)",
-        "shop": "🛍️ المتجر اليومي",
+        "shop": "️ المتجر اليومي",
         "classic_mode": "الوضع الكلاسيكي (الصعوبة)",
         "qcm_mode": "وضع الاختيار (10 أسئلة - 4 خيارات)",
         "chrono_mode": "وضع التوقيت (10 أسئلة - 10ث)",
@@ -3692,7 +4148,7 @@ let translations = {
         "settings": "الإعدادات",
         
         // Shop
-        "shop_title": "🛍️ المتجر اليومي",
+        "shop_title": "️ المتجر اليومي",
         "shop_desc": "العروض تتغير كل يوم!",
         "refresh_in": "يتجدد خلال",
         "inventory": "المخزون",
@@ -3878,12 +4334,353 @@ let translations = {
     "infinite": "الوضع اللامتناهي: خطأ واحد = خسارة",
     "qcm": "وضع الاختيارات (10 أسئلة - 4 خيارات)",
     "daily": "تحدي اليوم (5 أسئلة) - الهدف 5/5!",
-    "ramadan": "تحدي رمضان – اليوم"
+    "ramadan": "تحدي رمضان – اليوم",
+    "inventory": "المخزون",
+"back_to_menu": "العودة إلى القائمة الرئيسية",
+"shop_normal_tab": "🛍️ عادي",
+"shop_ramadan_tab": "🌙 رمضان",
+"refresh_in": "يتجدد خلال",
+"shop_refresh_menu": "عد لاحقًا...",
+"you": "أنت",
+"bought_for": "تم شراؤه مقابل",
+"wiki": "اقرأ الويكي",
+"bugs": "أخطاء / أسئلة / اقتراحات",
+"clickable_link": "رابط قابل للنقر🌙",
+"shop_desc": "العروض تتغير كل يوم!",
+"points": "نقاط",
+"stock": "المخزون",
+"player": "لاعب",
+"buy": "شراء",
+"out_of_stock": "نفد من المخزون",
+"not_enough_points": "نقاط غير كافية",
+"purchase_success": "تم الشراء بنجاح!",
+"empty_inventory": "المخزون فارغ.",
+"welcome": "مرحبًا",
+"level": "المستوى",
+
+"achievements_title": "الإنجازات",
+"unlocked": "✅ تم الفتح!",
+"remaining": "متبقي",
+"back": "رجوع",
+
+"ach_first_step": "الخطوة الأولى",
+"ach_first_step_desc": "العب لعبتك الأولى (أي وضع)",
+"ach_perfect_10": "١٠/١٠ كامل!",
+"ach_perfect_10_desc": "احصل على نتيجة كاملة (١٠/١٠) في الوضع الكلاسيكي",
+"ach_streak": "سلسلة نارية",
+"ach_streak_desc": "احصل على ١٠ إجابات صحيحة متتالية",
+"ach_infinite_50": "خمسون لانهائي",
+"ach_infinite_50_desc": "احصل على ٥٠ نقطة في الوضع اللامتناهي",
+"ach_speed": "سرعة البرق",
+"ach_speed_desc": "أنهِ وضع التوقيت بدون أخطاء (١٠/١٠)",
+"ach_1000xp": "١٠٠٠ XP",
+"ach_1000xp_desc": "اجمع ١٠٠٠ XP إجمالاً",
+"ach_scholar": "عالم في التكوين",
+"ach_scholar_desc": "أجب صحيحاً على ٥٠٠ سؤال",
+"ach_master_tf": "سيد الصواب/الخطأ",
+"ach_master_tf_desc": "أجب على ١٠٠٠ سؤال (صحيحة أو خاطئة)",
+"ach_hafiz": "حافظ",
+"ach_hafiz_desc": "احصل على ١٠/١٠ كامل في الكلاسيكي الصعب",
+"ach_qcm_init": "مجرب الاختيارات",
+"ach_qcm_init_desc": "أكمل ٥ ألعاب في وضع الاختيارات",
+"ach_qcm_master": "سيد الاختيارات",
+"ach_qcm_master_desc": "احصل على ١٠/١٠ كامل في وضع الاختيارات",
+"ach_legend": "أسطورة الأمة",
+"ach_legend_desc": "افتح جميع الإنجازات السابقة",
+"ach_chrono_fan": "عاشق التوقيت",
+"ach_chrono_fan_desc": "العب ١٠ ألعاب في وضع التوقيت",
+"ach_chrono_master": "سيد التوقيت",
+"ach_chrono_master_desc": "احصل على ٣ مرات ١٠/١٠ كامل في وضع التوقيت",
+"ach_survivor_25": "الناجي ٢٥",
+"ach_survivor_25_desc": "احصل على ٢٥ نقطة في الوضع اللامتناهي",
+"ach_qcm_expert": "خبير الاختيارات",
+"ach_qcm_expert_desc": "احصل على ٥ مرات ١٠/١٠ كامل في وضع الاختيارات",
+"ach_shop_collector": "جامع المتجر",
+"ach_shop_collector_desc": "اشترِ على الأقل قطعة واحدة من كل نوع في المتجر",
+"ach_big_spender": "منفق كبير",
+"ach_big_spender_desc": "أنفق ١٠,٠٠٠ نقطة متجر إجمالاً",
+"ach_millionaire": "مليونير المتجر",
+"ach_millionaire_desc": "اجمع ٥٠,٠٠٠ نقطة متجر",
+"ach_perfect_all": "كامل في كل المستويات",
+"ach_perfect_all_desc": "احصل على ١٠/١٠ في الكلاسيكي السهل + العادي + الصعب",
+"ach_podium": "المنصة",
+"ach_podium_desc": "كن في المراكز الثلاثة الأولى في الترتيب (أي فئة)",
+"ach_world_number1": "رقم ١ عالمي",
+"ach_world_number1_desc": "كن رقم ١ في الترتيب (أي فئة)",
+"ach_daily_dedicated": "ملتزم يومي",
+"ach_daily_dedicated_desc": "أكمل ٥ تحديات يومية",
+"ach_triple_challenge": "تحدي ثلاثي",
+"ach_triple_challenge_desc": "أكمل ٣ تحديات يومية في نفس اليوم",
+"ach_reroll_stock": "مخزون إعادة التعيين",
+"ach_reroll_stock_desc": "امتلك ٥ رولات يومية في نفس الوقت",
+ "not_unlocked": "غير مفتوح",   
 },
 
     }
 };
 
+// ================================================================
+// FONCTIONS DE TRADUCTION AVEC CONDITIONS if/else
+// ================================================================
+
+// Fonction pour obtenir le texte du bouton "Défi du Ramadan"
+function getRamadanChallengeButtonText() {
+    if (currentLang === 'fr') {
+        return "🌙 Défi Ramadan (Mix de tous les modes)";
+    } else if (currentLang === 'en') {
+        return "🌙 Ramadan Challenge (Mix of all modes)";
+    } else if (currentLang === 'ar') {
+        return "🌙 تحدي رمضان (مزيج من جميع الأوضاع)";
+    }
+}
+
+// Fonction pour obtenir la description du badge Ramadan (dans le classement)
+function getRamadanBadgeTooltip() {
+    if (currentLang === 'fr') {
+        return "🌟 Badge Ramadan Éternel - Obtenu pendant le Ramadan 2026 🌙";
+    } else if (currentLang === 'en') {
+        return "🌟 Eternal Ramadan Badge - Obtained during Ramadan 2026 🌙";
+    } else if (currentLang === 'ar') {
+        return "🌟 شارة رمضان الأبدية - تم الحصول عليها خلال رمضان 2026 🌙";
+    }
+}
+
+// Fonction pour obtenir le nom du badge Ramadan (dans le shop/inventaire)
+function getRamadanBadgeName() {
+    if (currentLang === 'fr') {
+        return "🌟 Badge Ramadan Éternel";
+    } else if (currentLang === 'en') {
+        return "🌟 Eternal Ramadan Badge";
+    } else if (currentLang === 'ar') {
+        return "🌟 شارة رمضان الأبدية";
+    }
+}
+
+// Fonction pour obtenir la description du badge Ramadan (dans le shop/inventaire)
+function getRamadanBadgeDescription() {
+    if (currentLang === 'fr') {
+        return "Badge spécial qui reste à côté de ton pseudo pour toujours. Illumine ton nom !";
+    } else if (currentLang === 'en') {
+        return "Special badge that stays next to your username forever. Makes your name glow!";
+    } else if (currentLang === 'ar') {
+        return "شارة خاصة تبقى بجانب اسم المستخدم إلى الأبد. تجعل اسمك يلمع!";
+    }
+}
+
+// Fonction pour obtenir le texte du pourcentage de réduction Ramadan
+function getRamadanDiscountText(discountPercent) {
+    if (currentLang === 'fr') {
+        return `-${discountPercent}% Ramadan`;
+    } else if (currentLang === 'en') {
+        return `-${discountPercent}% Ramadan`;
+    } else if (currentLang === 'ar') {
+        return `-${discountPercent}% رمضان`;
+    }
+}
+
+// Fonction pour obtenir le texte "X/Y" pour la question
+function getQuestionProgressText(current, total) {
+    if (currentLang === 'fr') {
+        return `Question ${current}/${total}`;
+    } else if (currentLang === 'en') {
+        return `Question ${current}/${total}`;
+    } else if (currentLang === 'ar') {
+        return `سؤال ${current}/${total}`;
+    }
+}
+
+// Fonction pour obtenir le texte "Faux !"
+function getWrongText() {
+    if (currentLang === 'fr') {
+        return "❌ Faux !";
+    } else if (currentLang === 'en') {
+        return "❌ Wrong!";
+    } else if (currentLang === 'ar') {
+        return "❌ خطأ!";
+    }
+}
+
+// Fonction pour obtenir le texte "Correct !"
+function getCorrectText() {
+    if (currentLang === 'fr') {
+        return "✔ Correct !";
+    } else if (currentLang === 'en') {
+        return "✔ Correct!";
+    } else if (currentLang === 'ar') {
+        return "✔ صحيح!";
+    }
+}
+
+// Fonction pour obtenir le texte "Partie terminée !" (fin de partie)
+function getGameOverText() {
+    if (currentLang === 'fr') {
+        return "Partie terminée !";
+    } else if (currentLang === 'en') {
+        return "Game over!";
+    } else if (currentLang === 'ar') {
+        return "انتهت اللعبة!";
+    }
+}
+
+// Fonction pour obtenir le texte "Ton score : X/Y" (fin de partie)
+function getScoreText(score, total) {
+    if (currentLang === 'fr') {
+        return `Ton score: ${score} / ${total}`;
+    } else if (currentLang === 'en') {
+        return `Your score: ${score} / ${total}`;
+    } else if (currentLang === 'ar') {
+        return `نتيجتك: ${score} / ${total}`;
+    }
+}
+
+// Fonction pour obtenir la description de la fin de partie (selon le mode)
+function getEndGameDescription(mode, score, total) {
+    if (mode === "daily") {
+        if (currentLang === 'fr') {
+            if (score === 5) {
+                return "🎉 **FÉLICITATIONS !** Tu as fait un 5/5 !<br>+200 XP de bonus quotidien !";
+            } else {
+                return "Dommage ! Il te fallait un 5/5 pour le bonus de 200 XP quotidien. Reviens demain !";
+            }
+        } else if (currentLang === 'en') {
+            if (score === 5) {
+                return "🎉 **CONGRATULATIONS!** You got 5/5!<br>+200 XP daily bonus!";
+            } else {
+                return "Too bad! You needed 5/5 for the 200 XP daily bonus. Come back tomorrow!";
+            }
+        } else if (currentLang === 'ar') {
+            if (score === 5) {
+                return "🎉 **مبروك!** لقد حصلت على 5/5!<br>+200 XP مكافأة اليوم!";
+            } else {
+                return "للأسف! كان يجب الحصول على 5/5 لمكافأة 200 XP. عد غداً!";
+            }
+        }
+    } else if (mode === "ramadan") {
+        if (currentLang === 'fr') {
+            if (score >= 6) {
+                let msg = "🎉 Jour validé ! +150 XP + 200 points boutique";
+                if (score === 7) {
+                    msg += "<br>✨ 7/7 PARFAIT ! +350 XP + 300 points bonus !";
+                }
+                return msg;
+            } else {
+                return "Dommage… Il fallait au moins 6/7 pour valider le jour.";
+            }
+        } else if (currentLang === 'en') {
+            if (score >= 6) {
+                let msg = "🎉 Day completed! +150 XP + 200 shop points";
+                if (score === 7) {
+                    msg += "<br>✨ 7/7 PERFECT! +350 XP + 300 bonus points!";
+                }
+                return msg;
+            } else {
+                return "Too bad… You needed at least 6/7 to validate the day.";
+            }
+        } else if (currentLang === 'ar') {
+            if (score >= 6) {
+                let msg = "🎉 تم إكمال اليوم! +150 XP + 200 نقطة متجر";
+                if (score === 7) {
+                    msg += "<br>✨ 7/7 كامل! +350 XP + 300 نقطة مكافأة!";
+                }
+                return msg;
+            } else {
+                return "للأسف… كان يجب الحصول على 6/7 على الأقل لإكمال اليوم.";
+            }
+        }
+    } else if (mode === "infinite") {
+        if (currentLang === 'fr') {
+            if (score > (currentUser?.infiniteBest || 0)) {
+                return `Nouveau record Infini : ${score} !`;
+            } else {
+                return `Record Infini : ${currentUser?.infiniteBest || 0}.`;
+            }
+        } else if (currentLang === 'en') {
+            if (score > (currentUser?.infiniteBest || 0)) {
+                return `New Infinite Record : ${score} !`;
+            } else {
+                return `Infinite Record : ${currentUser?.infiniteBest || 0}.`;
+            }
+        } else if (currentLang === 'ar') {
+            if (score > (currentUser?.infiniteBest || 0)) {
+                return `رقم قياسي لانهائي جديد : ${score} !`;
+            } else {
+                return `الرقم القياسي اللامتناهي : ${currentUser?.infiniteBest || 0}.`;
+            }
+        }
+    } else {
+        if (currentLang === 'fr') {
+            return "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
+        } else if (currentLang === 'en') {
+            return "You earned XP in this game. Return to the menu to see your stats!";
+        } else if (currentLang === 'ar') {
+            return "لقد ربحت نقاط خبرة في هذه اللعبة. عد إلى القائمة لرؤية إحصائياتك!";
+        }
+    }
+}
+
+// Fonction pour obtenir le texte du bouton "Retour au menu" (fin de partie)
+function getBackToMenuButtonText() {
+    if (currentLang === 'fr') {
+        return "Retour au menu principal";
+    } else if (currentLang === 'en') {
+        return "Back to main menu";
+    } else if (currentLang === 'ar') {
+        return "العودة إلى القائمة الرئيسية";
+    }
+}
+
+// Fonction pour obtenir le texte "Temps écoulé !"
+function getTimeoutText() {
+    if (currentLang === 'fr') {
+        return "❌ Temps écoulé !";
+    } else if (currentLang === 'en') {
+        return "❌ Time's up!";
+    } else if (currentLang === 'ar') {
+        return "❌ انتهى الوقت!";
+    }
+}
+
+// Fonction pour obtenir le texte des boutons Vrai/Faux dans le mode infini
+function getTrueFalseButtonsText() {
+    let vraiText, fauxText;
+    
+    if (currentLang === 'fr') {
+        vraiText = "VRAI";
+        fauxText = "FAUX";
+    } else if (currentLang === 'en') {
+        vraiText = "TRUE";
+        fauxText = "FALSE";
+    } else if (currentLang === 'ar') {
+        vraiText = "صحيح";
+        fauxText = "خطأ";
+    }
+    
+    return { vraiText, fauxText };
+}
+
+function selectCategory(category) {
+    currentCategory = category;
+    
+    const btn = document.getElementById('currentCategoryBtn');
+    const list = document.getElementById('categoryList');
+    
+    if (btn) {
+        // Mettre à jour le texte du bouton selon la catégorie sélectionnée
+        if (category === 'totalXp') {
+            btn.innerHTML = `${t('total_xp')} ▼`;
+        } else if (category === 'infiniteBest') {
+            btn.innerHTML = `${t('best_infinite')} ▼`;
+        } else if (category === 'points') {
+            btn.innerHTML = `${t('shop_points')} ▼`;
+        }
+    }
+    
+    // Cacher la liste
+    if (list) list.style.display = 'none';
+    
+    // Recharger le classement avec la nouvelle catégorie
+    loadLeaderboard(category);
+}
 // Fonctions pour obtenir les questions QCM traduites
 function getQCMQuestionText(qObj) {
     if (!qObj) return '';
@@ -4065,23 +4862,26 @@ function updateAuthTexts() {
     if (registerBtn) registerBtn.textContent = t('register');
 }
 
+
 function updateMenuTexts() {
     const menuScreen = document.getElementById('menu');
     if (!menuScreen || !currentUser) return;
     
-    // User info
+    // User info - avec traduction de "Bienvenue", "Niveau" et "Points"
     const userInfoDiv = menuScreen.querySelector('.user-info');
     if (userInfoDiv) {
-        const strongEls = userInfoDiv.querySelectorAll('strong');
-        if (strongEls.length >= 2) {
-            const usernameEl = strongEls[0];
-            const levelEl = strongEls[1];
-            if (usernameEl) usernameEl.textContent = currentUser.pseudo;
-            if (levelEl) levelEl.textContent = currentUser.level;
-        }
+        // Remplacer le contenu HTML complet pour avoir les traductions
+        const welcomeSpan = Array.from(userInfoDiv.querySelectorAll('span')).find(span => 
+            span.textContent.includes('Bienvenue') || 
+            span.textContent.includes('Welcome') || 
+            span.textContent.includes('مرحبًا')
+        );
         
-        const pointsEl = document.getElementById('userPoints');
-        if (pointsEl) pointsEl.textContent = currentUser.points.toLocaleString();
+        // Reconstruire le HTML avec les traductions
+        userInfoDiv.innerHTML = `
+            <span>${t('welcome')}</span> <strong id="username">${currentUser.pseudo}</strong> • <span>${t('level')}</span> <strong id="levelNum">${currentUser.level}</strong>
+            <br>💰 <span>${t('points')}</span> : <strong id="userPoints">${currentUser.points.toLocaleString()}</strong>
+        `;
     }
     
     // Stats
@@ -4109,14 +4909,13 @@ function updateMenuTexts() {
         if (ramadanBtn.disabled) {
             ramadanBtn.innerHTML = t('already_played');
         } else {
-            ramadanBtn.innerHTML = t('ramadan_challenge');
+            ramadanBtn.innerHTML = getRamadanChallengeButtonText();
         }
     }
     
-    // ✅ CORRIGÉ : Bouton Shop avec un seul emoji
+    // Bouton Shop
     const shopBtn = document.getElementById('shopBtn');
     if (!shopBtn) {
-        // Si le bouton n'existe pas avec cet ID, on cherche autrement
         const shopBtns = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).filter(btn => 
             btn.textContent.includes('Shop') || btn.textContent.includes('🛍️')
         );
@@ -4125,39 +4924,37 @@ function updateMenuTexts() {
         });
     }
     
-    // ✅ CORRIGÉ : Bouton Classique
+    // Bouton Classique
     const classicBtn = Array.from(menuScreen.querySelectorAll('.menu-btn')).find(btn => 
         btn.textContent.includes('Classique') || 
         btn.textContent.includes('Classic') || 
-        btn.textContent.includes('الكلاسيكي') ||
-        btn.innerHTML.includes('classic_mode')
+        btn.textContent.includes('الكلاسيكي')
     );
     if (classicBtn && !classicBtn.classList.contains('qcm-btn') && !classicBtn.classList.contains('chrono-btn') && !classicBtn.classList.contains('infinite-btn') && !classicBtn.classList.contains('leaderboard-btn') && !classicBtn.classList.contains('success-btn') && !classicBtn.classList.contains('settings-btn')) {
         classicBtn.textContent = t('classic_mode');
     }
     
-    // ✅ CORRIGÉ : Bouton QCM
+    // Bouton QCM
     const qcmBtn = menuScreen.querySelector('.qcm-btn');
     if (qcmBtn) qcmBtn.textContent = t('qcm_mode');
     
-    // ✅ CORRIGÉ : Bouton Chrono
+    // Bouton Chrono
     const chronoBtn = menuScreen.querySelector('.chrono-btn');
     if (chronoBtn && !chronoBtn.id) chronoBtn.textContent = t('chrono_mode');
     
-    // ✅ CORRIGÉ : Bouton Infini
+    // Bouton Infini
     const infiniteBtn = menuScreen.querySelector('.infinite-btn');
     if (infiniteBtn) infiniteBtn.textContent = t('infinite_mode');
     
-    // ✅ CORRIGÉ : Bouton Classement
+    // Bouton Classement
     const leaderboardBtn = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).find(btn => 
         btn.textContent.includes('Classement') || 
         btn.textContent.includes('Leaderboard') || 
-        btn.textContent.includes('ترتيب') ||
-        btn.innerHTML.includes('leaderboard')
+        btn.textContent.includes('ترتيب')
     );
     if (leaderboardBtn) leaderboardBtn.innerHTML = t('leaderboard');
     
-    // ✅ CORRIGÉ : Bouton Succès - Utiliser la classe 'success-btn' mais exclure les autres
+    // Bouton Succès
     const successBtns = menuScreen.querySelectorAll('.success-btn');
     for (let btn of successBtns) {
         if (btn.id !== 'ramadanChallengeBtn' && btn.id !== 'claimSelectedDayBtn') {
@@ -4166,7 +4963,7 @@ function updateMenuTexts() {
         }
     }
     
-    // ✅ CORRIGÉ : Bouton Paramètres
+    // Bouton Paramètres
     const settingsBtn = menuScreen.querySelector('.settings-btn');
     if (settingsBtn) settingsBtn.textContent = t('settings');
 }
@@ -4189,6 +4986,7 @@ function updateSettingsTexts() {
         langBtns[1].textContent = t('english');
         langBtns[2].textContent = t('arabic');
     }
+      initLangSlider();
     
     const backBtn = Array.from(settingsScreen.querySelectorAll('.menu-btn')).find(btn => btn.textContent.includes('Retour') || btn.textContent.includes('Back') || btn.textContent.includes('العودة'));
     if (backBtn) backBtn.textContent = t('back_to_menu');
@@ -4287,7 +5085,9 @@ function updateDifficultyTexts() {
             'HINT_TOKEN': ['Indice (Usage Unique)', 400, "Révèle la bonne réponse de la question VRAI/FAUX actuelle.", 'CONSUMABLE'],
             'INFINITE_REVIVE': ['Revive Infini', 1000, "Permet de faire une erreur de plus en Mode Infini.", 'CONSUMABLE'],
             'DAILY_REROLL': ['Reset Défi du Jour', 1500, "Permet de rejouer immédiatement au Défi du Jour.", 'CONSUMABLE'],
-        };
+            'RAMADAN_BADGE': ['🌟 Badge Ramadan Éternel', 3900, "Badge spécial qui reste à côté de ton pseudo pour toujours. Illumine ton nom !", 'BADGE']
+};
+        
 
         const DAILY_GIFT_REWARDS = [
             { type: 'points', min: 100, max: 500, probability: 100, label: 'Points Boutique' },
@@ -4318,6 +5118,8 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
                     level: currentUser.level || 1,
                     xp: currentUser.xp || 0,
                     totalXp: currentUser.totalXp || 0,
+                    normalShopItems: currentUser.normalShopItems || [],
+    ramadanShopItems: currentUser.ramadanShopItems || [],
                     streak: currentUser.streak || 0,
                     best: currentUser.best || 0,
                     totalCorrect: currentUser.totalCorrect || 0,
@@ -4498,6 +5300,12 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
                 alert("❌ " + error.message);
             }
         }
+        
+        function getMidnightTime(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d.getTime();
+}
 
         // ================================================================
         // CLASSEMENT FIRESTORE
@@ -4505,34 +5313,39 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
         let currentCategory = 'totalXp';
 
         async function getLeaderboardData(category = 'totalXp') {
-            try {
-                const field = category === 'totalXp' ? 'totalXp' : 
-                            category === 'infiniteBest' ? 'infiniteBest' : 'points';
-                
-                const snapshot = await db.collection('users')
-                    .orderBy(field, 'desc')
-                    .limit(10)
-                    .get();
-                
-                return snapshot.docs.map(doc => {
-                    const data = doc.data();
-                    let value = 0;
-                    if (category === 'totalXp') value = data.totalXp || 0;
-                    else if (category === 'infiniteBest') value = data.infiniteBest || data.best || 0;
-                    else if (category === 'points') value = data.points || 0;
-                    
-                    return {
-                        pseudo: data.pseudo,
-                        value: Math.round(value),
-                        isUser: currentUser && data.pseudo === currentUser.pseudo
-                    };
-                }).sort((a, b) => b.value - a.value);
-                
-            } catch (error) {
-                console.error("Erreur classement:", error);
-                return [];
-            }
-        }
+    try {
+        const field = category === 'totalXp' ? 'totalXp' : 
+                    category === 'infiniteBest' ? 'infiniteBest' : 'points';
+        
+        const snapshot = await db.collection('users')
+            .orderBy(field, 'desc')
+            .limit(10)
+            .get();
+        
+        return snapshot.docs.map(doc => {
+            const data = doc.data();
+            let value = 0;
+            if (category === 'totalXp') value = data.totalXp || 0;
+            else if (category === 'infiniteBest') value = data.infiniteBest || data.best || 0;
+            else if (category === 'points') value = data.points || 0;
+            
+            // Récupérer les infos du badge
+            const hasRamadanBadge = data.ownedItems && data.ownedItems['RAMADAN_BADGE'] > 0;
+            
+            return {
+                pseudo: data.pseudo,
+                value: Math.round(value),
+                isUser: currentUser && data.pseudo === currentUser.pseudo,
+                hasRamadanBadge: hasRamadanBadge,
+                uid: doc.id
+            };
+        }).sort((a, b) => b.value - a.value);
+        
+    } catch (error) {
+        console.error("Erreur classement:", error);
+        return [];
+    }
+}
 
        async function loadLeaderboard(category = 'totalXp') {
     const tbody = document.getElementById('leaderboardBody');
@@ -4578,9 +5391,41 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
             else if (index === 1) rankDisplay = '🥈 2';
             else if (index === 2) rankDisplay = '🥉 3';
             
+            // Construire le pseudo avec badge si nécessaire
+            let pseudoDisplay = entry.pseudo;
+            let badgeHTML = '';
+            
+            if (entry.hasRamadanBadge) {
+                // Pendant le Ramadan, le badge brille et s'anime
+                if (isRamadanPeriod()) {
+                    badgeHTML = `<span style="display: inline-flex; align-items: center; margin-left: 8px;">
+                        <span class="ramadan-badge" 
+                              style="font-size: 1.4rem; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 8px gold); cursor: help;"
+                              title="${getRamadanBadgeTooltip()}">🌟</span>
+                    </span>`;
+                    pseudoDisplay = `<span style="animation: pulse 2s infinite; text-shadow: 0 0 10px #FFD700;">${entry.pseudo}</span>`;
+                } else {
+                    // Hors Ramadan, badge normal avec tooltip
+                    badgeHTML = `<span style="display: inline-flex; align-items: center; margin-left: 8px;">
+                        <span class="ramadan-badge" 
+                              style="font-size: 1.2rem; cursor: help; opacity: 0.9;"
+                              title="${getRamadanBadgeTooltip()}">🌟</span>
+                    </span>`;
+                }
+            } else if (isRamadanPeriod()) {
+                // Pendant Ramadan sans badge, léger effet doré
+                pseudoDisplay = `<span style="color: #FFD700;">${entry.pseudo}</span>`;
+            }
+            
             tr.innerHTML = `
                 <td style="font-weight: ${index < 3 ? 'bold' : 'normal'};">${rankDisplay}</td>
-                <td>${entry.pseudo}${entry.isUser ? ` <span style="color:#FFD700;">(${t('you')})</span>` : ''}</td>
+                <td>
+                    <div style="display: flex; align-items: center; flex-wrap: wrap;">
+                        <span>${pseudoDisplay}</span>
+                        ${badgeHTML}
+                        ${entry.isUser ? ` <span style="color:#FFD700; margin-left: 5px;">(${t('you')})</span>` : ''}
+                    </div>
+                </td>
                 <td style="font-weight: ${index < 3 ? 'bold' : 'normal'};">${entry.value.toLocaleString()}</td>
             `;
             tbody.appendChild(tr);
@@ -4605,24 +5450,6 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
         `;
     }
 }
-
-        function toggleCategoryList() {
-            const list = document.getElementById('categoryList');
-            if (list) list.style.display = list.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function selectCategory(category) {
-            currentCategory = category;
-            const btn = document.getElementById('currentCategoryBtn');
-            if (btn) {
-                btn.innerHTML = (category === 'totalXp' ? 'Total XP' :
-                               category === 'infiniteBest' ? 'Meilleur Infini' :
-                               'Points Boutique') + ' ▼';
-            }
-            loadLeaderboard(category);
-            const list = document.getElementById('categoryList');
-            if (list) list.style.display = 'none';
-        }
         
         
         // ================================================================
@@ -4692,12 +5519,12 @@ function openDiscussions() {
                         const todayMidnight = new Date().setHours(0, 0, 0, 0);
                         if (lastPlay === todayMidnight) {
                             ramadanBtn.disabled = true;
-                            ramadanBtn.innerHTML = "Déjà joué aujourd'hui ✓";
+                            ramadanBtn.innerHTML = t('already_played');
                             ramadanBtn.style.opacity = "0.65";
                             ramadanBtn.style.cursor = "not-allowed";
                         } else {
                             ramadanBtn.disabled = false;
-                            ramadanBtn.innerHTML = "🌙 Défi Ramadan (Mix de tous les modes)";
+                            ramadanBtn.innerHTML = getRamadanChallengeButtonText();
                             ramadanBtn.style.opacity = "1";
                             ramadanBtn.style.cursor = "pointer";
                         }
@@ -4724,145 +5551,243 @@ function openDiscussions() {
         }
 
         async function updateStats() {
-            if (!currentUser) return;
+    if (!currentUser) return;
+    
+    xpToNextLevel = calculateXpToNextLevel(currentUser.level);
+    
+    while (currentUser.xp >= xpToNextLevel) {
+        try { document.getElementById("levelup")?.play(); } catch(e) {}
+        currentUser.level++;
+        currentUser.xp -= xpToNextLevel;
+        xpToNextLevel = calculateXpToNextLevel(currentUser.level);
+    }
+    
+    const usernameEl = document.getElementById("username");
+    if (usernameEl) {
+        let usernameHTML = '';
+        let badgeHTML = '';
+        
+        // Vérifier si l'utilisateur possède le badge Ramadan
+        if (currentUser.ownedItems && currentUser.ownedItems['RAMADAN_BADGE'] > 0) {
+            // Traduction du titre du badge selon la langue
+            let badgeTitle = getRamadanBadgeTooltip();
             
-            xpToNextLevel = calculateXpToNextLevel(currentUser.level);
-            
-            while (currentUser.xp >= xpToNextLevel) {
-                try { document.getElementById("levelup")?.play(); } catch(e) {}
-                currentUser.level++;
-                currentUser.xp -= xpToNextLevel;
-                xpToNextLevel = calculateXpToNextLevel(currentUser.level);
+            // Pendant le Ramadan, le badge brille et s'anime
+            if (isRamadanPeriod()) {
+                usernameHTML = `<span style="animation: pulse 2s infinite; text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;">${currentUser.pseudo}</span>`;
+                badgeHTML = `<span style="margin-left: 8px; font-size: 1.5rem; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 8px gold); cursor: help;" title="${badgeTitle}">🌟</span>`;
+            } else {
+                // Hors Ramadan, badge normal avec tooltip
+                usernameHTML = currentUser.pseudo;
+                badgeHTML = `<span style="margin-left: 5px; font-size: 1.2rem; cursor: help;" title="${badgeTitle}">🌟</span>`;
             }
-            
-            const usernameEl = document.getElementById("username");
-            if (usernameEl) usernameEl.textContent = currentUser.pseudo;
-            
-            const levelNumEl = document.getElementById("levelNum");
-            if (levelNumEl) levelNumEl.textContent = currentUser.level;
-            
-            const streakEl = document.getElementById("streak");
-            if (streakEl) streakEl.textContent = currentUser.streak;
-            
-            const bestEl = document.getElementById("best");
-            if (bestEl) bestEl.textContent = currentUser.best;
-            
-            const xpEl = document.getElementById("xp");
-            if (xpEl) xpEl.textContent = Math.round(currentUser.xp);
-            
-            const xpMaxEl = document.getElementById("xpMax");
-            if (xpMaxEl) xpMaxEl.textContent = Math.round(xpToNextLevel);
-            
-            const xpFill = document.getElementById("xpFill");
-            if (xpFill) xpFill.style.width = `${(currentUser.xp / xpToNextLevel * 100)}%`;
-            
-            const username2El = document.getElementById("username2");
-            if (username2El) username2El.textContent = currentUser.pseudo;
-            
-            const levelNum2El = document.getElementById("levelNum2");
-            if (levelNum2El) levelNum2El.textContent = currentUser.level;
-            
-            const totalXpEl = document.getElementById("totalXp");
-            if (totalXpEl) totalXpEl.textContent = Math.round(currentUser.totalXp);
-            
-            const pointsElem = document.getElementById("userPoints");
-            if (pointsElem) pointsElem.textContent = currentUser.points.toLocaleString();
-            
-            const rerollElem = document.getElementById("rerollCount");
-            if (rerollElem) rerollElem.textContent = currentUser.ownedItems?.['DAILY_REROLL'] || 0;
-            
-            const hintElem = document.getElementById("hintCount");
-            if (hintElem) hintElem.textContent = currentUser.ownedItems?.['HINT_TOKEN'] || 0;
-            
-            await saveUser();
-            checkAchievements();
+        } else if (isRamadanPeriod()) {
+            // Pendant Ramadan sans badge, léger effet doré
+            usernameHTML = `<span style="color: #FFD700; text-shadow: 0 0 5px rgba(255,215,0,0.5);">${currentUser.pseudo}</span>`;
+        } else {
+            usernameHTML = currentUser.pseudo;
         }
+        
+        usernameEl.innerHTML = usernameHTML + badgeHTML;
+    }
+    
+    const levelNumEl = document.getElementById("levelNum");
+    if (levelNumEl) levelNumEl.textContent = currentUser.level;
+    
+    const streakEl = document.getElementById("streak");
+    if (streakEl) streakEl.textContent = currentUser.streak;
+    
+    const bestEl = document.getElementById("best");
+    if (bestEl) bestEl.textContent = currentUser.best;
+    
+    const xpEl = document.getElementById("xp");
+    if (xpEl) xpEl.textContent = Math.round(currentUser.xp);
+    
+    const xpMaxEl = document.getElementById("xpMax");
+    if (xpMaxEl) xpMaxEl.textContent = Math.round(xpToNextLevel);
+    
+    const xpFill = document.getElementById("xpFill");
+    if (xpFill) xpFill.style.width = `${(currentUser.xp / xpToNextLevel * 100)}%`;
+    
+    const username2El = document.getElementById("username2");
+    if (username2El) username2El.textContent = currentUser.pseudo;
+    
+    const levelNum2El = document.getElementById("levelNum2");
+    if (levelNum2El) levelNum2El.textContent = currentUser.level;
+    
+    const totalXpEl = document.getElementById("totalXp");
+    if (totalXpEl) totalXpEl.textContent = Math.round(currentUser.totalXp);
+    
+    const pointsElem = document.getElementById("userPoints");
+    if (pointsElem) pointsElem.textContent = currentUser.points.toLocaleString();
+    
+    const rerollElem = document.getElementById("rerollCount");
+    if (rerollElem) rerollElem.textContent = currentUser.ownedItems?.['DAILY_REROLL'] || 0;
+    
+    const hintElem = document.getElementById("hintCount");
+    if (hintElem) hintElem.textContent = currentUser.ownedItems?.['HINT_TOKEN'] || 0;
+    
+    await saveUser();
+    checkAchievements();
+}
 
         // ================================================================
         // SHOP & CADEAU QUOTIDIEN
         // ================================================================
         function generateDailyShop() {
-            const now = Date.now();
-            const midnightToday = getMidnightTime(now);
+    const now = Date.now();
+    const midnightToday = getMidnightTime(now);
+    
+    // Vérifier si on doit régénérer le shop (nouvelle journée)
+    const needsRefresh = !currentUser.shopLastRefresh || 
+                         currentUser.shopLastRefresh < midnightToday || 
+                         (currentUser.normalShopItems && currentUser.normalShopItems.length === 0 && 
+                          currentUser.ramadanShopItems && currentUser.ramadanShopItems.length === 0);
+    
+    if (needsRefresh) {
+        // On régénère complètement le shop pour la nouvelle journée
+        const allItemKeys = Object.keys(SHOP_ITEMS);
+        
+        // Générer les articles pour le shop normal
+        const normalItems = allItemKeys.filter(key => key !== 'RAMADAN_BADGE');
+        const selectedNormalKeys = shuffleArray(normalItems).slice(0, 3);
+        
+        // Stocker les articles normaux
+        const normalShopItems = [];
+        selectedNormalKeys.forEach(key => {
+            const item = SHOP_ITEMS[key];
+            const basePrice = item[1];
             
-            if (!currentUser.shopLastRefresh || currentUser.shopLastRefresh < midnightToday || currentUser.dailyShopItems.length === 0) {
-                const allItemKeys = Object.keys(SHOP_ITEMS);
-                const selectedKeys = shuffleArray(allItemKeys).slice(0, 3);
-                
-                currentUser.dailyShopItems = [];
-                selectedKeys.forEach(key => {
-                    const item = SHOP_ITEMS[key];
-                    const basePrice = item[1];
-                    
-                    // Pendant le Ramadan, réductions plus importantes (45-75%) et stock doublé
-                    const isRamadanActive = isRamadanPeriod() && currentShopTab === 'ramadan';
-                    
-                    let finalPrice = basePrice;
-                    let stockModifier = 1;
-                    
-                    if (isRamadanActive) {
-                        // Réduction aléatoire entre 45% et 75%
-                        const discountPercent = 45 + Math.floor(Math.random() * 31); // 45-75%
-                        finalPrice = Math.round(basePrice * (1 - discountPercent / 100));
-                        stockModifier = 2; // Stock doublé
-                    } else {
-                        // Réduction normale (0-60%)
-                        const randomModifier = Math.floor(Math.random() * 66) - 50;
-                        finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
-                    }
-                    
-                    const maxStock = key === 'HINT_TOKEN' ? 5 * stockModifier : 
-                                    key === 'XP_BOOST_X2' ? 3 * stockModifier : 
-                                    key === 'INFINITE_REVIVE' ? 1 * stockModifier : 
-                                    1 * stockModifier;
-                    
-                    const stock = Math.floor(Math.random() * maxStock) + 1;
-                    
-                    currentUser.dailyShopItems.push({
-                        code: key,
-                        name: item[0],
-                        price: finalPrice,
-                        originalPrice: basePrice,
-                        stock: stock,
-                        description: item[2],
-                        ramadanSpecial: isRamadanActive
-                    });
-                });
-                currentUser.shopLastRefresh = midnightToday;
-                saveUser();
+            // En période de Ramadan, grosses réductions
+            let finalPrice;
+            let discountPercent = 0;
+            
+            if (isRamadanPeriod()) {
+                discountPercent = 45 + Math.floor(Math.random() * 56); // 45-100%
+                finalPrice = Math.round(basePrice * (1 - discountPercent / 100));
+            } else {
+                const randomModifier = Math.floor(Math.random() * 66) - 50; // -50% à +15%
+                discountPercent = randomModifier;
+                finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
             }
             
-            const midnightTomorrow = getMidnightTime(now + DAILY_COOLDOWN_MS);
-            return midnightTomorrow - now;
-        }
+            const stockModifier = isRamadanPeriod() ? 2 : 1;
+            const maxStock = key === 'HINT_TOKEN' ? 5 * stockModifier : 
+                            key === 'XP_BOOST_X2' ? 3 * stockModifier : 
+                            key === 'INFINITE_REVIVE' ? 2 * stockModifier : 
+                            2 * stockModifier;
+            
+            const stock = Math.floor(Math.random() * maxStock) + 1;
+            
+            normalShopItems.push({
+                code: key,
+                name: item[0],
+                price: Math.max(1, finalPrice),
+                originalPrice: basePrice,
+                stock: stock,
+                description: item[2],
+                ramadanSpecial: isRamadanPeriod(),
+                discountPercent: discountPercent
+            });
+        });
+        
+        // Générer l'article pour le shop Ramadan (le badge)
+        const ramadanShopItems = [];
+        const badgeItem = SHOP_ITEMS['RAMADAN_BADGE'];
+        ramadanShopItems.push({
+            code: 'RAMADAN_BADGE',
+            name: getRamadanBadgeName(),
+            price: badgeItem[1],
+            originalPrice: badgeItem[1],
+            stock: 1,
+            description: getRamadanBadgeDescription(),
+            ramadanSpecial: true,
+            isBadge: true
+        });
+        
+        // Stocker les deux jeux d'articles dans currentUser
+        currentUser.normalShopItems = normalShopItems;
+        currentUser.ramadanShopItems = ramadanShopItems;
+        currentUser.shopLastRefresh = midnightToday;
+        
+        saveUser();
+    }
+    
+    const midnightTomorrow = getMidnightTime(now + DAILY_COOLDOWN_MS);
+    return midnightTomorrow - now;
+}
 
-        function getMidnightTime(date) {
-            const d = new Date(date);
-            d.setHours(0, 0, 0, 0);
-            return d.getTime();
-        }
+       function switchShopTab(tab) {
+    if (tab === currentShopTab) return;
+    
+    currentShopTab = tab;
+    
+    // Mettre à jour les classes des onglets
+    document.getElementById('shopTabNormal').classList.toggle('active', tab === 'normal');
+    document.getElementById('shopTabRamadan').classList.toggle('active', tab === 'ramadan');
+    
+    // Afficher les articles correspondants
+    if (tab === 'normal' && currentUser.normalShopItems) {
+        displayShopItems(currentUser.normalShopItems);
+    } else if (tab === 'ramadan' && currentUser.ramadanShopItems) {
+        displayShopItems(currentUser.ramadanShopItems);
+    }
+    
+    updateOwnedItemsDisplay();
+    updateBuyButtons();
+}
 
-        function switchShopTab(tab) {
-            if (tab === currentShopTab) return;
-            
-            currentShopTab = tab;
-            
-            // Mettre à jour les classes des onglets
-            document.getElementById('shopTabNormal').classList.toggle('active', tab === 'normal');
-            document.getElementById('shopTabRamadan').classList.toggle('active', tab === 'ramadan');
-            
-            // Régénérer le shop avec le nouveau tab
-            currentUser.shopLastRefresh = 0; // Forcer la régénération
-            showShop();
-        }
+// Ajoutez cette fonction de traduction pour le texte de rafraîchissement
+function getShopRefreshText() {
+    if (currentLang === 'fr') {
+        return "Actualisation dans";
+    } else if (currentLang === 'en') {
+        return "Refresh in";
+    } else if (currentLang === 'ar') {
+        return "تحديث خلال";
+    }
+}
 
 function showShop() {
+    // Toujours mettre l'onglet normal par défaut
+    currentShopTab = 'normal';
+    
     showScreen("shop");
     if (shopTimerInterval) clearInterval(shopTimerInterval);
     
     let timeLeft = generateDailyShop();
     const shopContainer = document.getElementById("shopItemsContainer");
     if (shopContainer) shopContainer.innerHTML = '';
+    
+    // Traduire le titre et la description
+    const shopTitle = document.querySelector('#shop h1');
+    if (shopTitle) shopTitle.innerHTML = `🛍️ ${t('shop_title')}`;
+    
+    const shopDesc = document.querySelector('#shop p');
+    if (shopDesc) shopDesc.innerHTML = t('shop_desc');
+    
+    // Gérer l'affichage des onglets selon la période
+    const shopTabNormal = document.getElementById('shopTabNormal');
+    const shopTabRamadan = document.getElementById('shopTabRamadan');
+    
+    // Traduire les onglets
+    // Utilisez directement les fonctions ou t() selon votre préférence
+if (shopTabNormal) shopTabNormal.innerHTML = getShopNormalTabText();
+if (shopTabRamadan) shopTabRamadan.innerHTML = getShopRamadanTabText();
+    
+    // S'assurer que l'onglet normal est actif
+    if (shopTabNormal) shopTabNormal.classList.add('active');
+    if (shopTabRamadan) shopTabRamadan.classList.remove('active');
+    
+    if (isRamadanPeriod()) {
+        // Pendant Ramadan : les deux onglets sont visibles
+        shopTabNormal.style.display = 'block';
+        shopTabRamadan.style.display = 'block';
+    } else {
+        // Hors Ramadan : seulement l'onglet normal
+        shopTabNormal.style.display = 'block';
+        shopTabRamadan.style.display = 'none';
+    }
     
     updateShopTimerDisplay(timeLeft);
     shopTimerInterval = setInterval(() => {
@@ -4874,77 +5799,141 @@ function showShop() {
         }
     }, 1000);
     
-    if (currentUser.dailyShopItems) {
-        currentUser.dailyShopItems.forEach(item => {
-            const modifier = Math.round(((item.price - item.originalPrice) / item.originalPrice) * 100);
-            const modifierText = modifier !== 0 ? (modifier > 0 ? `+${modifier}%` : `${modifier}%`) : '';
-            const discountText = modifier < 0 ? `<span style="color:#f87171;text-decoration:line-through;margin-right:8px;">${item.originalPrice.toLocaleString()}</span>` : '';
-            const priceColor = modifier < 0 ? '#FFD700' : '#C0C0C0';
-            
-            // Ajouter une indication Ramadan si spécial
-            if (item.ramadanSpecial) {
-                modifierText += ' 🌙 Ramadan';
-            }
-            
-            // Traduire le nom et la description
-            let itemName = item.name;
-            let itemDesc = item.description;
-            
-            // Traduction selon la langue
-            if (currentLang === 'en') {
-                if (item.code === 'XP_BOOST_X2') { itemName = t('double_xp'); itemDesc = "Multiplies XP earned by 2 for 1 classic/chrono game."; }
-                else if (item.code === 'HINT_TOKEN') { itemName = t('hint_token'); itemDesc = "Reveals the correct answer for the current TRUE/FALSE question."; }
-                else if (item.code === 'INFINITE_REVIVE') { itemName = t('infinite_revive'); itemDesc = "Allows one extra mistake in Infinite Mode."; }
-                else if (item.code === 'DAILY_REROLL') { itemName = t('daily_reroll'); itemDesc = "Allows you to replay the Daily Challenge immediately."; }
-            } else if (currentLang === 'ar') {
-                if (item.code === 'XP_BOOST_X2') { itemName = t('double_xp'); itemDesc = "يضاعف نقاط الخبرة المكتسبة لمدة لعبة واحدة كلاسيكية/مؤقتة."; }
-                else if (item.code === 'HINT_TOKEN') { itemName = t('hint_token'); itemDesc = "يكشف الإجابة الصحيحة للسؤال الحالي صواب/خطأ."; }
-                else if (item.code === 'INFINITE_REVIVE') { itemName = t('infinite_revive'); itemDesc = "يسمح بخطأ إضافي في الوضع اللامتناهي."; }
-                else if (item.code === 'DAILY_REROLL') { itemName = t('daily_reroll'); itemDesc = "يسمح لك بإعادة لعب التحدي اليومي فورًا."; }
-            }
-            
-            const itemDiv = document.createElement('div');
-            itemDiv.className = 'shop-item';
-            itemDiv.innerHTML = `
-                <div class="item-header">
-                    <h3>${itemName} ${item.ramadanSpecial ? '🌙' : ''}</h3>
-                    <p class="stock">${t('stock')}: <span id="stock-${item.code}">${item.stock}</span> (${modifierText})</p>
-                </div>
-                <p class="item-desc">${itemDesc}</p>
-                <div class="item-footer">
-                    <p class="price">${discountText} <span style="color:${priceColor};">${item.price.toLocaleString()}</span> ${t('points')}</p>
-                    <button class="buy-btn menu-btn"
-                            id="buy-${item.code}"
-                            data-code="${item.code}"
-                            data-price="${item.price}"
-                            onclick="buyItem('${item.code}', ${item.price})">${t('buy')}</button>
-                </div>
-            `;
-            if (shopContainer) shopContainer.appendChild(itemDiv);
-        });
+    // Traduire le titre "Inventaire"
+    const inventoryTitle = document.querySelector('#shop h2');
+    if (inventoryTitle) inventoryTitle.innerHTML = t('inventory');
+    
+    // Traduire le bouton retour
+    const backBtn = document.querySelector('#shop .settings-btn');
+    if (backBtn) backBtn.innerHTML = t('back_to_menu');
+    
+    // Afficher les articles (normal par défaut)
+    if (currentUser.normalShopItems) {
+        displayShopItems(currentUser.normalShopItems);
     }
     
     updateOwnedItemsDisplay();
     updateBuyButtons();
 }
 
-       function updateShopTimerDisplay(ms) {
-    const timerElement = document.getElementById("shopChrono"); // Renommé !
+function displayShopItems(items) {
+    const shopContainer = document.getElementById("shopItemsContainer");
+    if (!shopContainer) return;
+    
+    shopContainer.innerHTML = '';
+    
+    items.forEach(item => {
+        const modifier = Math.round(((item.price - item.originalPrice) / item.originalPrice) * 100);
+        const modifierText = modifier !== 0 ? (modifier > 0 ? `+${modifier}%` : `${modifier}%`) : '';
+        const discountText = modifier < 0 ? `<span style="color:#f87171;text-decoration:line-through;margin-right:8px;">${item.originalPrice.toLocaleString()}</span>` : '';
+        const priceColor = modifier < 0 ? '#FFD700' : '#C0C0C0';
+        
+        // Ajout badge réduction Ramadan
+        let discountBadge = '';
+        if (item.ramadanSpecial && item.discountPercent && item.discountPercent >= 45) {
+            discountBadge = `<span style="background: #FFD700; color: #0a2f1f; padding: 4px 8px; border-radius: 20px; font-size: 0.9rem; margin-left: 10px;">${getRamadanDiscountText(item.discountPercent)}</span>`;
+        }
+        
+        // Traduction du nom et description - UTILISER currentLang
+        let itemName = item.name;
+        let itemDesc = item.description;
+        
+        // Si c'est le badge Ramadan, utiliser les fonctions de traduction
+        if (item.code === 'RAMADAN_BADGE') {
+            itemName = getRamadanBadgeName(); // Déjà traduit
+            itemDesc = getRamadanBadgeDescription(); // Déjà traduit
+        } else {
+            // Pour les autres items, utiliser les traductions existantes
+            if (currentLang === 'en') {
+                if (item.code === 'XP_BOOST_X2') { 
+                    itemName = t('double_xp'); 
+                    itemDesc = "Multiplies XP earned by 2 for 1 classic/chrono game."; 
+                }
+                else if (item.code === 'HINT_TOKEN') { 
+                    itemName = t('hint_token'); 
+                    itemDesc = "Reveals the correct answer for the current TRUE/FALSE question."; 
+                }
+                else if (item.code === 'INFINITE_REVIVE') { 
+                    itemName = t('infinite_revive'); 
+                    itemDesc = "Allows one extra mistake in Infinite Mode."; 
+                }
+                else if (item.code === 'DAILY_REROLL') { 
+                    itemName = t('daily_reroll'); 
+                    itemDesc = "Allows you to replay the Daily Challenge immediately."; 
+                }
+            } else if (currentLang === 'ar') {
+                if (item.code === 'XP_BOOST_X2') { 
+                    itemName = t('double_xp'); 
+                    itemDesc = "يضاعف نقاط الخبرة لمدة لعبة واحدة كلاسيكية/مؤقتة."; 
+                }
+                else if (item.code === 'HINT_TOKEN') { 
+                    itemName = t('hint_token'); 
+                    itemDesc = "يكشف الإجابة الصحيحة للسؤال الحالي صواب/خطأ."; 
+                }
+                else if (item.code === 'INFINITE_REVIVE') { 
+                    itemName = t('infinite_revive'); 
+                    itemDesc = "يسمح بخطأ إضافي في الوضع اللامتناهي."; 
+                }
+                else if (item.code === 'DAILY_REROLL') { 
+                    itemName = t('daily_reroll'); 
+                    itemDesc = "يسمح لك بإعادة لعب التحدي اليومي فورًا."; 
+                }
+            }
+        }
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'shop-item';
+        itemDiv.innerHTML = `
+            <div class="item-header">
+                <h3>${itemName} ${discountBadge}</h3>
+                <p class="stock">${t('stock')}: <span id="stock-${item.code}">${item.stock}</span> ${modifierText ? '(' + modifierText + ')' : ''}</p>
+            </div>
+            <p class="item-desc">${itemDesc}</p>
+            <div class="item-footer">
+                <p class="price">${discountText} <span style="color:${priceColor};">${item.price.toLocaleString()}</span> ${t('points')}</p>
+                <button class="buy-btn menu-btn"
+                        id="buy-${item.code}"
+                        data-code="${item.code}"
+                        data-price="${item.price}"
+                        onclick="buyItem('${item.code}', ${item.price})">${t('buy')}</button>
+            </div>
+        `;
+        shopContainer.appendChild(itemDiv);
+    });
+}
+
+      function updateShopTimerDisplay(ms) {
+    const timerElement = document.getElementById("shopChrono");
     if (!timerElement) return;
     
     const seconds = Math.floor(ms / 1000);
     if (seconds <= 0) {
-        timerElement.textContent = t('shop_refresh_menu'); // ✅ t() est la fonction
+        timerElement.textContent = t('shop_refresh_menu');
         if (shopTimerInterval) clearInterval(shopTimerInterval);
         return;
     }
     
+    timerElement.textContent = getShopTimerDisplay(ms);
+}
+
+function getShopTimerDisplay(ms) {
+    const seconds = Math.floor(ms / 1000);
+    if (seconds <= 0) return t('shop_refresh_menu');
+    
     const h = Math.floor(seconds / 3600);
     const m = Math.floor((seconds % 3600) / 60);
     const s = seconds % 60;
-    timerElement.textContent = `${t('shop_refresh')} : ${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+    
+    const timeString = `${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
+    
+    if (currentLang === 'ar') {
+        // Pour l'arabe, on met le texte après pour une meilleure lisibilité RTL
+        return `${timeString} : ${getShopRefreshText()}`;
+    } else {
+        // Pour français et anglais, texte avant
+        return `${getShopRefreshText()} : ${timeString}`;
+    }
 }
-
         function updateOwnedItemsDisplay() {
     const ownedContainer = document.getElementById("ownedItemsList");
     if (!ownedContainer) return;
@@ -4957,7 +5946,10 @@ function showShop() {
         if (count > 0) {
             // Traduire le nom de l'objet
             let itemName = SHOP_ITEMS[key]?.[0] || key;
-            if (currentLang === 'en') {
+            
+            if (key === 'RAMADAN_BADGE') {
+                itemName = getRamadanBadgeName(); // ✅ Utiliser la fonction de traduction
+            } else if (currentLang === 'en') {
                 if (key === 'XP_BOOST_X2') itemName = t('double_xp');
                 else if (key === 'HINT_TOKEN') itemName = t('hint_token');
                 else if (key === 'INFINITE_REVIVE') itemName = t('infinite_revive');
@@ -5011,7 +6003,14 @@ function showShop() {
         return;
     }
     
-    const shopItem = currentUser.dailyShopItems.find(item => item.code === code);
+    // Trouver l'item dans les shops selon l'onglet actuel
+    let shopItem;
+    if (currentShopTab === 'normal' && currentUser.normalShopItems) {
+        shopItem = currentUser.normalShopItems.find(item => item.code === code);
+    } else if (currentShopTab === 'ramadan' && currentUser.ramadanShopItems) {
+        shopItem = currentUser.ramadanShopItems.find(item => item.code === code);
+    }
+    
     if (!shopItem || shopItem.stock <= 0) {
         alert(t('out_of_stock'));
         return;
@@ -5036,8 +6035,11 @@ function showShop() {
     await saveUser();
     
     // Traduire le nom de l'objet pour le popup
-    let itemName = SHOP_ITEMS[code][0];
-    if (currentLang === 'en') {
+    let itemName = SHOP_ITEMS[code]?.[0] || code;
+    
+    if (code === 'RAMADAN_BADGE') {
+        itemName = getRamadanBadgeName(); // ✅ Utiliser la traduction
+    } else if (currentLang === 'en') {
         if (code === 'XP_BOOST_X2') itemName = t('double_xp');
         else if (code === 'HINT_TOKEN') itemName = t('hint_token');
         else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
@@ -5351,6 +6353,7 @@ function launchGame(delay = 0, mode, difficulty = null) {
      function nextQuestion() {
     clearTimeout(timer);
     isAnswered = false;
+    ramadanChronoActive = false; // Réinitialiser le chrono aléatoire
     
     const timerFill = document.getElementById("timerFill");
     if (timerFill) {
@@ -5381,7 +6384,7 @@ function launchGame(delay = 0, mode, difficulty = null) {
     const vraiBtn = document.querySelector('.ans.vrai');
     const fauxBtn = document.querySelector('.ans.faux');
     
-    // Chercher les boutons QCM - ils peuvent être avec différents sélecteurs
+    // Chercher les boutons QCM
     let ansA = document.getElementById('ansA');
     let ansB = document.getElementById('ansB');
     let ansC = document.getElementById('ansC');
@@ -5428,24 +6431,71 @@ function launchGame(delay = 0, mode, difficulty = null) {
         }
         questionObj = quiz[current];
         const qEl = document.getElementById("q");
-        if (qEl) qEl.innerHTML = `${t('current_score')}: <strong>${score}</strong><br>${getQuestionText(questionObj)}`;
+        
+        // MODIF INFINI : Supprimer l'affichage du score dans la question
+        if (qEl) qEl.innerHTML = `${getQuestionText(questionObj)}`;
+        
+        // MODIF INFINI : Ajouter l'affichage du score entre le titre et la question
+        const gameTitle = document.getElementById("gameTitle");
+        
+        // Vérifier si l'élément de score existe déjà, sinon le créer
+        let scoreDisplay = document.getElementById("infiniteScoreDisplay");
+        if (!scoreDisplay) {
+            scoreDisplay = document.createElement("div");
+            scoreDisplay.id = "infiniteScoreDisplay";
+            scoreDisplay.className = "score-display";
+            
+            // Insérer après le titre
+            if (gameTitle && gameTitle.parentNode) {
+                gameTitle.parentNode.insertBefore(scoreDisplay, gameTitle.nextSibling);
+            }
+        }
+        
+        // Mettre à jour l'affichage du score avec la couleur appropriée
+        scoreDisplay.textContent = `🏆 ${score}`;
+        
+        // Changer la couleur selon le score
+        scoreDisplay.classList.remove("score-low", "score-medium", "score-high", "score-very-high");
+        if (score < 10) {
+            scoreDisplay.classList.add("score-low");
+        } else if (score < 25) {
+            scoreDisplay.classList.add("score-medium");
+        } else if (score < 50) {
+            scoreDisplay.classList.add("score-high");
+        } else {
+            scoreDisplay.classList.add("score-very-high");
+        }
         
         const progressEl = document.getElementById("gameProgress");
         if (progressEl) progressEl.textContent = "";
         
         // Mode Infini = toujours Vrai/Faux
-        if (vraiBtn) vraiBtn.style.display = "flex";
-        if (fauxBtn) fauxBtn.style.display = "flex";
+        const { vraiText, fauxText } = getTrueFalseButtonsText();
+        
+        if (vraiBtn) {
+            vraiBtn.style.display = "flex";
+            vraiBtn.textContent = vraiText;
+        }
+        if (fauxBtn) {
+            fauxBtn.style.display = "flex";
+            fauxBtn.textContent = fauxText;
+        }
         if (ansA) ansA.style.display = "none";
         if (ansB) ansB.style.display = "none";
         if (ansC) ansC.style.display = "none";
         if (ansD) ansD.style.display = "none";
         
     } else if (["daily", "chrono", "classic", "ramadan", "qcm"].includes(currentMode)) {
+        // MODIF INFINI : Pour les autres modes, supprimer l'affichage du score infini s'il existe
+        const scoreDisplay = document.getElementById("infiniteScoreDisplay");
+        if (scoreDisplay) {
+            scoreDisplay.remove();
+        }
+        
         if (current < quiz.length) {
             questionObj = quiz[current];
             const progressEl = document.getElementById("gameProgress");
-            if (progressEl) progressEl.textContent = `Question ${current + 1}/${quiz.length}`;
+            if (progressEl) progressEl.textContent = getQuestionProgressText(current + 1, quiz.length);
             
             const qEl = document.getElementById("q");
             if (qEl) {
@@ -5500,17 +6550,16 @@ function launchGame(delay = 0, mode, difficulty = null) {
                 // Question Vrai/Faux
                 console.log("Question Vrai/Faux détectée");
                 
-                // Traduire VRAI/FAUX
-                const vraiTexte = currentLang === 'fr' ? 'VRAI' : (currentLang === 'en' ? 'TRUE' : 'صحيح');
-                const fauxTexte = currentLang === 'fr' ? 'FAUX' : (currentLang === 'en' ? 'FALSE' : 'خطأ');
+                // Utiliser les textes traduits pour les boutons Vrai/Faux
+                const { vraiText, fauxText } = getTrueFalseButtonsText();
                 
                 if (vraiBtn) {
                     vraiBtn.style.display = "flex";
-                    vraiBtn.textContent = vraiTexte;
+                    vraiBtn.textContent = vraiText;
                 }
                 if (fauxBtn) {
                     fauxBtn.style.display = "flex";
-                    fauxBtn.textContent = fauxTexte;
+                    fauxBtn.textContent = fauxText;
                 }
                 
                 // Cacher les boutons QCM
@@ -5519,16 +6568,120 @@ function launchGame(delay = 0, mode, difficulty = null) {
                 if (ansC) ansC.style.display = "none";
                 if (ansD) ansD.style.display = "none";
             }
+            
+            // === NOUVEAU : CHRONO ALÉATOIRE POUR LE MODE RAMADAN ===
+            if (currentMode === "ramadan") {
+                // 50% de chance d'avoir un chrono
+                const shouldHaveChrono = Math.random() < 0.5;
+                
+                if (shouldHaveChrono) {
+                    // Temps aléatoire entre 6 et 10 secondes
+                    ramadanChronoTime = getRandomInt(6, 10) * 1000;
+                    ramadanChronoActive = true;
+                    
+                    console.log(`🕐 Chrono activé: ${ramadanChronoTime/1000}s pour cette question`);
+                    
+                    // Activer le timer
+                    const timerContainer = document.getElementById("timerContainer");
+                    if (timerContainer) {
+                        timerContainer.classList.remove("hidden");
+                        timerContainer.setAttribute("data-time-limit", ramadanChronoTime);
+                        
+                        // Réinitialiser et démarrer le chrono
+                        const fill = document.getElementById("timerFill");
+                        if (fill) {
+                            fill.style.transition = "none";
+                            fill.style.width = "100%";
+                        }
+                        
+                        startRamadanTimer();
+                    }
+                } else {
+                    // Pas de chrono pour cette question
+                    const timerContainer = document.getElementById("timerContainer");
+                    if (timerContainer) {
+                        timerContainer.classList.add("hidden");
+                    }
+                }
+            } else if (isChronoMode) {
+                // Mode Chrono normal
+                startTimer();
+            }
         } else {
             return endQuiz();
         }
     }
     
     current++;
+}
+
+function startRamadanTimer() {
+    if (!ramadanChronoActive) return;
     
-    if (isChronoMode) {
-        startTimer();
+    const timerContainer = document.getElementById("timerContainer");
+    if (!timerContainer) return;
+    
+    const timeLimit = ramadanChronoTime;
+    let remaining = Math.ceil(timeLimit / 1000);
+    
+    const fill = document.getElementById("timerFill");
+    const text = document.getElementById("timerText");
+    
+    if (fill) {
+        fill.style.transition = "none";
+        fill.style.width = "100%";
     }
+    
+    if (text) {
+        text.textContent = `${remaining}s`;
+        text.style.color = "#388E3C";
+        text.style.animation = "none";
+    }
+    
+    if (fill) {
+        void fill.offsetWidth;
+        fill.style.transition = `width ${timeLimit}ms linear`;
+        fill.style.width = "0%";
+    }
+    
+    const tick = () => {
+        remaining--;
+        if (text) {
+            text.textContent = `${remaining}s`;
+            if (remaining <= 3) {
+                text.style.color = "#ff4444";
+                text.style.animation = "pulse 0.8s infinite alternate";
+            }
+        }
+        
+        if (remaining <= 0) {
+            if (!isAnswered && ramadanChronoActive) {
+                isAnswered = true;
+                ramadanChronoActive = false;
+                if (fill) {
+                    fill.style.transition = "none";
+                    fill.style.width = "0%";
+                }
+                document.getElementById("timeout")?.play();
+                
+                // Traiter comme une mauvaise réponse
+                const questionIndex = current - 1;
+                const question = quiz[questionIndex];
+                
+                // Déterminer si c'est une question Vrai/Faux ou QCM
+                if (question.correctIndex !== undefined) {
+                    processAnswerQCM(false);
+                } else {
+                    processAnswer(false, true);
+                }
+            }
+            return;
+        }
+        
+        timer = setTimeout(tick, 1000);
+    };
+    
+    timer = setTimeout(tick, 1000);
 }
 
         function startTimer() {
@@ -5648,164 +6801,226 @@ function launchGame(delay = 0, mode, difficulty = null) {
 }
 
         function processAnswer(e, isTimeout) {
-            if (!currentUser) return;
-            
-            const questionIndex = current - 1;
-            const question = quiz[questionIndex];
-            const isCorrect = isTimeout ? false : e === question.a;
-            
-            currentUser.totalQuestions++;
-            
-            const answersContainer = document.getElementById("answers");
-            if (answersContainer) {
-                answersContainer.querySelectorAll(".ans").forEach(btn => {
-                    btn.classList.add("disabled");
-                    if (btn.textContent.includes(question.a ? 'VRAI' : 'FAUX')) {
-                        btn.style.backgroundColor = '#388E3C';
-                        btn.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
-                    } else if (btn.textContent.includes(e ? 'VRAI' : 'FAUX') && !isCorrect) {
-                        btn.style.backgroundColor = '#D32F2F';
-                        btn.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
-                    }
-                });
+    if (!currentUser) return;
+    
+    // Désactiver le chrono Ramadan s'il était actif
+    if (ramadanChronoActive) {
+        ramadanChronoActive = false;
+    }
+    
+    const questionIndex = current - 1;
+    const question = quiz[questionIndex];
+    const isCorrect = isTimeout ? false : e === question.a;
+    
+    currentUser.totalQuestions++;
+    
+    const answersContainer = document.getElementById("answers");
+    if (answersContainer) {
+        answersContainer.querySelectorAll(".ans").forEach(btn => {
+            btn.classList.add("disabled");
+            if (btn.textContent.includes(question.a ? 'VRAI' : 'FAUX')) {
+                btn.style.backgroundColor = '#388E3C';
+                btn.style.boxShadow = '0 12px 35px rgba(56, 142, 60, 0.7)';
+            } else if (btn.textContent.includes(e ? 'VRAI' : 'FAUX') && !isCorrect) {
+                btn.style.backgroundColor = '#D32F2F';
+                btn.style.boxShadow = '0 12px 35px rgba(211, 47, 47, 0.7)';
             }
-            
-            const hintBtn = document.getElementById("hintBtn");
-            if (hintBtn) hintBtn.classList.add("hidden");
-            
-            const resultEl = document.getElementById("result");
-            const expEl = document.getElementById("exp");
-            
-            if (isCorrect) {
-                document.getElementById("good")?.play();
-                if (resultEl) {
-                    resultEl.style.color = "#388E3C";
-                    resultEl.textContent = "✔ Correct !";
-                }
-                score++;
-                currentUser.totalCorrect++;
-                currentUser.streak++;
-                if (currentUser.streak > currentUser.best) currentUser.best = currentUser.streak;
-                
-                let xpGain = xpPerCorrect;
-                if (currentUser.ownedItems?.['XP_BOOST_X2'] > 0) xpGain *= 2;
-                
-                currentUser.xp += xpGain;
-                currentUser.totalXp += xpGain;
-                currentUser.points += 10;
-                
-                if (expEl) expEl.innerHTML = `+${xpGain} ${t('xp_gain')} : ${currentUser.streak})`;
-
-            } else {
-                document.getElementById("bad")?.play();
-                if (resultEl) {
-                    resultEl.style.color = "#D32F2F";
-                    resultEl.textContent = isTimeout ? "❌ Temps écoulé !" : "❌ Faux !";
-                }
-if (expEl) expEl.textContent = `${t('explanation')}: ${getExplanationText(question)}`;
-                
-                if (document.getElementById("game")?.getAttribute("data-mode") === "infinite" && currentUser.ownedItems?.['INFINITE_REVIVE'] > 0) {
-                    currentUser.ownedItems['INFINITE_REVIVE']--;
-                    document.getElementById("unlock")?.play();
-                    if (resultEl) resultEl.textContent = "❌ Faux ! | REVIVE UTILISÉ !";
-if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question)} | ${t('revive_used')} ! (${currentUser.ownedItems['INFINITE_REVIVE']} ${t('remaining')})`;
-                    current++;
-                    saveUser();
-                    updateStats();
-                    setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
-                    return;
-                }
-                
-                if (!isTimeout && document.getElementById("game")?.getAttribute("data-mode") !== "daily") {
-                    const penalty = Math.ceil(xpPerCorrect / 2);
-                    currentUser.xp = Math.max(0, currentUser.xp - penalty);
-                    currentUser.totalXp = Math.max(0, currentUser.totalXp - penalty);
-                    if (expEl) expEl.innerHTML += ` | ⚠️ -${penalty} ${t('penalty')}!`;
-
-                }
-                
-                currentUser.streak = 0;
-            }
-            
-            updateStats();
-            saveUser();
-            
-            if (isCorrect && document.getElementById("game")?.getAttribute("data-mode") === "infinite") {
-                setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
-            } else if (current < quiz.length) {
-                setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
-            } else {
-                endQuiz();
-            }
+        });
+    }
+    
+    const hintBtn = document.getElementById("hintBtn");
+    if (hintBtn) hintBtn.classList.add("hidden");
+    
+    const resultEl = document.getElementById("result");
+    const expEl = document.getElementById("exp");
+    
+    if (isCorrect) {
+        document.getElementById("good")?.play();
+        if (resultEl) {
+            resultEl.style.color = "#388E3C";
+            resultEl.textContent = getCorrectText();
         }
-
-        function processAnswerQCM(isCorrect) {
-            if (!currentUser) return;
-            
-            currentUser.totalQuestions++;
-            const q = quiz[current - 1];
-            
-            const resultEl = document.getElementById("result");
-            const expEl = document.getElementById("exp");
-            
-            if (isCorrect) {
-                document.getElementById("good")?.play();
-                if (resultEl) {
-                    resultEl.style.color = "#388E3C";
-                    resultEl.textContent = "✔ Correct !";
-                }
-                score++;
-                currentUser.totalCorrect++;
-                currentUser.streak++;
-                if (currentUser.streak > currentUser.best) currentUser.best = currentUser.streak;
+        score++;
+        currentUser.totalCorrect++;
+        currentUser.streak++;
+        if (currentUser.streak > currentUser.best) currentUser.best = currentUser.streak;
+        
+        let xpGain = xpPerCorrect;
+        if (currentUser.ownedItems?.['XP_BOOST_X2'] > 0) xpGain *= 2;
+        
+        currentUser.xp += xpGain;
+        currentUser.totalXp += xpGain;
+        currentUser.points += 10;
+        
+        if (expEl) expEl.innerHTML = `+${xpGain} ${t('xp_gain')} : ${currentUser.streak})`;
+        
+        // CORRECTION INFINI : En mode infini, continuer après une bonne réponse
+        if (document.getElementById("game")?.getAttribute("data-mode") === "infinite") {
+            setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
+        } else if (current < quiz.length) {
+            setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
+        } else {
+            endQuiz();
+        }
+        
+    } else {
+        document.getElementById("bad")?.play();
+        if (resultEl) {
+            resultEl.style.color = "#D32F2F";
+            resultEl.textContent = isTimeout ? getTimeoutText() : getWrongText();
+        }
+        if (expEl) expEl.textContent = `${t('explanation')}: ${getExplanationText(question)}`;
+        
+        // CORRECTION INFINI : Vérifier le mode infini avec revive
+        const currentMode = document.getElementById("game")?.getAttribute("data-mode");
+        
+        if (currentMode === "infinite") {
+            // Vérifier si l'utilisateur a un revive
+            if (currentUser.ownedItems?.['INFINITE_REVIVE'] > 0) {
+                currentUser.ownedItems['INFINITE_REVIVE']--;
+                document.getElementById("unlock")?.play();
+                if (resultEl) resultEl.textContent = `${getWrongText()} | REVIVE UTILISÉ !`;
+                if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question)} | ${t('revive_used')} ! (${currentUser.ownedItems['INFINITE_REVIVE']} ${t('remaining')})`;
                 
-                let xpGain = xpPerCorrect;
-                if (currentUser.ownedItems?.['XP_BOOST_X2'] > 0) xpGain *= 2;
-                
-                currentUser.xp += xpGain;
-                currentUser.totalXp += xpGain;
-                currentUser.points += 10;
-                
-                if (expEl) expEl.innerHTML = `+${xpGain} XP ! (+10 Points) (Série : ${currentUser.streak})`;
+                // Continuer la partie
+                saveUser();
+                updateStats();
+                setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
+                return;
             } else {
-                document.getElementById("bad")?.play();
-                if (resultEl) {
-                    resultEl.style.color = "#D32F2F";
-                    resultEl.textContent = "❌ Faux !";
+                // CORRECTION : Fin de partie immédiate en mode infini après une faute sans revive
+                if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question)}<br><strong>GAME OVER - 1 FAUTE = PERDU</strong>`;
+                
+                // Mettre à jour le meilleur score si nécessaire
+                if (score > (currentUser.infiniteBest || 0)) {
+                    currentUser.infiniteBest = score;
                 }
-                if (expEl) expEl.textContent = `${t('explanation')}: ${getQCMExplanation(q)}`;
-
                 
-                currentUser.streak = 0;
-                
+                saveUser();
+                updateStats();
+                endQuiz(); // Appeler endQuiz pour terminer la partie
+                return;
+            }
+        } else {
+            // Pour les autres modes (non infini)
+            if (!isTimeout) {
                 const penalty = Math.ceil(xpPerCorrect / 2);
                 currentUser.xp = Math.max(0, currentUser.xp - penalty);
                 currentUser.totalXp = Math.max(0, currentUser.totalXp - penalty);
-                if (expEl) expEl.innerHTML += ` | ⚠️ -${penalty} XP de pénalité !`;
+                if (expEl) expEl.innerHTML += ` | ⚠️ -${penalty} ${t('penalty')}!`;
             }
             
-            updateStats();
-            saveUser();
+            currentUser.streak = 0;
             
             if (current < quiz.length) {
-                setTimeout(nextQuestion, NEXT_QUESTION_DELAY);
+                setTimeout(() => nextQuestion(), NEXT_QUESTION_DELAY);
             } else {
                 endQuiz();
             }
         }
+    }
+    
+    updateStats();
+    saveUser();
+}
 
+        function processAnswerQCM(isCorrect) {
+    if (!currentUser) return;
+    
+    // Désactiver le chrono Ramadan s'il était actif
+    if (ramadanChronoActive) {
+        ramadanChronoActive = false;
+    }
+    
+    currentUser.totalQuestions++;
+    const q = quiz[current - 1];
+    
+    const resultEl = document.getElementById("result");
+    const expEl = document.getElementById("exp");
+    
+    if (isCorrect) {
+        document.getElementById("good")?.play();
+        if (resultEl) {
+            resultEl.style.color = "#388E3C";
+            resultEl.textContent = getCorrectText();
+        }
+        score++;
+        currentUser.totalCorrect++;
+        currentUser.streak++;
+        if (currentUser.streak > currentUser.best) currentUser.best = currentUser.streak;
+        
+        let xpGain = xpPerCorrect;
+        if (currentUser.ownedItems?.['XP_BOOST_X2'] > 0) xpGain *= 2;
+        
+        currentUser.xp += xpGain;
+        currentUser.totalXp += xpGain;
+        currentUser.points += 10;
+        
+        if (expEl) expEl.innerHTML = `+${xpGain} XP ! (+10 Points) (Série : ${currentUser.streak})`;
+    } else {
+        document.getElementById("bad")?.play();
+        if (resultEl) {
+            resultEl.style.color = "#D32F2F";
+            resultEl.textContent = getWrongText();
+        }
+        if (expEl) expEl.textContent = `${t('explanation')}: ${getQCMExplanation(q)}`;
+
+        
+        currentUser.streak = 0;
+        
+        const penalty = Math.ceil(xpPerCorrect / 2);
+        currentUser.xp = Math.max(0, currentUser.xp - penalty);
+        currentUser.totalXp = Math.max(0, currentUser.totalXp - penalty);
+        if (expEl) expEl.innerHTML += ` | ⚠️ -${penalty} XP de pénalité !`;
+    }
+    
+    updateStats();
+    saveUser();
+    
+    if (current < quiz.length) {
+        setTimeout(nextQuestion, NEXT_QUESTION_DELAY);
+    } else {
+        endQuiz();
+    }
+}
+
+// Ajoutez ces fonctions de traduction pour les onglets du shop
+function getShopNormalTabText() {
+    if (currentLang === 'fr') {
+        return "🛍️ Normal";
+    } else if (currentLang === 'en') {
+        return "🛍️ Normal";
+    } else if (currentLang === 'ar') {
+        return "🛍️ عادي";
+    }
+}
+
+function getShopRamadanTabText() {
+    if (currentLang === 'fr') {
+        return "🌙 Ramadan";
+    } else if (currentLang === 'en') {
+        return "🌙 Ramadan";
+    } else if (currentLang === 'ar') {
+        return "🌙 رمضان";
+    }
+}
         async function endQuiz() {
             clearTimeout(timer);
             
             const mode = document.getElementById("game")?.getAttribute("data-mode");
             const qEl = document.getElementById("q");
-            if (qEl) qEl.textContent = "Partie terminée !";
+            if (qEl) qEl.textContent = getGameOverText();
             
             const resultEl = document.getElementById("result");
             if (resultEl) {
                 resultEl.style.color = "#FFD700";
-                resultEl.textContent = `Ton score: ${score} / ${quiz.length}`;
+                resultEl.textContent = getScoreText(score, quiz.length);
             }
+            // MODIF INFINI : Supprimer l'affichage du score à la fin de la partie
+const scoreDisplay = document.getElementById("infiniteScoreDisplay");
+if (scoreDisplay) {
+    scoreDisplay.remove();
+}
             
             const isFiniteMode = !isInfiniteMode;
             
@@ -5851,22 +7066,7 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
             } else if (mode === "ramadan") {
                 currentUser.lastRamadanPlay = new Date().setHours(0, 0, 0, 0);
                 
-                let message = "";
-                if (score >= 6) {
-                    currentUser.xp += 150;
-                    currentUser.totalXp += 150;
-                    currentUser.points += 200;
-                    message = "🎉 Jour validé ! +150 XP + 200 points boutique";
-                    
-                    if (score === 7) {
-                        currentUser.xp += 350;
-                        currentUser.totalXp += 350;
-                        currentUser.points += 300;
-                        message += "<br>✨ 7/7 PARFAIT ! +350 XP + 300 points bonus !";
-                    }
-                } else {
-                    message = "Dommage… Il fallait au moins 6/7 pour valider le jour.";
-                }
+                let message = getEndGameDescription(mode, score, quiz.length);
                 
                 if (expEl) expEl.innerHTML = message;
                 if (resultEl) resultEl.innerHTML = `Score : <strong>${score}/7</strong> – Jour ${getCurrentRamadanDay()}`;
@@ -5874,14 +7074,14 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
                 const ramadanBtn = document.getElementById("ramadanChallengeBtn");
                 if (ramadanBtn) {
                     ramadanBtn.disabled = true;
-                    ramadanBtn.innerHTML = "Déjà joué aujourd'hui ✓";
+                    ramadanBtn.innerHTML = t('already_played');
                     ramadanBtn.style.opacity = "0.65";
                     ramadanBtn.style.cursor = "not-allowed";
                 }
             } else if (mode === "infinite") {
                 if (score > (currentUser.infiniteBest || 0)) {
                     currentUser.infiniteBest = score;
-                    if (expEl) expEl.textContent = `Nouveau record Infini : ${score} !`;
+                    if (expEl) expEl.textContent = getEndGameDescription(mode, score, quiz.length);
                     
                     if (score >= 50 && currentUser.achievements[3] === 0) {
                         currentUser.achievements[3] = 1;
@@ -5889,15 +7089,16 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
                         showPopup("♾️", "Succès Débloqué !", "Infini 50 : Atteindre 50 points en Mode Infini");
                     }
                 } else {
-                    if (expEl) expEl.textContent = `Record Infini : ${currentUser.best || 0}.`;
+                    if (expEl) expEl.textContent = getEndGameDescription(mode, score, quiz.length);
                 }
             } else if (mode === "chrono") {
                 currentUser.chronoGamesPlayed = (currentUser.chronoGamesPlayed || 0) + 1;
                 if (score === quiz.length) {
                     currentUser.chronoPerfects = (currentUser.chronoPerfects || 0) + 1;
                 }
+                if (expEl) expEl.textContent = getEndGameDescription(mode, score, quiz.length);
             } else if (score === quiz.length && quiz.length > 0) {
-                if (expEl) expEl.textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
+                if (expEl) expEl.textContent = getEndGameDescription(mode, score, quiz.length);
                 
                 const title = document.getElementById("gameTitle")?.textContent || "";
                 const timeLimit = document.getElementById("timerContainer")?.getAttribute("data-time-limit");
@@ -5919,13 +7120,16 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
                     showPopup("💯", "Succès Débloqué !", "10/10 Parfait ! : Faire un sans-faute en Classique");
                 }
             } else {
-                if (expEl) expEl.textContent = "Tu as gagné de l'XP dans cette partie. Retourne au menu pour voir tes stats !";
+                if (expEl) expEl.textContent = getEndGameDescription(mode, score, quiz.length);
             }
             
             currentUser.streak = 0;
             
             const restartBtn = document.getElementById("restartBtn");
-            if (restartBtn) restartBtn.classList.remove("hidden");
+            if (restartBtn) {
+                restartBtn.classList.remove("hidden");
+                restartBtn.textContent = getBackToMenuButtonText();
+            }
             
             const nextBtn = document.getElementById("nextBtn");
             if (nextBtn) nextBtn.classList.add("hidden");
@@ -5959,104 +7163,168 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
         function checkAchievements() {
     if (!currentUser) return;
     
+    // Dictionnaire des descriptions par ID
+    const descMap = {
+        "a1": currentLang === 'fr' ? "Jouer sa première partie (n'importe quel mode)" : 
+              (currentLang === 'en' ? "Play your first game (any mode)" : "العب لعبتك الأولى (أي وضع)"),
+        "a2": currentLang === 'fr' ? "Faire un sans-faute (10/10) en mode Classique" : 
+              (currentLang === 'en' ? "Get a perfect score (10/10) in Classic mode" : "احصل على نتيجة كاملة (١٠/١٠) في الوضع الكلاسيكي"),
+        "a3": currentLang === 'fr' ? "Atteindre 10 bonnes réponses d'affilée (streak)" : 
+              (currentLang === 'en' ? "Reach 10 correct answers in a row (streak)" : "احصل على ١٠ إجابات صحيحة متتالية"),
+        "a4": currentLang === 'fr' ? "Atteindre 50 points en Mode Infini" : 
+              (currentLang === 'en' ? "Reach 50 points in Infinite Mode" : "احصل على ٥٠ نقطة في الوضع اللامتناهي"),
+        "a5": currentLang === 'fr' ? "Finir le Mode Chrono sans aucune erreur (10/10)" : 
+              (currentLang === 'en' ? "Finish Chrono Mode with no mistakes (10/10)" : "أنهِ وضع التوقيت بدون أخطاء (١٠/١٠)"),
+        "a6": currentLang === 'fr' ? "Accumuler 1000 XP au total" : 
+              (currentLang === 'en' ? "Accumulate 1000 total XP" : "اجمع ١٠٠٠ XP إجمالاً"),
+        "a7": currentLang === 'fr' ? "Répondre correctement à 500 questions" : 
+              (currentLang === 'en' ? "Correctly answer 500 questions" : "أجب صحيحاً على ٥٠٠ سؤال"),
+        "a8": currentLang === 'fr' ? "Répondre à 1000 questions (bonnes ou mauvaises)" : 
+              (currentLang === 'en' ? "Answer 1000 questions (correct or incorrect)" : "أجب على ١٠٠٠ سؤال (صحيحة أو خاطئة)"),
+        "a9": currentLang === 'fr' ? "Faire un 10/10 parfait en Classique Difficile" : 
+              (currentLang === 'en' ? "Get a perfect 10/10 in Hard Classic mode" : "احصل على ١٠/١٠ كامل في الكلاسيكي الصعب"),
+        "a11": currentLang === 'fr' ? "Terminer 5 parties QCM" : 
+               (currentLang === 'en' ? "Complete 5 QCM games" : "أكمل ٥ ألعاب في وضع الاختيارات"),
+        "a12": currentLang === 'fr' ? "Faire un 10/10 parfait en mode QCM" : 
+               (currentLang === 'en' ? "Get a perfect 10/10 in QCM mode" : "احصل على ١٠/١٠ كامل في وضع الاختيارات"),
+        "a10": currentLang === 'fr' ? "Débloquer TOUS les succès précédents" : 
+               (currentLang === 'en' ? "Unlock ALL previous achievements" : "افتح جميع الإنجازات السابقة"),
+        "a13": currentLang === 'fr' ? "Jouer 10 parties en Mode Chrono" : 
+               (currentLang === 'en' ? "Play 10 games in Chrono Mode" : "العب ١٠ ألعاب في وضع التوقيت"),
+        "a14": currentLang === 'fr' ? "Faire 3 × 10/10 parfait en Mode Chrono" : 
+               (currentLang === 'en' ? "Get 3 perfect 10/10 scores in Chrono Mode" : "احصل على ٣ مرات ١٠/١٠ كامل في وضع التوقيت"),
+        "a15": currentLang === 'fr' ? "Atteindre 25 points en Mode Infini" : 
+               (currentLang === 'en' ? "Reach 25 points in Infinite Mode" : "احصل على ٢٥ نقطة في الوضع اللامتناهي"),
+        "a16": currentLang === 'fr' ? "Faire 5 × 10/10 parfait en mode QCM" : 
+               (currentLang === 'en' ? "Get 5 perfect 10/10 scores in QCM mode" : "احصل على ٥ مرات ١٠/١٠ كامل في وضع الاختيارات"),
+        "a17": currentLang === 'fr' ? "Acheter au moins un exemplaire de chaque type d'objet boutique" : 
+               (currentLang === 'en' ? "Buy at least one of each shop item type" : "اشترِ على الأقل قطعة واحدة من كل نوع في المتجر"),
+        "a18": currentLang === 'fr' ? "Dépenser 10 000 points boutique au total" : 
+               (currentLang === 'en' ? "Spend 10,000 shop points total" : "أنفق ١٠,٠٠٠ نقطة متجر إجمالاً"),
+        "a19": currentLang === 'fr' ? "Accumuler 50 000 points boutique" : 
+               (currentLang === 'en' ? "Accumulate 50,000 shop points" : "اجمع ٥٠,٠٠٠ نقطة متجر"),
+        "a20": currentLang === 'fr' ? "Faire 10/10 en Classique Facile + Normal + Difficile" : 
+               (currentLang === 'en' ? "Get 10/10 in Easy + Normal + Hard Classic" : "احصل على ١٠/١٠ في الكلاسيكي السهل + العادي + الصعب"),
+        "a21": currentLang === 'fr' ? "Être dans le top 3 du classement (n'importe quelle catégorie)" : 
+               (currentLang === 'en' ? "Be in the top 3 of the leaderboard (any category)" : "كن في المراكز الثلاثة الأولى في الترتيب (أي فئة)"),
+        "a22": currentLang === 'fr' ? "Être numéro 1 du classement (n'importe quelle catégorie)" : 
+               (currentLang === 'en' ? "Be number 1 on the leaderboard (any category)" : "كن رقم ١ في الترتيب (أي فئة)"),
+        "a23": currentLang === 'fr' ? "Terminer 5 Défis du Jour" : 
+               (currentLang === 'en' ? "Complete 5 Daily Challenges" : "أكمل ٥ تحديات يومية"),
+        "a24": currentLang === 'fr' ? "Faire 3 Défis du Jour dans la même journée" : 
+               (currentLang === 'en' ? "Complete 3 Daily Challenges in the same day" : "أكمل ٣ تحديات يومية في نفس اليوم"),
+        "a25": currentLang === 'fr' ? "Avoir possédé 5 Daily Rerolls en même temps" : 
+               (currentLang === 'en' ? "Have owned 5 Daily Rerolls at the same time" : "امتلك ٥ رولات يومية في نفس الوقت"),
+    };
+    
     const goals = [
-        { id: "a1", goal: 1, current: currentUser.totalQuestions > 0 ? 1 : 0, text: t('ach_first_step'), idx: 0 },
-        { id: "a2", goal: 1, current: currentUser.achievements[1], text: t('ach_perfect_10'), idx: 1 },
-        { id: "a3", goal: 10, current: currentUser.best > 10 ? 10 : currentUser.streak, text: t('ach_streak'), idx: 2 },
-        { id: "a4", goal: 50, current: currentUser.best, text: t('ach_infinite_50'), idx: 3 },
-        { id: "a5", goal: 1, current: currentUser.achievements[4], text: t('ach_speed'), idx: 4 },
-        { id: "a6", goal: 1000, current: Math.round(currentUser.totalXp), text: t('ach_1000xp'), idx: 5 },
-        { id: "a7", goal: 500, current: currentUser.totalCorrect, text: t('ach_scholar'), idx: 6 },
-        { id: "a8", goal: 1000, current: currentUser.totalQuestions, text: t('ach_master_tf'), idx: 7 },
-        { id: "a9", goal: 1, current: currentUser.achievements[8], text: t('ach_hafiz'), idx: 8 },
-        { id: "a11", goal: 5, current: totalQCMCompleted, text: t('ach_qcm_init'), idx: 9 },
-        { id: "a12", goal: 1, current: currentUser.achievements[11], text: t('ach_qcm_master'), idx: 11 },
-        { id: "a10", goal: 1, current: currentUser.achievements.slice(0, 9).every(e => e === 1) && currentUser.achievements[9] === 1 && currentUser.achievements[11] === 1 ? 1 : 0, text: t('ach_legend'), idx: 10 },
-        { id: "a13", goal: 10, current: currentUser.chronoGamesPlayed || 0, text: t('ach_chrono_fan'), idx: 12 },
-        { id: "a14", goal: 3, current: currentUser.chronoPerfects || 0, text: t('ach_chrono_master'), idx: 13 },
-        { id: "a15", goal: 25, current: currentUser.infiniteBest || 0, text: t('ach_survivor_25'), idx: 14 },
-        { id: "a16", goal: 5, current: currentUser.qcmPerfects || 0, text: t('ach_qcm_expert'), idx: 15 },
-        { id: "a17", goal: 1, current: Object.keys(SHOP_ITEMS).every(k => currentUser.ownedItems?.[k] > 0) ? 1 : 0, text: t('ach_shop_collector'), idx: 16 },
-        { id: "a18", goal: 10000, current: currentUser.shopPointsSpent || 0, text: t('ach_big_spender'), idx: 17 },
-        { id: "a19", goal: 50000, current: currentUser.points || 0, text: t('ach_millionaire'), idx: 18 },
-        { id: "a20", goal: 1, current: (currentUser.achievements[1] && currentUser.achievements[8] && currentUser.achievements[2]) ? 1 : 0, text: t('ach_perfect_all'), idx: 19 },
-        { id: "a21", goal: 1, current: 0, text: t('ach_podium'), idx: 20 },
-        { id: "a22", goal: 1, current: 0, text: t('ach_world_number1'), idx: 21 },
-        { id: "a23", goal: 5, current: currentUser.dailyQuizzesCompleted || 0, text: t('ach_daily_dedicated'), idx: 22 },
-        { id: "a24", goal: 3, current: 0, text: t('ach_triple_challenge'), idx: 23 },
-        { id: "a25", goal: 5, current: currentUser.dailyRerollsOwnedMax || 0, text: t('ach_reroll_stock'), idx: 24 }
+        { id: "a1", goal: 1, current: currentUser.totalQuestions > 0 ? 1 : 0, text: currentLang === 'fr' ? "Premier pas" : (currentLang === 'en' ? "First Step" : "الخطوة الأولى"), idx: 0 },
+        { id: "a2", goal: 1, current: currentUser.achievements[1], text: currentLang === 'fr' ? "10/10 Parfait !" : (currentLang === 'en' ? "10/10 Perfect!" : "١٠/١٠ كامل!"), idx: 1 },
+        { id: "a3", goal: 10, current: currentUser.best, text: currentLang === 'fr' ? "Streak de feu" : (currentLang === 'en' ? "Fire Streak" : "سلسلة نارية"), idx: 2 },
+        { id: "a4", goal: 50, current: currentUser.infiniteBest || 0, text: currentLang === 'fr' ? "Infini 50" : (currentLang === 'en' ? "Infinite 50" : "خمسون لانهائي"), idx: 3 },
+        { id: "a5", goal: 1, current: currentUser.achievements[4], text: currentLang === 'fr' ? "Vitesse Éclair" : (currentLang === 'en' ? "Lightning Speed" : "سرعة البرق"), idx: 4 },
+        { id: "a6", goal: 1000, current: Math.round(currentUser.totalXp), text: currentLang === 'fr' ? "1000 XP" : (currentLang === 'en' ? "1000 XP" : "١٠٠٠ XP"), idx: 5 },
+        { id: "a7", goal: 500, current: currentUser.totalCorrect, text: currentLang === 'fr' ? "Savant en devenir" : (currentLang === 'en' ? "Becoming Scholar" : "عالم في التكوين"), idx: 6 },
+        { id: "a8", goal: 1000, current: currentUser.totalQuestions, text: currentLang === 'fr' ? "Maître du Vrai/Faux" : (currentLang === 'en' ? "True/False Master" : "سيد الصواب/الخطأ"), idx: 7 },
+        { id: "a9", goal: 1, current: currentUser.achievements[8], text: currentLang === 'fr' ? "Hafiz" : (currentLang === 'en' ? "Hafiz" : "حافظ"), idx: 8 },
+        { id: "a11", goal: 5, current: totalQCMCompleted, text: currentLang === 'fr' ? "QCM Initié" : (currentLang === 'en' ? "QCM Initiate" : "مجرب الاختيارات"), idx: 9 },
+        { id: "a12", goal: 1, current: currentUser.achievements[11], text: currentLang === 'fr' ? "Maître QCM" : (currentLang === 'en' ? "QCM Master" : "سيد الاختيارات"), idx: 11 },
+        { id: "a10", goal: 1, current: (currentUser.achievements.slice(0, 9).every(e => e === 1) && currentUser.achievements[9] === 1 && currentUser.achievements[11] === 1) ? 1 : 0, text: currentLang === 'fr' ? "Légende de la oumma" : (currentLang === 'en' ? "Ummah Legend" : "أسطورة الأمة"), idx: 10 },
+        { id: "a13", goal: 10, current: currentUser.chronoGamesPlayed || 0, text: currentLang === 'fr' ? "Chrono Passionné" : (currentLang === 'en' ? "Chrono Enthusiast" : "عاشق التوقيت"), idx: 12 },
+        { id: "a14", goal: 3, current: currentUser.chronoPerfects || 0, text: currentLang === 'fr' ? "Maître Chrono" : (currentLang === 'en' ? "Chrono Master" : "سيد التوقيت"), idx: 13 },
+        { id: "a15", goal: 25, current: currentUser.infiniteBest || 0, text: currentLang === 'fr' ? "Survivant 25" : (currentLang === 'en' ? "Survivor 25" : "الناجي ٢٥"), idx: 14 },
+        { id: "a16", goal: 5, current: currentUser.qcmPerfects || 0, text: currentLang === 'fr' ? "Expert QCM" : (currentLang === 'en' ? "QCM Expert" : "خبير الاختيارات"), idx: 15 },
+        { id: "a17", goal: 1, current: Object.keys(SHOP_ITEMS).every(k => currentUser.ownedItems?.[k] > 0) ? 1 : 0, text: currentLang === 'fr' ? "Collectionneur Boutique" : (currentLang === 'en' ? "Shop Collector" : "جامع المتجر"), idx: 16 },
+        { id: "a18", goal: 10000, current: currentUser.shopPointsSpent || 0, text: currentLang === 'fr' ? "Grand Dépensier" : (currentLang === 'en' ? "Big Spender" : "منفق كبير"), idx: 17 },
+        { id: "a19", goal: 50000, current: currentUser.points || 0, text: currentLang === 'fr' ? "Millionnaire Boutique" : (currentLang === 'en' ? "Shop Millionaire" : "مليونير المتجر"), idx: 18 },
+        { id: "a20", goal: 1, current: (currentUser.achievements[1] && currentUser.achievements[8] && currentUser.achievements[2]) ? 1 : 0, text: currentLang === 'fr' ? "Parfait dans tous les niveaux" : (currentLang === 'en' ? "Perfect in All Levels" : "كامل في كل المستويات"), idx: 19 },
+        { id: "a21", goal: 1, current: 0, text: currentLang === 'fr' ? "Le Podium" : (currentLang === 'en' ? "The Podium" : "المنصة"), idx: 20 },
+        { id: "a22", goal: 1, current: 0, text: currentLang === 'fr' ? "Numéro 1 Mondial" : (currentLang === 'en' ? "World Number 1" : "رقم ١ عالمي"), idx: 21 },
+        { id: "a23", goal: 5, current: currentUser.dailyQuizzesCompleted || 0, text: currentLang === 'fr' ? "Assidu Quotidien" : (currentLang === 'en' ? "Daily Dedicated" : "ملتزم يومي"), idx: 22 },
+        { id: "a24", goal: 3, current: 0, text: currentLang === 'fr' ? "Triple Défi" : (currentLang === 'en' ? "Triple Challenge" : "تحدي ثلاثي"), idx: 23 },
+        { id: "a25", goal: 5, current: currentUser.dailyRerollsOwnedMax || 0, text: currentLang === 'fr' ? "Stock de Rerolls" : (currentLang === 'en' ? "Reroll Stock" : "مخزون إعادة التعيين"), idx: 24 }
     ];
     
-    
-
+    goals.forEach(goal => {
+        const achievementEl = document.getElementById(goal.id);
+        if (!achievementEl) return;
+        
+        // Récupérer les spans
+        const progSpan = document.getElementById(`${goal.id}-prog`);
+        const descSpan = document.getElementById(`${goal.id}-desc`);
+        
+        if (!progSpan || !descSpan) {
+            console.log(`Élément manquant: ${goal.id}-prog ou ${goal.id}-desc`);
+            return;
+        }
+        
+        // Mettre la description
+        descSpan.textContent = descMap[goal.id] || "Description manquante";
+        
+        // Vérifier si débloqué
+        if (goal.current >= goal.goal) {
+            achievementEl.classList.add("unlocked");
+            progSpan.innerHTML = `<span style="color: #FFD700;">✅ ${currentLang === 'fr' ? 'Débloqué !' : (currentLang === 'en' ? 'Unlocked!' : 'تم الفتح!')}</span>`;
             
-            goals.forEach(goal => {
-                const achievementEl = document.getElementById(goal.id);
-                if (!achievementEl) return;
-                
-                const divEl = achievementEl.querySelector("div");
-                if (!divEl) return;
-                
-                const strongEl = divEl.querySelector("strong");
-                const originalTitle = strongEl ? strongEl.textContent : "";
-                
-                if (goal.current >= goal.goal) {
-                    achievementEl.classList.add("unlocked");
-                    if (divEl) divEl.innerHTML = `<strong>${originalTitle}</strong><br>✅ Débloqué !`;
-                    
-                    if (currentUser.achievements[goal.idx] === 0) {
-                        currentUser.achievements[goal.idx] = 1;
-                        document.getElementById("unlock")?.play();
-                        showPopup("🏆", "Succès Débloqué !", goal.text);
-                    }
-                } else {
-                    achievementEl.classList.remove("unlocked");
-                    
-                    if (divEl) divEl.innerHTML = `<strong>${originalTitle}</strong><br><span id="${goal.id}-prog"></span>`;
-                    
-                    const progSpan = document.getElementById(`${goal.id}-prog`);
-                    if (progSpan) {
-                        if (goal.id === "a1" || goal.id === "a2" || goal.id === "a5" || goal.id === "a9" || goal.id === "a12" || goal.id === "a10" || goal.id === "a20" || goal.id === "a21" || goal.id === "a22" || goal.id === "a24") {
-                            progSpan.textContent = goal.text;
-                        } else {
-                            let current = goal.current;
-                            let unit = "";
-                            
-                            if (goal.id === "a3") current = currentUser.streak;
-                            else if (goal.id === "a4") current = currentUser.best;
-                            else if (goal.id === "a6") unit = " XP";
-                            else if (goal.id === "a7") unit = " Bonnes Réponses";
-                            else if (goal.id === "a8") unit = " Questions";
-                            else if (goal.id === "a11") current = totalQCMCompleted;
-                            else if (goal.id === "a13") unit = " parties Chrono";
-                            else if (goal.id === "a14") unit = " × 10/10 Chrono";
-                            else if (goal.id === "a15") unit = " points Infini";
-                            else if (goal.id === "a16") unit = " × 10/10 QCM";
-                            else if (goal.id === "a17") unit = " types d'objets";
-                            else if (goal.id === "a18") unit = " points dépensés";
-                            else if (goal.id === "a19") unit = " points";
-                            else if (goal.id === "a23") unit = " défis";
-                            else if (goal.id === "a25") unit = " rerolls";
-                            
-                            const remaining = Math.max(0, goal.goal - current);
-                            progSpan.textContent = `${Math.round(current).toLocaleString()}/${goal.goal.toLocaleString()}${unit} (${Math.round(remaining).toLocaleString()} restants)`;
-                        }
-                    }
-                }
-            });
-            
-            if (currentUser.achievements.slice(0, 9).every(e => e === 1) && 
-                currentUser.achievements[9] === 1 && 
-                currentUser.achievements[11] === 1 && 
-                currentUser.achievements[10] === 0) {
-                currentUser.achievements[10] = 1;
+            if (currentUser.achievements[goal.idx] === 0) {
+                currentUser.achievements[goal.idx] = 1;
                 document.getElementById("unlock")?.play();
-                showPopup("💎", "FÉLICITATIONS !", "Légende de la oumma : Tous les succès débloqués");
+                const emojiSpan = achievementEl.querySelector(".emoji");
+                showPopup(emojiSpan ? emojiSpan.textContent : "🏆", 
+                         currentLang === 'fr' ? "Succès Débloqué !" : (currentLang === 'en' ? "Achievement Unlocked!" : "تم فتح إنجاز!"), 
+                         goal.text);
+            }
+        } else {
+            achievementEl.classList.remove("unlocked");
+            
+            // Calculer la progression
+            let displayText = "";
+            let current = goal.current;
+            
+            if (goal.id === "a1" || goal.id === "a2" || goal.id === "a5" || goal.id === "a9" || 
+                goal.id === "a10" || goal.id === "a12" || goal.id === "a17" || goal.id === "a20" || 
+                goal.id === "a21" || goal.id === "a22" || goal.id === "a24") {
+                displayText = `<span style="color: #f87171;">🔒 ${currentLang === 'fr' ? 'Non débloqué' : (currentLang === 'en' ? 'Not unlocked' : 'غير مفتوح')}</span>`;
+            } else {
+                // Déterminer l'unité
+                let unit = "";
+                if (goal.id === "a3") unit = "";
+                else if (goal.id === "a4") unit = "";
+                else if (goal.id === "a6") unit = " XP";
+                else if (goal.id === "a7") unit = currentLang === 'fr' ? " bonnes réponses" : (currentLang === 'en' ? " correct answers" : " إجابات صحيحة");
+                else if (goal.id === "a8") unit = currentLang === 'fr' ? " questions" : (currentLang === 'en' ? " questions" : " أسئلة");
+                else if (goal.id === "a11") current = totalQCMCompleted;
+                else if (goal.id === "a13") unit = currentLang === 'fr' ? " parties" : (currentLang === 'en' ? " games" : " ألعاب");
+                else if (goal.id === "a14") unit = currentLang === 'fr' ? " perfect" : (currentLang === 'en' ? " perfect" : " كامل");
+                else if (goal.id === "a15") unit = currentLang === 'fr' ? " points" : (currentLang === 'en' ? " points" : " نقاط");
+                else if (goal.id === "a16") unit = currentLang === 'fr' ? " perfect" : (currentLang === 'en' ? " perfect" : " كامل");
+                else if (goal.id === "a18") unit = currentLang === 'fr' ? " pts dépensés" : (currentLang === 'en' ? " pts spent" : " نقاط منفقة");
+                else if (goal.id === "a19") unit = currentLang === 'fr' ? " pts" : (currentLang === 'en' ? " pts" : " نقاط");
+                else if (goal.id === "a23") unit = currentLang === 'fr' ? " défis" : (currentLang === 'en' ? " challenges" : " تحديات");
+                else if (goal.id === "a25") unit = currentLang === 'fr' ? " rerolls" : (currentLang === 'en' ? " rerolls" : " رولات");
+                
+                const remaining = Math.max(0, goal.goal - current);
+                displayText = `${Math.round(current).toLocaleString()}/${goal.goal.toLocaleString()}${unit} (${Math.round(remaining).toLocaleString()} ${currentLang === 'fr' ? 'restants' : (currentLang === 'en' ? 'remaining' : 'متبقي')})`;
             }
             
-            saveUser();
+            progSpan.innerHTML = displayText;
         }
-
+    });
+    
+    // Vérifier "Légende de la oumma"
+    if (currentUser.achievements.slice(0, 9).every(e => e === 1) && 
+        currentUser.achievements[9] === 1 && 
+        currentUser.achievements[11] === 1 && 
+        currentUser.achievements[10] === 0) {
+        currentUser.achievements[10] = 1;
+        document.getElementById("unlock")?.play();
+        showPopup("💎", 
+                 currentLang === 'fr' ? "Succès Débloqué !" : (currentLang === 'en' ? "Achievement Unlocked!" : "تم فتح إنجاز!"), 
+                 currentLang === 'fr' ? "Légende de la oumma" : (currentLang === 'en' ? "Ummah Legend" : "أسطورة الأمة"));
+    }
+    
+    saveUser();
+}
         function showAchievements() {
             showScreen("achievements");
             checkAchievements();
@@ -6071,10 +7339,51 @@ if (expEl) expEl.innerHTML = `${t('explanation')}: ${getExplanationText(question
             showScreen("difficultyMenu");
         }
 
-        function showLeaderboard() {
-            showScreen("leaderboard");
-            loadLeaderboard('totalXp');
+       function showLeaderboard() {
+    showScreen("leaderboard");
+    
+    // Traduire le titre
+    const leaderboardTitle = document.querySelector('#leaderboard h1');
+    if (leaderboardTitle) leaderboardTitle.innerHTML = t('leaderboard_title');
+    
+    // Traduire le bouton retour
+    const backBtn = document.querySelector('#leaderboard .menu-btn');
+    if (backBtn) backBtn.innerHTML = t('back_to_menu');
+    
+    // Mettre à jour les en-têtes du tableau
+    const ths = document.querySelectorAll('#leaderboardTable th');
+    if (ths.length >= 3) {
+        ths[0].innerHTML = '#';
+        ths[1].innerHTML = t('player');
+        // Le 3ème th est géré par le bouton déroulant
+    }
+    
+    // Réinitialiser l'affichage du bouton de catégorie
+    const categoryBtn = document.getElementById('currentCategoryBtn');
+    if (categoryBtn) {
+        if (currentCategory === 'totalXp') {
+            categoryBtn.innerHTML = `${t('total_xp')} ▼`;
+        } else if (currentCategory === 'infiniteBest') {
+            categoryBtn.innerHTML = `${t('best_infinite')} ▼`;
+        } else if (currentCategory === 'points') {
+            categoryBtn.innerHTML = `${t('shop_points')} ▼`;
         }
+    }
+    
+    // Mettre à jour les textes des options dans la liste déroulante
+    const categoryList = document.getElementById('categoryList');
+    if (categoryList) {
+        const options = categoryList.children;
+        if (options.length >= 3) {
+            options[0].innerHTML = t('total_xp');
+            options[1].innerHTML = t('best_infinite');
+            options[2].innerHTML = t('shop_points');
+        }
+    }
+    
+    // Charger le classement
+    loadLeaderboard(currentCategory);
+}
 
         // ================================================================
         // RAMADAN - DÉFI ET CALENDRIER
@@ -6351,7 +7660,7 @@ function openWikiHome() {
         // ================================================================
         // INDICES
         // ================================================================
-        function useHint() {
+        function useHint() { 
     if (isAnswered) return;
     if (!currentUser?.ownedItems?.['HINT_TOKEN'] || currentUser.ownedItems['HINT_TOKEN'] <= 0) {
         alert(t('no_hint'));
@@ -6362,7 +7671,8 @@ function openWikiHome() {
     if (!currentQuestion) return;
     
     const correct = currentQuestion.a;
-    const correctAns = correct ? t('vrai') : t('faux');
+    const { vraiText, fauxText } = getTrueFalseButtonsText();
+    const correctAns = correct ? vraiText : fauxText;
     
     if (confirm(`${t('hint_confirm')} : ${currentUser.ownedItems['HINT_TOKEN']})`)) {
         currentUser.ownedItems['HINT_TOKEN']--;
@@ -6447,35 +7757,77 @@ function openWikiHome() {
 
         
 
-        // ================================================================
-        // INITIALISATION
-        // ================================================================
-        document.addEventListener("DOMContentLoaded", () => {
-            showScreen("auth");
-            
-            if (isRamadanPeriod()) {
-                document.body.classList.add("ramadan-theme");
-            }
-            
-            startRamadanCountdown();
-            
-            const giftBtn = document.getElementById('ramadanGiftBtn');
-            if (giftBtn) giftBtn.style.display = 'none'; // Cacher le bouton cadeau
-            
-            const categoryBtn = document.getElementById('currentCategoryBtn');
-            if (categoryBtn) categoryBtn.onclick = toggleCategoryList;
-            
-            document.addEventListener('click', (e) => {
-                const list = document.getElementById('categoryList');
-                const btn = document.getElementById('currentCategoryBtn');
-                if (list && btn && list.style.display === 'block' && !btn.contains(e.target)) {
-                    list.style.display = 'none';
-                }
-            });
-            
-        setLanguage(currentLang);
-        });
-        // Fonction de débogage - à appeler quand une question QCM devrait apparaître
+       // ================================================================
+// INITIALISATION - VERSION CORRIGÉE
+// ================================================================
+document.addEventListener("DOMContentLoaded", () => {
+    showScreen("auth");
+    
+    if (isRamadanPeriod()) {
+        document.body.classList.add("ramadan-theme");
+    }
+    
+    startRamadanCountdown();
+    
+    const giftBtn = document.getElementById('ramadanGiftBtn');
+    if (giftBtn) giftBtn.style.display = 'none'; // Cacher le bouton cadeau
+    
+    // CORRECTION : Réattacher l'événement du bouton de catégorie
+    const categoryBtn = document.getElementById('currentCategoryBtn');
+    if (categoryBtn) {
+        // Supprimer les anciens événements et ajouter le nouveau
+        categoryBtn.onclick = function(e) {
+            e.stopPropagation();
+            toggleCategoryList();
+        };
+    }
+    setTimeout(() => {
+        if (document.getElementById('settings') && !document.getElementById('settings').classList.contains('hidden')) {
+            initLangSlider();
+        }
+    }, 500)
+    
+    // Fermer la liste déroulante si on clique ailleurs
+    document.addEventListener('click', (e) => {
+        const list = document.getElementById('categoryList');
+        const btn = document.getElementById('currentCategoryBtn');
+        if (list && btn && list.style.display === 'block' && !btn.contains(e.target) && !list.contains(e.target)) {
+            list.style.display = 'none';
+        }
+    });
+    
+    // Définir la langue initiale
+    setLanguage(currentLang);
+});
+
+// ================================================================
+// FONCTION TOGGLE CATEGORY LIST
+// ================================================================
+function toggleCategoryList() {
+    const list = document.getElementById('categoryList');
+    const btn = document.getElementById('currentCategoryBtn');
+    
+    if (!list || !btn) return;
+    
+    // Basculer l'affichage
+    if (list.style.display === 'none' || list.style.display === '') {
+        list.style.display = 'block';
+        
+        // Mettre à jour les textes des options selon la langue actuelle
+        const options = list.children;
+        if (options.length >= 3) {
+            options[0].innerHTML = t('total_xp');
+            options[1].innerHTML = t('best_infinite');
+            options[2].innerHTML = t('shop_points');
+        }
+    } else {
+        list.style.display = 'none';
+    }
+}
+
+// ================================================================
+// FONCTION DE DÉBOGAGE QCM
+// ================================================================
 function debugQCM() {
     console.log("=== DÉBOGAGE QCM ===");
     console.log("Mode actuel:", document.getElementById("game")?.getAttribute("data-mode"));
@@ -6505,7 +7857,161 @@ function debugQCM() {
     
     console.log("=== FIN DÉBOGAGE ===");
 }
-        
+
+// ================================================================
+// CORRECTION DE LA FONCTION BUYITEM (parenthèse manquante)
+// ================================================================
+async function buyItem(code, price) {
+    if (currentUser.points < price) {
+        alert(t('not_enough_points'));
+        return;
+    }
+    
+    const shopItem = currentUser.dailyShopItems.find(item => item.code === code);
+    if (!shopItem || shopItem.stock <= 0) {
+        alert(t('out_of_stock'));
+        return;
+    }
+    
+    currentUser.points -= price;
+    shopItem.stock--;
+    currentUser.ownedItems[code] = (currentUser.ownedItems[code] || 0) + 1;
+    currentUser.shopItemsBoughtTotal++;
+    currentUser.shopPointsSpent += price;
+    
+    if (currentUser.ownedItems['DAILY_REROLL'] > (currentUser.dailyRerollsOwnedMax || 0)) {
+        currentUser.dailyRerollsOwnedMax = currentUser.ownedItems['DAILY_REROLL'];
+    }
+    
+    const stockEl = document.getElementById(`stock-${code}`);
+    if (stockEl) stockEl.textContent = shopItem.stock;
+    
+    updateStats();
+    updateOwnedItemsDisplay();
+    updateBuyButtons();
+    await saveUser();
+    
+    // Traduire le nom de l'objet pour le popup
+    let itemName = SHOP_ITEMS[code][0];
+    
+    if (code === 'RAMADAN_BADGE') {
+        itemName = getRamadanBadgeName();
+    } else if (currentLang === 'en') {
+        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
+        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
+        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
+        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
+    } else if (currentLang === 'ar') {
+        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
+        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
+        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
+        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
+    }
+    
+    showPopup("💰", t('purchase_success'), `${itemName} ${t('bought_for')} ${price} ${t('points')} !`);
+}
+// ================================================================
+// FONCTIONS POUR LE SLIDER DE LANGUE
+// ================================================================
+
+// Initialisation du slider de langue
+function initLangSlider() {
+    const langBtn = document.getElementById('currentLangBtn');
+    const langList = document.getElementById('langSliderList');
+    
+    if (!langBtn || !langList) return;
+    
+    // Mettre à jour le texte du bouton principal
+    updateCurrentLangButton();
+    
+    // Ajouter l'événement pour ouvrir/fermer le slider
+    langBtn.onclick = function(e) {
+        e.stopPropagation();
+        toggleLangSlider();
+    };
+    
+    // Ajouter les événements pour les options
+    document.querySelectorAll('.lang-slider-option').forEach(option => {
+        option.onclick = function(e) {
+            e.stopPropagation();
+            const lang = this.dataset.lang;
+            if (lang) {
+                setLanguage(lang);
+                closeLangSlider();
+            }
+        };
+    });
+    
+    // Fermer le slider si on clique ailleurs
+    document.addEventListener('click', function(e) {
+        if (langList && langList.classList.contains('show') && 
+            !langBtn.contains(e.target) && !langList.contains(e.target)) {
+            closeLangSlider();
+        }
+    });
+}
+
+// Ouvrir/Fermer le slider
+function toggleLangSlider() {
+    const langList = document.getElementById('langSliderList');
+    if (!langList) return;
+    
+    if (langList.classList.contains('show')) {
+        closeLangSlider();
+    } else {
+        openLangSlider();
+    }
+}
+
+// Ouvrir le slider
+function openLangSlider() {
+    const langList = document.getElementById('langSliderList');
+    if (!langList) return;
+    
+    langList.classList.add('show');
+    langList.style.display = 'block';
+    
+    // Mettre en évidence la langue active
+    document.querySelectorAll('.lang-slider-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === currentLang);
+    });
+}
+
+// Fermer le slider
+function closeLangSlider() {
+    const langList = document.getElementById('langSliderList');
+    if (!langList) return;
+    
+    langList.classList.remove('show');
+    langList.style.display = 'none';
+}
+
+// Mettre à jour le texte du bouton principal
+function updateCurrentLangButton() {
+    const langText = document.getElementById('currentLangText');
+    if (!langText) return;
+    
+    if (currentLang === 'fr') {
+        langText.innerHTML = '🇫🇷 Français';
+    } else if (currentLang === 'en') {
+        langText.innerHTML = '🇬🇧 English';
+    } else if (currentLang === 'ar') {
+        langText.innerHTML = '🇸🇦 العربية';
+    }
+}
+
+// Modifier la fonction setLanguage pour mettre à jour le slider
+const originalSetLanguage = setLanguage;
+setLanguage = function(lang) {
+    originalSetLanguage(lang);
+    updateCurrentLangButton();
+    
+    // Mettre à jour la classe active dans le slider
+    document.querySelectorAll('.lang-slider-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === lang);
+    });
+};
+
     </script>
 </body>
-</html> 
+</html>
