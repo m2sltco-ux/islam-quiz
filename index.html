@@ -1088,6 +1088,26 @@
     border-right: 6px solid #FFD700 !important;
 }
 
+
+
+/* Style amélioré pour le popup de langue */
+#langSelectionPopup {
+    background: linear-gradient(135deg, #0a2f1f 0%, #143c30 100%);
+    border: 4px solid #FFD700;
+    box-shadow: 0 0 80px rgba(255, 215, 0, 0.8);
+    z-index: 10000;
+}
+
+#langSelectionPopup button {
+    transition: all 0.3s;
+    border: 2px solid #FFD700 !important;
+}
+
+#langSelectionPopup button:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+}
+
     </style>
 </head>
 
@@ -1250,11 +1270,12 @@
         
        <!-- ÉCRAN PARAMÈTRES -->
 <div id="settings" class="hidden">
-    <h1>Paramètres</h1>
-    <div class="user-info">
-        <span>Connecté</span> : <strong id="username2"></strong><br>
-        <span>Niveau</span> <strong id="levelNum2">1</strong> • <span>XP</span> total : <strong id="totalXp">0</strong>
-    </div>
+    <h1 data-i18n="settings">Paramètres</h1>
+   <!-- Dans l'écran des paramètres -->
+<div class="user-info">
+    <span data-i18n="connected">Connecté</span> : <strong id="username2">M2S</strong><br>
+    <span data-i18n="level">Niveau</span> <strong id="levelNum2">5</strong> • <span data-i18n="total_xp">XP total</span> : <strong id="totalXp">928</strong>
+</div>
     
     <button class="menu-btn infinite-btn" onclick="useDailyReroll()">
         Utiliser Daily Reroll (<span>Possédé</span> : <span id="rerollCount">0</span>)
@@ -1353,6 +1374,7 @@
     Bugs / Questions / Suggestions
     </a>
 </div>
+
         
         <!-- POPUP SUCCÈS -->
         <div class="popup" id="popup">
@@ -1361,6 +1383,34 @@
             <p id="popupText">MashaAllah akhi !</p>
         </div>
     </div>
+    
+    <!-- POPUP DE SÉLECTION DE LANGUE POUR PREMIÈRE VISITE - TOUT EN ANGLAIS -->
+<div class="popup" id="langSelectionPopup" style="max-width: 450px;">
+    <div class="emoji" style="font-size: 4rem;">🌐</div>
+    <h2 style="font-size: 2.5rem; margin: 20px 0;">Welcome to Islam Quiz!</h2>
+    <p style="font-size: 1.4rem; color: #e2e8f0; margin-bottom: 25px;">Please choose your language</p>
+    
+    <div style="display: flex; flex-direction: column; gap: 15px; margin: 30px 0;">
+        <button onclick="setFirstLanguage('fr')" 
+                style="background: linear-gradient(135deg, #0055A4, #FFFFFF, #EF4135); color: #000; padding: 18px; font-size: 1.8rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+            <span style="font-size: 2.5rem;">🇫🇷</span> Français
+        </button>
+        
+        <button onclick="setFirstLanguage('en')" 
+                style="background: linear-gradient(135deg, #012169, #FFFFFF, #C8102E); color: #000; padding: 18px; font-size: 1.8rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+            <span style="font-size: 2.5rem;">🇬🇧</span> English
+        </button>
+        
+        <button onclick="setFirstLanguage('ar')" 
+                style="background: linear-gradient(135deg, #006C35, #FFFFFF, #000000); color: #000; padding: 18px; font-size: 1.8rem; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 15px; width: 100%;">
+            <span style="font-size: 2.5rem;">🇸🇦</span> العربية
+        </button>
+    </div>
+    
+    <p style="font-size: 1.2rem; color: #94a3b8; margin-top: 20px;">
+        ⚙️ Settings → 🌐 to change later
+    </p>
+</div>
     
     <script>
         // ================================================================
@@ -1415,7 +1465,7 @@ db.enablePersistence({
         const NEXT_QUESTION_DELAY = 3000;
         const DAILY_COOLDOWN_MS = 86400000;
        
-let currentLang = localStorage.getItem('lang') || 'fr';
+let currentLang = localStorage.getItem('lang') || 'en';
 
         // ================================================================
         // BANQUE DE QUESTIONS - 400+ QUESTIONS
@@ -3545,6 +3595,7 @@ let translations = {
         "password": "Mot de passe",
         "login": "Se connecter",
         "register": "Créer un compte",
+        "mashaAllah": "MashaAllah !",
         
         // Menu
         "welcome": "Bienvenue",
@@ -3622,6 +3673,9 @@ let translations = {
         "arabic": "العربية",
         "reset_account": "Réinitialiser mon compte",
         "logout": "Déconnexion",
+        "daily_gift_title": "Cadeau Quotidien !",
+"daily_gift_message": "MashaAllah ! Vous avez gagné :",
+
         
         // Difficulty
         "difficulty_choice": "Choix de la Difficulté",
@@ -3659,6 +3713,7 @@ let translations = {
         "account_created": "✅ Compte créé avec succès ! Bienvenue",
         "account_deleted": "Compte supprimé avec succès.",
         "confirm_delete": "⚠️ Êtes-vous sûr de vouloir SUPPRIMER votre compte ? Cette action est IRRÉVERSIBLE !",
+        "xp_gain": "XP! (+10 Points) (Streak",
         
         // Items
         "double_xp": "Double XP (x1 Partie)",
@@ -3813,6 +3868,15 @@ let translations = {
 "ach_reroll_stock": "Stock de Rerolls",
 "ach_reroll_stock_desc": "Avoir possédé 5 Daily Rerolls en même temps",
 "not_unlocked": "Non débloqué",
+"settings": "Paramètres",
+"connected": "Connecté",
+"level": "Niveau",
+"total_xp": "XP total",
+"use_reroll": "Utiliser Daily Reroll",
+"owned": "Possédé",
+"back_to_menu": "Retour au menu principal",
+"reset_account": "Réinitialiser mon compte",
+"logout": "Déconnexion",
 },
 
 
@@ -3847,12 +3911,15 @@ let translations = {
         "leaderboard": "Leaderboard",
         "achievements": "Achievements",
         "settings": "Settings",
-        
+        "daily_gift_title": "Daily Gift!",
+"daily_gift_message": "MashaAllah! You have won:",
         // Shop
         "shop_title": "️ Daily Shop",
         "shop_desc": "Offers change every day!",
         "refresh_in": "Refresh in",
         "inventory": "Inventory",
+"mashaAllah_en": "MashaAllah!",
+
         "empty_inventory": "Empty inventory.",
         "buy": "Buy",
         "out_of_stock": "Out of Stock",
@@ -4115,6 +4182,15 @@ let translations = {
 "ach_reroll_stock": "Reroll Stock",
 "ach_reroll_stock_desc": "Have owned 5 Daily Rerolls at the same time",
 "not_unlocked": "Not unlocked",
+"settings": "Settings",
+"connected": "Connected",
+"level": "Level",
+"total_xp": "Total XP",
+"use_reroll": "Use Daily Reroll",
+"owned": "Owned",
+"back_to_menu": "Back to main menu",
+"reset_account": "Reset my account",
+"logout": "Logout",
 },
     },
     
@@ -4157,6 +4233,8 @@ let translations = {
         "out_of_stock": "نفد من المخزون",
         "not_enough_points": "نقاط غير كافية",
         "purchase_success": "تم الشراء بنجاح!",
+        "daily_gift_title": "هدية يومية!",
+"daily_gift_message": "ما شاء الله! لقد ربحت:",
         
         // Game
         "correct": "✔ صحيح!",
@@ -4174,6 +4252,7 @@ let translations = {
         "ramadan_started": "بدأ رمضان! رمضان مبارك 🌙",
         "ramadan_gift": "🎁 تقويم هدايا رمضان",
         "already_played": "لقد لعبت اليوم بالفعل ✓",
+   "mashaAllah_ar": "ما شاء الله!",
         
         // Leaderboard
         "leaderboard_title": "ترتيب اللاعبين",
@@ -4203,6 +4282,7 @@ let translations = {
         "arabic": "العربية",
         "reset_account": "إعادة تعيين حسابي",
         "logout": "تسجيل الخروج",
+       
         
         // Difficulty
         "difficulty_choice": "اختر الصعوبة",
@@ -4413,7 +4493,16 @@ let translations = {
 "ach_triple_challenge_desc": "أكمل ٣ تحديات يومية في نفس اليوم",
 "ach_reroll_stock": "مخزون إعادة التعيين",
 "ach_reroll_stock_desc": "امتلك ٥ رولات يومية في نفس الوقت",
- "not_unlocked": "غير مفتوح",   
+ "not_unlocked": "غير مفتوح",
+ "settings": "الإعدادات",
+"connected": "متصل",
+"level": "المستوى",
+"total_xp": "إجمالي XP",
+"use_reroll": "استخدم إعادة التحديث اليومي",
+"owned": "يمتلك",
+"back_to_menu": "العودة إلى القائمة الرئيسية",
+"reset_account": "إعادة تعيين حسابي",
+"logout": "تسجيل الخروج",
 },
 
     }
@@ -4618,6 +4707,68 @@ function getEndGameDescription(mode, score, total) {
     }
 }
 
+
+// ================================================================
+// FONCTION POUR METTRE À JOUR LES TEXTES DES PARAMÈTRES
+// ================================================================
+function updateSettingsTexts() {
+    const settingsScreen = document.getElementById('settings');
+    if (!settingsScreen) return;
+    
+    // Titre de la page - Utiliser t()
+    const title = settingsScreen.querySelector('h1');
+    if (title) {
+        title.textContent = t('settings');
+    }
+    
+    // Informations utilisateur
+    const userInfoDiv = settingsScreen.querySelector('.user-info');
+    if (userInfoDiv && currentUser) {
+        userInfoDiv.innerHTML = `
+            <span>${t('connected')}</span> : <strong id="username2">${currentUser.pseudo}</strong><br>
+            <span>${t('level')}</span> <strong id="levelNum2">${currentUser.level}</strong> • <span>${t('total_xp')}</span> : <strong id="totalXp">${Math.round(currentUser.totalXp)}</strong>
+        `;
+    }
+    
+    // Bouton Daily Reroll
+    const rerollBtn = settingsScreen.querySelector('.infinite-btn');
+    if (rerollBtn) {
+        const rerollCount = currentUser?.ownedItems?.['DAILY_REROLL'] || 0;
+        rerollBtn.innerHTML = `${t('use_reroll')} (${t('owned')} : <span id="rerollCount">${rerollCount}</span>)`;
+    }
+    
+    // Mettre à jour le texte du bouton de langue
+    updateCurrentLangButton();
+    
+    // Bouton Retour
+    const backBtn = Array.from(settingsScreen.querySelectorAll('.menu-btn')).find(btn => 
+        btn.textContent.includes('Retour') || 
+        btn.textContent.includes('Back') || 
+        btn.textContent.includes('العودة') ||
+        btn.textContent.includes('menu')
+    );
+    if (backBtn) {
+        backBtn.textContent = t('back_to_menu');
+    }
+    
+    // Bouton Réinitialiser
+    const resetBtn = settingsScreen.querySelector('.danger-btn');
+    if (resetBtn) {
+        resetBtn.textContent = t('reset_account');
+    }
+    
+    // Bouton Déconnexion
+    const logoutBtn = Array.from(settingsScreen.querySelectorAll('.settings-btn')).find(btn => 
+        btn.textContent.includes('Déconnexion') || 
+        btn.textContent.includes('Logout') || 
+        btn.textContent.includes('تسجيل الخروج') ||
+        (btn !== rerollBtn && btn !== backBtn && !btn.classList.contains('danger-btn'))
+    );
+    if (logoutBtn) {
+        logoutBtn.textContent = t('logout');
+    }
+}
+
 // Fonction pour obtenir le texte du bouton "Retour au menu" (fin de partie)
 function getBackToMenuButtonText() {
     if (currentLang === 'fr') {
@@ -4743,67 +4894,601 @@ function t(key) {
     return translations[currentLang]?.[key] || translations['fr']?.[key] || key;
 }
 
+// ================================================================
+// FONCTION SETLANGUAGE CORRIGÉE
+// ================================================================
 async function setLanguage(lang) {
     if (!['fr', 'en', 'ar'].includes(lang)) return;
     
+    // ✅ IMPORTANT : Mettre à jour currentLang et localStorage
     currentLang = lang;
     localStorage.setItem('lang', lang);
     
-    // ✅ AJOUTÉ : Sauvegarder dans Firebase SI l'utilisateur est connecté
+    // Fermer le popup si ouvert
+    const langPopup = document.getElementById('langSelectionPopup');
+    if (langPopup && langPopup.classList.contains('show')) {
+        langPopup.classList.remove('show');
+    }
+    
+    // Sauvegarder dans Firebase SI l'utilisateur est connecté
     if (currentUser && auth.currentUser) {
         try {
             currentUser.language = lang;
             await db.collection('users').doc(auth.currentUser.uid).update({
                 language: lang
             });
+            console.log("✅ Langue sauvegardée dans Firebase:", lang);
         } catch (error) {
-            console.error("Erreur sauvegarde langue:", error);
+            console.error("❌ Erreur sauvegarde langue:", error);
         }
     }
     
-    // Direction RTL pour l'arabe
+    // ✅ CORRIGÉ : Direction RTL pour l'arabe
     if (lang === 'ar') {
         document.documentElement.setAttribute('dir', 'rtl');
+        document.body.style.direction = 'rtl';
         document.body.style.textAlign = 'right';
+        
+        // Ajuster quelques éléments spécifiques
+        const style = document.createElement('style');
+        style.id = 'rtl-styles';
+        style.textContent = `
+            .menu-btn { text-align: center; }
+            .user-info { text-align: right; }
+            .stats { text-align: right; }
+            .item-footer { flex-direction: row-reverse; }
+            .price { flex-direction: row-reverse; }
+        `;
+        
+        // Supprimer l'ancien style RTL s'il existe
+        const oldStyle = document.getElementById('rtl-styles');
+        if (oldStyle) oldStyle.remove();
+        
+        document.head.appendChild(style);
     } else {
         document.documentElement.setAttribute('dir', 'ltr');
+        document.body.style.direction = 'ltr';
         document.body.style.textAlign = 'left';
+        
+        // Supprimer le style RTL
+        const oldStyle = document.getElementById('rtl-styles');
+        if (oldStyle) oldStyle.remove();
     }
     
     // Mettre à jour tous les textes
     updateAllTexts();
     
-    // Mettre en évidence le bouton actif
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === lang);
+    // Mettre à jour le texte du bouton de langue dans les paramètres
+    updateCurrentLangButton();
+    
+    // Mettre à jour les options du slider
+    document.querySelectorAll('.lang-slider-option').forEach(option => {
+        option.classList.toggle('active', option.dataset.lang === lang);
     });
     
-    // Recharger les écrans dynamiques
-    if (currentUser) {
-        if (!document.getElementById('auth')?.classList.contains('hidden')) {
-            updateAuthTexts();
-        }
-        if (!document.getElementById('menu')?.classList.contains('hidden')) {
-            updateMenuTexts();
-            updateStats();
-        }
-        if (!document.getElementById('shop')?.classList.contains('hidden')) {
-            showShop();
-        }
-        if (!document.getElementById('leaderboard')?.classList.contains('hidden')) {
-            loadLeaderboard(currentCategory);
-        }
-        if (!document.getElementById('achievements')?.classList.contains('hidden')) {
-            checkAchievements();
-        }
-        if (!document.getElementById('settings')?.classList.contains('hidden')) {
-            updateSettingsTexts();
-        }
-        if (!document.getElementById('difficultyMenu')?.classList.contains('hidden')) {
-            updateDifficultyTexts();
-        }
+    // Mettre à jour l'interface selon l'écran visible
+    updateCurrentScreen();
+    
+    console.log("✅ Langue changée pour:", lang, "| RTL:", lang === 'ar');
+}
+
+// ================================================================
+// FONCTION POUR METTRE À JOUR L'ÉCRAN ACTUEL
+// ================================================================
+function updateCurrentScreen() {
+    if (!currentUser) {
+        // Écran d'authentification
+        updateAuthTexts();
+        return;
+    }
+    
+    // Déterminer quel écran est visible
+    if (!document.getElementById('auth')?.classList.contains('hidden')) {
+        updateAuthTexts();
+    }
+    
+    if (!document.getElementById('menu')?.classList.contains('hidden')) {
+        updateMenuTexts();
+        updateStats();
+    }
+    
+    if (!document.getElementById('shop')?.classList.contains('hidden')) {
+        showShop(); // Recharger complètement le shop
+    }
+    
+    if (!document.getElementById('leaderboard')?.classList.contains('hidden')) {
+        loadLeaderboard(currentCategory);
+    }
+    
+    if (!document.getElementById('achievements')?.classList.contains('hidden')) {
+        checkAchievements();
+    }
+    
+    if (!document.getElementById('settings')?.classList.contains('hidden')) {
+        updateSettingsTexts();
+        initLangSlider();
+    }
+    
+    if (!document.getElementById('difficultyMenu')?.classList.contains('hidden')) {
+        updateDifficultyTexts();
+    }
+    
+    if (!document.getElementById('game')?.classList.contains('hidden')) {
+        updateGameScreen();
     }
 }
+
+// ================================================================
+// FONCTION POUR METTRE À JOUR L'ÉCRAN DE JEU
+// ================================================================
+function updateGameScreen() {
+    const gameTitle = document.getElementById('gameTitle');
+    if (gameTitle) {
+        const mode = document.getElementById('game')?.getAttribute('data-mode');
+        const difficulty = mode === 'classic' ? 
+            (xpPerCorrect === 1 ? 1 : xpPerCorrect === 10 ? 2 : 3) : null;
+        gameTitle.textContent = getGameTitle(mode, difficulty);
+    }
+    
+    // Mettre à jour la question en cours
+    const questionObj = quiz[current - 1];
+    if (questionObj) {
+        const qEl = document.getElementById('q');
+        if (qEl) {
+            if (questionObj.correctIndex !== undefined) {
+                qEl.innerHTML = getQCMQuestionText(questionObj);
+            } else {
+                qEl.innerHTML = getQuestionText(questionObj);
+            }
+        }
+        
+        // Mettre à jour les boutons
+        if (questionObj.correctIndex === undefined) {
+            // Question Vrai/Faux
+            const { vraiText, fauxText } = getTrueFalseButtonsText();
+            const vraiBtn = document.querySelector('.ans.vrai');
+            const fauxBtn = document.querySelector('.ans.faux');
+            
+            if (vraiBtn) {
+                vraiBtn.style.display = "flex";
+                vraiBtn.textContent = vraiText;
+            }
+            if (fauxBtn) {
+                fauxBtn.style.display = "flex";
+                fauxBtn.textContent = fauxText;
+            }
+            
+            // Cacher les boutons QCM
+            ['ansA', 'ansB', 'ansC', 'ansD'].forEach(id => {
+                const btn = document.getElementById(id);
+                if (btn) btn.style.display = "none";
+            });
+        } else {
+            // Question QCM
+            const vraiBtn = document.querySelector('.ans.vrai');
+            const fauxBtn = document.querySelector('.ans.faux');
+            
+            if (vraiBtn) vraiBtn.style.display = "none";
+            if (fauxBtn) fauxBtn.style.display = "none";
+            
+            const options = getQCMOptions(questionObj);
+            ['ansA', 'ansB', 'ansC', 'ansD'].forEach((id, index) => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.style.display = "flex";
+                    btn.textContent = `${String.fromCharCode(65 + index)}) ${options[index]}`;
+                }
+            });
+        }
+    }
+    
+    // Mettre à jour le bouton d'indice
+    const hintBtn = document.getElementById('hintBtn');
+    if (hintBtn) {
+        hintBtn.innerHTML = `${t('use_hint')} (${currentUser?.ownedItems?.['HINT_TOKEN'] || 0})`;
+    }
+}
+
+// ================================================================
+// FONCTIONS DE MISE À JOUR DES TEXTES
+// ================================================================
+
+function updateAllTexts() {
+    // Mettre à jour les éléments avec data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (key && translations[currentLang]?.[key]) {
+            el.textContent = translations[currentLang][key];
+        }
+    });
+    
+    // Mettre à jour les titres des pages
+    const authTitle = document.querySelector('#auth h1');
+    if (authTitle) authTitle.textContent = t('title');
+    
+    const menuTitle = document.querySelector('#menu h1');
+    if (menuTitle) menuTitle.textContent = t('title');
+    
+    const shopTitle = document.querySelector('#shop h1');
+    if (shopTitle) shopTitle.innerHTML = `🛍️ ${t('shop_title')}`;
+    
+    const leaderboardTitle = document.querySelector('#leaderboard h1');
+    if (leaderboardTitle) leaderboardTitle.innerHTML = t('leaderboard_title');
+    
+    const achievementsTitle = document.querySelector('#achievements h1');
+    if (achievementsTitle) achievementsTitle.innerHTML = t('achievements_title');
+    
+    const settingsTitle = document.querySelector('#settings h1');
+    if (settingsTitle) settingsTitle.innerHTML = t('settings');
+    
+    const difficultyTitle = document.querySelector('#difficultyMenu h1');
+    if (difficultyTitle) difficultyTitle.innerHTML = t('difficulty_choice');
+}
+
+function updateAuthTexts() {
+    const authScreen = document.getElementById('auth');
+    if (!authScreen) return;
+    
+    const h1 = authScreen.querySelector('h1');
+    if (h1) h1.textContent = t('title');
+    
+    const p = authScreen.querySelector('p');
+    if (p) p.textContent = t('create_account');
+    
+    const pseudoInput = document.getElementById('pseudo');
+    if (pseudoInput) pseudoInput.placeholder = t('pseudo');
+    
+    const passwordInput = document.getElementById('password');
+    if (passwordInput) passwordInput.placeholder = t('password');
+    
+    const buttons = authScreen.querySelectorAll('.menu-btn');
+    if (buttons.length >= 2) {
+        buttons[0].textContent = t('login');
+        buttons[1].textContent = t('register');
+    }
+}
+
+function updateMenuTexts() {
+    const menuScreen = document.getElementById('menu');
+    if (!menuScreen || !currentUser) return;
+    
+    let welcomeText, levelText, pointsText, streakText, recordText;
+    
+    if (currentLang === 'fr') {
+        welcomeText = "Bienvenue";
+        levelText = "Niveau";
+        pointsText = "Points";
+        streakText = "Série";
+        recordText = "Record Infini";
+    } else if (currentLang === 'en') {
+        welcomeText = "Welcome";
+        levelText = "Level";
+        pointsText = "Points";
+        streakText = "Streak";
+        recordText = "Infinite Record";
+    } else if (currentLang === 'ar') {
+        welcomeText = "مرحبًا";
+        levelText = "المستوى";
+        pointsText = "النقاط";
+        streakText = "السلسلة";
+        recordText = "رقم قياسي لانهائي";
+    }
+    
+    const userInfoDiv = menuScreen.querySelector('.user-info');
+    if (userInfoDiv) {
+        userInfoDiv.innerHTML = `
+            <span>${welcomeText}</span> <strong id="username">${currentUser.pseudo}</strong> • <span>${levelText}</span> <strong id="levelNum">${currentUser.level}</strong>
+            <br>💰 <span>${pointsText}</span> : <strong id="userPoints">${currentUser.points.toLocaleString()}</strong>
+        `;
+    }
+    
+    const statsDiv = menuScreen.querySelector('.stats');
+    if (statsDiv) {
+        statsDiv.innerHTML = `${streakText} : <span id="streak">${currentUser.streak}</span> | ${recordText} : <span id="best">${currentUser.best}</span>`;
+    }
+    
+    // Daily challenge
+    const dailyBox = document.getElementById('dailyQuizBtnContainer');
+    if (dailyBox) {
+        const h2 = dailyBox.querySelector('h2');
+        if (h2) {
+            if (currentLang === 'fr') h2.textContent = "DÉFI DU JOUR";
+            else if (currentLang === 'en') h2.textContent = "DAILY CHALLENGE";
+            else if (currentLang === 'ar') h2.textContent = "تحدي اليوم";
+        }
+        
+        const p = dailyBox.querySelector('p');
+        if (p) {
+            if (currentLang === 'fr') p.textContent = "5 questions → +200 XP si 5/5";
+            else if (currentLang === 'en') p.textContent = "5 questions → +200 XP if 5/5";
+            else if (currentLang === 'ar') p.textContent = "5 أسئلة → +200 XP إذا 5/5";
+        }
+        
+        const btn = document.getElementById('dailyQuizBtn');
+        if (btn) {
+            if (currentLang === 'fr') btn.textContent = "JOUER";
+            else if (currentLang === 'en') btn.textContent = "PLAY";
+            else if (currentLang === 'ar') btn.textContent = "العب";
+        }
+    }
+    
+    // Ramadan challenge
+    const ramadanBtn = document.getElementById('ramadanChallengeBtn');
+    if (ramadanBtn && !ramadanBtn.disabled) {
+        ramadanBtn.innerHTML = getRamadanChallengeButtonText();
+    }
+    
+    // Bouton Shop
+    const shopBtns = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).filter(btn => 
+        btn.textContent.includes('Shop') || btn.textContent.includes('🛍️')
+    );
+    shopBtns.forEach(btn => {
+        let shopText;
+        if (currentLang === 'fr') shopText = "Shop Quotidien";
+        else if (currentLang === 'en') shopText = "Daily Shop";
+        else if (currentLang === 'ar') shopText = "المتجر اليومي";
+        btn.innerHTML = `🛍️ ${shopText}`;
+    });
+    
+    // Bouton Classique
+    const classicBtn = Array.from(menuScreen.querySelectorAll('.menu-btn')).find(btn => 
+        btn.textContent.includes('Classique') || 
+        btn.textContent.includes('Classic') || 
+        btn.textContent.includes('الكلاسيكي')
+    );
+    if (classicBtn && !classicBtn.classList.contains('qcm-btn') && !classicBtn.classList.contains('chrono-btn') && !classicBtn.classList.contains('infinite-btn') && !classicBtn.classList.contains('leaderboard-btn') && !classicBtn.classList.contains('success-btn') && !classicBtn.classList.contains('settings-btn')) {
+        if (currentLang === 'fr') classicBtn.textContent = "Mode Classique (Difficulté)";
+        else if (currentLang === 'en') classicBtn.textContent = "Classic Mode (Difficulty)";
+        else if (currentLang === 'ar') classicBtn.textContent = "الوضع الكلاسيكي (الصعوبة)";
+    }
+    
+    // Bouton QCM
+    const qcmBtn = menuScreen.querySelector('.qcm-btn');
+    if (qcmBtn) {
+        if (currentLang === 'fr') qcmBtn.textContent = "Mode QCM (10 Q. - 4 Choix)";
+        else if (currentLang === 'en') qcmBtn.textContent = "QCM Mode (10 Q. - 4 Choices)";
+        else if (currentLang === 'ar') qcmBtn.textContent = "وضع الاختيار (10 أسئلة - 4 خيارات)";
+    }
+    
+    // Bouton Chrono
+    const chronoBtn = menuScreen.querySelector('.chrono-btn');
+    if (chronoBtn && !chronoBtn.id) {
+        if (currentLang === 'fr') chronoBtn.textContent = "Mode Chrono (10 Q. - 10s)";
+        else if (currentLang === 'en') chronoBtn.textContent = "Chrono Mode (10 Q. - 10s)";
+        else if (currentLang === 'ar') chronoBtn.textContent = "وضع التوقيت (10 أسئلة - 10ث)";
+    }
+    
+    // Bouton Infini
+    const infiniteBtn = menuScreen.querySelector('.infinite-btn');
+    if (infiniteBtn) {
+        if (currentLang === 'fr') infiniteBtn.textContent = "Mode Infini (1 Faute = Perdu)";
+        else if (currentLang === 'en') infiniteBtn.textContent = "Infinite Mode (1 Mistake = Game Over)";
+        else if (currentLang === 'ar') infiniteBtn.textContent = "الوضع اللامتناهي (خطأ واحد = خسارة)";
+    }
+    
+    // Bouton Classement
+    const leaderboardBtn = Array.from(menuScreen.querySelectorAll('.leaderboard-btn')).find(btn => 
+        btn.textContent.includes('Classement') || 
+        btn.textContent.includes('Leaderboard') || 
+        btn.textContent.includes('ترتيب')
+    );
+    if (leaderboardBtn) {
+        if (currentLang === 'fr') leaderboardBtn.innerHTML = "Classement";
+        else if (currentLang === 'en') leaderboardBtn.innerHTML = "Leaderboard";
+        else if (currentLang === 'ar') leaderboardBtn.innerHTML = "ترتيب اللاعبين";
+    }
+    
+    // Bouton Succès
+    const successBtns = menuScreen.querySelectorAll('.success-btn');
+    for (let btn of successBtns) {
+        if (btn.id !== 'ramadanChallengeBtn' && btn.id !== 'claimSelectedDayBtn') {
+            if (currentLang === 'fr') btn.innerHTML = "Succès";
+            else if (currentLang === 'en') btn.innerHTML = "Achievements";
+            else if (currentLang === 'ar') btn.innerHTML = "الإنجازات";
+            break;
+        }
+    }
+    
+    // Bouton Paramètres
+    const settingsBtn = menuScreen.querySelector('.settings-btn');
+    if (settingsBtn) {
+        if (currentLang === 'fr') settingsBtn.textContent = "Paramètres";
+        else if (currentLang === 'en') settingsBtn.textContent = "Settings";
+        else if (currentLang === 'ar') settingsBtn.textContent = "الإعدادات";
+    }
+}
+
+// ================================================================
+// FONCTION POUR METTRE À JOUR LES TEXTES DES PARAMÈTRES
+// ================================================================
+function updateSettingsTexts() {
+    const settingsScreen = document.getElementById('settings');
+    if (!settingsScreen) return;
+    
+    // Titre de la page - Utiliser currentLang
+    const title = settingsScreen.querySelector('h1');
+    if (title) {
+        if (currentLang === 'fr') {
+            title.textContent = "Paramètres";
+        } else if (currentLang === 'en') {
+            title.textContent = "Settings";
+        } else if (currentLang === 'ar') {
+            title.textContent = "الإعدادات";
+        }
+    }
+    
+    // Informations utilisateur
+    const userInfoDiv = settingsScreen.querySelector('.user-info');
+    if (userInfoDiv && currentUser) {
+        let connectedText, levelText, totalXpText;
+        
+        if (currentLang === 'fr') {
+            connectedText = "Connecté";
+            levelText = "Niveau";
+            totalXpText = "XP total";
+        } else if (currentLang === 'en') {
+            connectedText = "Connected";
+            levelText = "Level";
+            totalXpText = "Total XP";
+        } else if (currentLang === 'ar') {
+            connectedText = "متصل";
+            levelText = "المستوى";
+            totalXpText = "إجمالي XP";
+        }
+        
+        userInfoDiv.innerHTML = `
+            <span>${connectedText}</span> : <strong id="username2">${currentUser.pseudo}</strong><br>
+            <span>${levelText}</span> <strong id="levelNum2">${currentUser.level}</strong> • <span>${totalXpText}</span> : <strong id="totalXp">${Math.round(currentUser.totalXp)}</strong>
+        `;
+    }
+    
+    // Bouton Daily Reroll
+    const rerollBtn = settingsScreen.querySelector('.infinite-btn');
+    if (rerollBtn) {
+        const rerollCount = currentUser?.ownedItems?.['DAILY_REROLL'] || 0;
+        let useRerollText, ownedText;
+        
+        if (currentLang === 'fr') {
+            useRerollText = "Utiliser Daily Reroll";
+            ownedText = "Possédé";
+        } else if (currentLang === 'en') {
+            useRerollText = "Use Daily Reroll";
+            ownedText = "Owned";
+        } else if (currentLang === 'ar') {
+            useRerollText = "استخدم إعادة التحديث اليومي";
+            ownedText = "يمتلك";
+        }
+        
+        rerollBtn.innerHTML = `${useRerollText} (${ownedText} : <span id="rerollCount">${rerollCount}</span>)`;
+    }
+    
+    // Mettre à jour le texte du bouton de langue
+    updateCurrentLangButton();
+    
+    // Bouton Retour
+    const backBtn = Array.from(settingsScreen.querySelectorAll('.menu-btn')).find(btn => 
+        btn.textContent.includes('Retour') || 
+        btn.textContent.includes('Back') || 
+        btn.textContent.includes('العودة') ||
+        btn.textContent.includes('menu')
+    );
+    
+    if (backBtn) {
+        if (currentLang === 'fr') {
+            backBtn.textContent = "Retour au menu";
+        } else if (currentLang === 'en') {
+            backBtn.textContent = "Back to menu";
+        } else if (currentLang === 'ar') {
+            backBtn.textContent = "العودة إلى القائمة";
+        }
+    }
+    
+    // Bouton Réinitialiser
+    const resetBtn = settingsScreen.querySelector('.danger-btn');
+    if (resetBtn) {
+        if (currentLang === 'fr') {
+            resetBtn.textContent = "Réinitialiser mon compte";
+        } else if (currentLang === 'en') {
+            resetBtn.textContent = "Reset my account";
+        } else if (currentLang === 'ar') {
+            resetBtn.textContent = "إعادة تعيين حسابي";
+        }
+    }
+    
+    // Bouton Déconnexion
+    const logoutBtn = Array.from(settingsScreen.querySelectorAll('.settings-btn')).find(btn => 
+        btn.textContent.includes('Déconnexion') || 
+        btn.textContent.includes('Logout') || 
+        btn.textContent.includes('تسجيل الخروج') ||
+        (btn !== rerollBtn && btn !== backBtn && !btn.classList.contains('danger-btn'))
+    );
+    
+    if (logoutBtn) {
+        if (currentLang === 'fr') {
+            logoutBtn.textContent = "Déconnexion";
+        } else if (currentLang === 'en') {
+            logoutBtn.textContent = "Logout";
+        } else if (currentLang === 'ar') {
+            logoutBtn.textContent = "تسجيل الخروج";
+        }
+    }
+
+}
+
+function updateDifficultyTexts() {
+    const difficultyScreen = document.getElementById('difficultyMenu');
+    if (!difficultyScreen) return;
+    
+    const p = difficultyScreen.querySelector('p');
+    if (p) p.textContent = t('difficulty_desc');
+    
+    const buttons = difficultyScreen.querySelectorAll('.menu-btn');
+    if (buttons.length >= 4) {
+        buttons[0].textContent = t('easy');
+        buttons[1].textContent = t('normal');
+        buttons[2].textContent = t('hard');
+        buttons[3].textContent = t('back_to_menu');
+    }
+}
+
+// ================================================================
+// FONCTION POUR METTRE À JOUR LE BOUTON DE LANGUE
+// ================================================================
+function updateCurrentLangButton() {
+    const langText = document.getElementById('currentLangText');
+    if (!langText) return;
+    
+    if (currentLang === 'fr') {
+        langText.innerHTML = '🇫🇷 Français';
+    } else if (currentLang === 'en') {
+        langText.innerHTML = '🇬🇧 English';
+    } else if (currentLang === 'ar') {
+        langText.innerHTML = '🇸🇦 العربية';
+    }
+}
+
+
+// ✅ MODIFIÉ : Fonction pour définir la langue à la première visite
+// Fonction pour définir la langue à la première visite
+function setFirstLanguage(lang) {
+    // Mettre à jour la langue
+    currentLang = lang;
+    localStorage.setItem('lang', lang);
+    
+    // Mettre à jour l'affichage
+    setLanguage(lang);
+    
+    // Marquer la première visite comme terminée
+    if (currentUser && auth.currentUser) {
+        // Connecté : sauvegarder dans Firebase
+        currentUser.firstVisitCompleted = true;
+        currentUser.language = lang;
+        db.collection('users').doc(auth.currentUser.uid).update({
+            firstVisitCompleted: true,
+            language: lang
+        }).catch(error => console.error("Erreur sauvegarde:", error));
+    } else {
+        // Non connecté : sauvegarder dans localStorage
+        localStorage.setItem('firstVisitCompleted', 'true');
+    }
+    
+    // Fermer le popup
+    const langPopup = document.getElementById('langSelectionPopup');
+    if (langPopup) {
+        langPopup.classList.remove('show');
+    }
+    
+    // Mettre à jour l'écran d'authentification
+    updateAuthTexts();
+    
+    // Message de confirmation dans la langue choisie
+    setTimeout(() => {
+        alert(lang === 'fr' ? 'Langue définie sur Français ✓' : 
+              (lang === 'en' ? 'Language set to English ✓' : 
+              'تم تعيين اللغة إلى العربية ✓'));
+    }, 100);
+}
+
 
 function updateAllTexts() {
     updateAuthTexts();
@@ -4846,20 +5531,33 @@ function updateAuthTexts() {
     const authScreen = document.getElementById('auth');
     if (!authScreen) return;
     
+    const h1 = authScreen.querySelector('h1');
+    if (h1) h1.textContent = t('title'); // "Islam Quiz" en anglais
+    
     const p = authScreen.querySelector('p');
-    if (p) p.textContent = t('create_account');
+    if (p) p.textContent = t('create_account'); // "Create an account or login"
     
     const pseudoInput = document.getElementById('pseudo');
-    if (pseudoInput) pseudoInput.placeholder = t('pseudo');
+    if (pseudoInput) pseudoInput.placeholder = t('pseudo'); // "Username"
     
     const passwordInput = document.getElementById('password');
-    if (passwordInput) passwordInput.placeholder = t('password');
+    if (passwordInput) passwordInput.placeholder = t('password'); // "Password"
     
-    const loginBtn = Array.from(authScreen.querySelectorAll('.menu-btn')).find(btn => btn.textContent.includes('Se connecter') || btn.textContent.includes('Login') || btn.textContent.includes('تسجيل الدخول'));
-    if (loginBtn) loginBtn.textContent = t('login');
+    const loginBtn = Array.from(authScreen.querySelectorAll('.menu-btn')).find(btn => 
+        btn.textContent.includes('Se connecter') || 
+        btn.textContent.includes('Login') || 
+        btn.textContent.includes('تسجيل الدخول') ||
+        btn.textContent.includes('Login') // Pour être sûr
+    );
+    if (loginBtn) loginBtn.textContent = t('login'); // "Login"
     
-    const registerBtn = Array.from(authScreen.querySelectorAll('.menu-btn')).find(btn => btn.textContent.includes('Créer') || btn.textContent.includes('Create') || btn.textContent.includes('إنشاء'));
-    if (registerBtn) registerBtn.textContent = t('register');
+    const registerBtn = Array.from(authScreen.querySelectorAll('.menu-btn')).find(btn => 
+        btn.textContent.includes('Créer') || 
+        btn.textContent.includes('Create') || 
+        btn.textContent.includes('إنشاء') ||
+        btn.textContent.includes('Create') // Pour être sûr
+    );
+    if (registerBtn) registerBtn.textContent = t('register'); // "Create account"
 }
 
 
@@ -5119,7 +5817,7 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
                     xp: currentUser.xp || 0,
                     totalXp: currentUser.totalXp || 0,
                     normalShopItems: currentUser.normalShopItems || [],
-    ramadanShopItems: currentUser.ramadanShopItems || [],
+                    ramadanShopItems: currentUser.ramadanShopItems || [],
                     streak: currentUser.streak || 0,
                     best: currentUser.best || 0,
                     totalCorrect: currentUser.totalCorrect || 0,
@@ -5146,14 +5844,17 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
                     dailyQuizzesCompleted: currentUser.dailyQuizzesCompleted || 0,
                     dailyRerollsOwnedMax: currentUser.dailyRerollsOwnedMax || 0,
                     lastRamadanPlay: currentUser.lastRamadanPlay || 0,
-                    language: currentUser.language || localStorage.getItem('lang') || 'fr', // ✅ AJOUTÉ
+                    language: currentUser.language || 'en', // ✅ Forcer 'en' si pas de langue
+                    firstVisitCompleted: currentUser.firstVisitCompleted || false,
                     uid: user.uid
                 };
                 
-                // ✅ AJOUTÉ : Définir la langue depuis Firebase
-                currentLang = currentUser.language || 'fr';
+                // ✅ CORRIGÉ : Mettre à jour currentLang avec la langue Firebase
+                currentLang = currentUser.language || 'en';
                 localStorage.setItem('lang', currentLang);
-                setLanguage(currentLang);
+                
+                // ✅ CORRIGÉ : Appliquer la langue immédiatement
+                await setLanguage(currentLang);
                 
                 totalQCMCompleted = currentUser.totalQCMCompleted;
                 generateDailyShop();
@@ -5162,6 +5863,16 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
                 showMenu();
                 updateStats();
                 checkAndCollectDailyGift();
+                
+                // Vérifier si première visite
+                if (!currentUser.firstVisitCompleted) {
+                    setTimeout(() => {
+                        const langPopup = document.getElementById('langSelectionPopup');
+                        if (langPopup) {
+                            langPopup.classList.add('show');
+                        }
+                    }, 800);
+                }
             }
         } catch (error) {
             console.error("Erreur chargement utilisateur:", error);
@@ -5169,11 +5880,34 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
     } else {
         currentUser = null;
         showScreen("auth");
-        // ✅ AJOUTÉ : Garder la langue du localStorage quand déconnecté
-        currentLang = localStorage.getItem('lang') || 'fr';
-        setLanguage(currentLang);
+        
+        // ✅ CORRIGÉ : Utiliser localStorage pour les non-connectés
+        currentLang = localStorage.getItem('lang') || 'en';
+        
+        // ✅ CORRIGÉ : Appliquer la langue immédiatement
+        await setLanguage(currentLang);
+        
+        // Vérifier la première visite
+        checkFirstVisit();
     }
 });
+
+// Fonction pour vérifier la première visite
+function checkFirstVisit() {
+    // Ne pas forcer l'anglais ici, utiliser la langue déjà définie
+    const firstVisitDone = localStorage.getItem('firstVisitCompleted');
+    
+    if (!firstVisitDone && !currentUser) {
+        setTimeout(() => {
+            const langPopup = document.getElementById('langSelectionPopup');
+            if (langPopup) {
+                langPopup.classList.add('show');
+            }
+        }, 800);
+    }
+}
+
+                  
 
         // ================================================================
         // FONCTIONS AUTH FIREBASE
@@ -5231,7 +5965,8 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
             shopPointsSpent: 0,
             dailyQuizzesCompleted: 0,
             dailyRerollsOwnedMax: 0,
-            language: 'fr', // ✅ Français par défaut
+            language: 'en', 
+            firstVisitCompleted: false,
             lastRamadanPlay: 0
         };
         
@@ -5277,14 +6012,15 @@ unsubscribeAuth = auth.onAuthStateChanged(async (user) => {
         }
 
         async function saveUser() {
-            if (!currentUser || !auth.currentUser) return;
-            try {
-                const { uid, ...userData } = currentUser;
-                await db.collection('users').doc(auth.currentUser.uid).update(userData);
-            } catch (error) {
-                console.error("Erreur sauvegarde:", error);
-            }
-        }
+    if (!currentUser || !auth.currentUser) return;
+    try {
+        const { uid, ...userData } = currentUser;
+        await db.collection('users').doc(auth.currentUser.uid).update(userData);
+        console.log("Utilisateur sauvegardé avec langue:", currentUser.language);
+    } catch (error) {
+        console.error("Erreur sauvegarde:", error);
+    }
+}
 
         async function resetAccount() {
             if (!confirm("⚠️ Êtes-vous sûr de vouloir SUPPRIMER votre compte ? Cette action est IRRÉVERSIBLE !")) return;
@@ -5562,27 +6298,23 @@ function openDiscussions() {
         xpToNextLevel = calculateXpToNextLevel(currentUser.level);
     }
     
+    // Mettre à jour le nom d'utilisateur dans le menu
     const usernameEl = document.getElementById("username");
     if (usernameEl) {
         let usernameHTML = '';
         let badgeHTML = '';
         
-        // Vérifier si l'utilisateur possède le badge Ramadan
         if (currentUser.ownedItems && currentUser.ownedItems['RAMADAN_BADGE'] > 0) {
-            // Traduction du titre du badge selon la langue
             let badgeTitle = getRamadanBadgeTooltip();
             
-            // Pendant le Ramadan, le badge brille et s'anime
             if (isRamadanPeriod()) {
                 usernameHTML = `<span style="animation: pulse 2s infinite; text-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;">${currentUser.pseudo}</span>`;
                 badgeHTML = `<span style="margin-left: 8px; font-size: 1.5rem; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 8px gold); cursor: help;" title="${badgeTitle}">🌟</span>`;
             } else {
-                // Hors Ramadan, badge normal avec tooltip
                 usernameHTML = currentUser.pseudo;
                 badgeHTML = `<span style="margin-left: 5px; font-size: 1.2rem; cursor: help;" title="${badgeTitle}">🌟</span>`;
             }
         } else if (isRamadanPeriod()) {
-            // Pendant Ramadan sans badge, léger effet doré
             usernameHTML = `<span style="color: #FFD700; text-shadow: 0 0 5px rgba(255,215,0,0.5);">${currentUser.pseudo}</span>`;
         } else {
             usernameHTML = currentUser.pseudo;
@@ -5591,6 +6323,7 @@ function openDiscussions() {
         usernameEl.innerHTML = usernameHTML + badgeHTML;
     }
     
+    // Mettre à jour les éléments du menu
     const levelNumEl = document.getElementById("levelNum");
     if (levelNumEl) levelNumEl.textContent = currentUser.level;
     
@@ -5609,6 +6342,7 @@ function openDiscussions() {
     const xpFill = document.getElementById("xpFill");
     if (xpFill) xpFill.style.width = `${(currentUser.xp / xpToNextLevel * 100)}%`;
     
+    // ✅ Mettre à jour les éléments des paramètres
     const username2El = document.getElementById("username2");
     if (username2El) username2El.textContent = currentUser.pseudo;
     
@@ -5618,6 +6352,7 @@ function openDiscussions() {
     const totalXpEl = document.getElementById("totalXp");
     if (totalXpEl) totalXpEl.textContent = Math.round(currentUser.totalXp);
     
+    // Mettre à jour les points et autres
     const pointsElem = document.getElementById("userPoints");
     if (pointsElem) pointsElem.textContent = currentUser.points.toLocaleString();
     
@@ -6092,7 +6827,7 @@ function getShopTimerDisplay(ms) {
             
             if (collectedRewards.length > 0) {
                 const rewardMessage = collectedRewards.join('\n');
-                showPopup('🎁', "Cadeau Quotidien !", `MashaAllah ! Vous avez gagné :\n${rewardMessage}`);
+                showPopup('🎁', t('daily_gift_title'), `${t('daily_gift_message')}\n${rewardMessage}`);
             }
         }
 
@@ -6924,7 +7659,7 @@ function startRamadanTimer() {
     saveUser();
 }
 
-        function processAnswerQCM(isCorrect) {
+       function processAnswerQCM(isCorrect) {
     if (!currentUser) return;
     
     // Désactiver le chrono Ramadan s'il était actif
@@ -6956,7 +7691,16 @@ function startRamadanTimer() {
         currentUser.totalXp += xpGain;
         currentUser.points += 10;
         
-        if (expEl) expEl.innerHTML = `+${xpGain} XP ! (+10 Points) (Série : ${currentUser.streak})`;
+        // ✅ CORRECTION ICI - Supprimer le if en trop
+        if (expEl) {
+            if (currentLang === 'fr') {
+                expEl.innerHTML = `+${xpGain} XP ! (+10 Points) (Série : ${currentUser.streak})`;
+            } else if (currentLang === 'en') {
+                expEl.innerHTML = `+${xpGain} XP! (+10 Points) (Streak: ${currentUser.streak})`;
+            } else if (currentLang === 'ar') {
+                expEl.innerHTML = `+${xpGain} XP! (+10 نقاط) (السلسلة: ${currentUser.streak})`;
+            }
+        }
     } else {
         document.getElementById("bad")?.play();
         if (resultEl) {
@@ -6964,7 +7708,6 @@ function startRamadanTimer() {
             resultEl.textContent = getWrongText();
         }
         if (expEl) expEl.textContent = `${t('explanation')}: ${getQCMExplanation(q)}`;
-
         
         currentUser.streak = 0;
         
@@ -7330,10 +8073,12 @@ if (scoreDisplay) {
             checkAchievements();
         }
 
-        function showSettings() {
-            showScreen("settings");
-            updateStats();
-        }
+       function showSettings() {
+    showScreen("settings");
+    updateStats();
+    updateSettingsTexts(); // ✅ Ajouter cette ligne pour traduire les paramètres
+    initLangSlider(); // Initialiser le slider de langue
+}
 
         function showDifficultyMenu() {
             showScreen("difficultyMenu");
@@ -7388,7 +8133,7 @@ if (scoreDisplay) {
         // ================================================================
         // RAMADAN - DÉFI ET CALENDRIER
         // ================================================================
-        const RAMADAN_START_2026 = new Date(2026, 1, 18);
+        const RAMADAN_START_2026 = new Date(2026, 1, 15);
         const DAYS_BEFORE_VISIBLE = 30;
         const START_VISIBLE_DATE = new Date(RAMADAN_START_2026);
         START_VISIBLE_DATE.setDate(RAMADAN_START_2026.getDate() - DAYS_BEFORE_VISIBLE);
@@ -7758,9 +8503,16 @@ function openWikiHome() {
         
 
        // ================================================================
-// INITIALISATION - VERSION CORRIGÉE
+// INITIALISATION
 // ================================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // ✅ CORRIGÉ : Charger la langue depuis localStorage
+    const savedLang = localStorage.getItem('lang') || 'en';
+    currentLang = savedLang;
+    
+    // Appliquer la langue
+    setLanguage(savedLang);
+    
     showScreen("auth");
     
     if (isRamadanPeriod()) {
@@ -7769,23 +8521,23 @@ document.addEventListener("DOMContentLoaded", () => {
     
     startRamadanCountdown();
     
+    // Cacher le bouton cadeau
     const giftBtn = document.getElementById('ramadanGiftBtn');
-    if (giftBtn) giftBtn.style.display = 'none'; // Cacher le bouton cadeau
+    if (giftBtn) giftBtn.style.display = 'none';
     
-    // CORRECTION : Réattacher l'événement du bouton de catégorie
+    // Initialiser le slider de langue
+    setTimeout(() => {
+        initLangSlider();
+    }, 500);
+    
+    // Gestionnaire pour le bouton de catégorie du classement
     const categoryBtn = document.getElementById('currentCategoryBtn');
     if (categoryBtn) {
-        // Supprimer les anciens événements et ajouter le nouveau
         categoryBtn.onclick = function(e) {
             e.stopPropagation();
             toggleCategoryList();
         };
     }
-    setTimeout(() => {
-        if (document.getElementById('settings') && !document.getElementById('settings').classList.contains('hidden')) {
-            initLangSlider();
-        }
-    }, 500)
     
     // Fermer la liste déroulante si on clique ailleurs
     document.addEventListener('click', (e) => {
@@ -7795,9 +8547,6 @@ document.addEventListener("DOMContentLoaded", () => {
             list.style.display = 'none';
         }
     });
-    
-    // Définir la langue initiale
-    setLanguage(currentLang);
 });
 
 // ================================================================
