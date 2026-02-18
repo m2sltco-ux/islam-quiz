@@ -6406,20 +6406,22 @@ function openDiscussions() {
                 finalPrice = Math.round(basePrice * (1 + randomModifier / 100));
             }
             
+            // 🔴 CORRECTION : S'assurer que le stock est toujours > 0
             const stockModifier = isRamadanPeriod() ? 2 : 1;
             const maxStock = key === 'HINT_TOKEN' ? 5 * stockModifier : 
                             key === 'XP_BOOST_X2' ? 3 * stockModifier : 
                             key === 'INFINITE_REVIVE' ? 2 * stockModifier : 
                             2 * stockModifier;
             
-            const stock = Math.floor(Math.random() * maxStock) + 1;
+            // 🔴 IMPORTANT : S'assurer que le stock est au moins 1
+            const stock = Math.max(1, Math.floor(Math.random() * maxStock) + 1);
             
             normalShopItems.push({
                 code: key,
                 name: item[0],
                 price: Math.max(1, finalPrice),
                 originalPrice: basePrice,
-                stock: stock,
+                stock: stock, // Maintenant toujours >= 1
                 description: item[2],
                 ramadanSpecial: isRamadanPeriod(),
                 discountPercent: discountPercent
@@ -6434,7 +6436,7 @@ function openDiscussions() {
             name: getRamadanBadgeName(),
             price: badgeItem[1],
             originalPrice: badgeItem[1],
-            stock: 1,
+            stock: 1, // 🔴 Toujours 1 pour le badge
             description: getRamadanBadgeDescription(),
             ramadanSpecial: true,
             isBadge: true
@@ -6445,11 +6447,31 @@ function openDiscussions() {
         currentUser.ramadanShopItems = ramadanShopItems;
         currentUser.shopLastRefresh = midnightToday;
         
+        console.log("🛍️ Shop généré avec stock:", normalShopItems);
         saveUser();
     }
     
     const midnightTomorrow = getMidnightTime(now + DAILY_COOLDOWN_MS);
     return midnightTomorrow - now;
+}
+
+function debugShop() {
+    console.log("=== DÉBOGAGE SHOP ===");
+    console.log("Onglet actuel:", currentShopTab);
+    console.log("normalShopItems:", currentUser.normalShopItems);
+    console.log("ramadanShopItems:", currentUser.ramadanShopItems);
+    console.log("Points utilisateur:", currentUser.points);
+    
+    if (currentShopTab === 'normal' && currentUser.normalShopItems) {
+        currentUser.normalShopItems.forEach(item => {
+            console.log(`${item.code}: stock=${item.stock}, prix=${item.price}, points dispo=${currentUser.points >= item.price}`);
+        });
+    } else if (currentShopTab === 'ramadan' && currentUser.ramadanShopItems) {
+        currentUser.ramadanShopItems.forEach(item => {
+            console.log(`${item.code}: stock=${item.stock}, prix=${item.price}, points dispo=${currentUser.points >= item.price}`);
+        });
+    }
+    console.log("=== FIN DÉBOGAGE ===");
 }
 
        function switchShopTab(tab) {
@@ -6469,7 +6491,11 @@ function openDiscussions() {
     }
     
     updateOwnedItemsDisplay();
-    updateBuyButtons();
+    
+    // 🔴 NOUVEAU : Mettre à jour les boutons après le changement d'onglet
+    setTimeout(() => {
+        refreshShopButtons();
+    }, 100);
 }
 
 // Ajoutez cette fonction de traduction pour le texte de rafraîchissement
@@ -6506,9 +6532,8 @@ function showShop() {
     const shopTabRamadan = document.getElementById('shopTabRamadan');
     
     // Traduire les onglets
-    // Utilisez directement les fonctions ou t() selon votre préférence
-if (shopTabNormal) shopTabNormal.innerHTML = getShopNormalTabText();
-if (shopTabRamadan) shopTabRamadan.innerHTML = getShopRamadanTabText();
+    if (shopTabNormal) shopTabNormal.innerHTML = getShopNormalTabText();
+    if (shopTabRamadan) shopTabRamadan.innerHTML = getShopRamadanTabText();
     
     // S'assurer que l'onglet normal est actif
     if (shopTabNormal) shopTabNormal.classList.add('active');
@@ -6548,6 +6573,28 @@ if (shopTabRamadan) shopTabRamadan.innerHTML = getShopRamadanTabText();
     }
     
     updateOwnedItemsDisplay();
+    
+    // 🔴 Déboguer le shop après l'affichage
+    setTimeout(() => {
+        debugShop();
+        updateBuyButtons();
+    }, 500);
+}
+
+function refreshShopButtons() {
+    // Mettre à jour l'affichage du stock dans le HTML
+    const currentItems = currentShopTab === 'normal' ? 
+        (currentUser.normalShopItems || []) : 
+        (currentUser.ramadanShopItems || []);
+    
+    currentItems.forEach(item => {
+        const stockEl = document.getElementById(`stock-${item.code}`);
+        if (stockEl) {
+            stockEl.textContent = item.stock;
+        }
+    });
+    
+    // Mettre à jour l'état des boutons
     updateBuyButtons();
 }
 
@@ -6714,16 +6761,23 @@ function getShopTimerDisplay(ms) {
     if (hintElem) hintElem.textContent = currentUser.ownedItems?.['HINT_TOKEN'] || 0;
 }
         function updateBuyButtons() {
-    if (!currentUser.dailyShopItems) return;
+    // 🔴 CORRECTION : Utiliser le bon shop selon l'onglet
+    const currentItems = currentShopTab === 'normal' ? 
+        (currentUser.normalShopItems || []) : 
+        (currentUser.ramadanShopItems || []);
     
-    currentUser.dailyShopItems.forEach(item => {
+    currentItems.forEach(item => {
         const button = document.getElementById(`buy-${item.code}`);
         if (button) {
-            button.disabled = item.stock <= 0 || currentUser.points < item.price;
+            // Vérifier le stock et les points
+            const hasStock = item.stock > 0;
+            const hasPoints = currentUser.points >= item.price;
             
-            if (item.stock <= 0) {
+            button.disabled = !hasStock || !hasPoints;
+            
+            if (!hasStock) {
                 button.textContent = t('out_of_stock');
-            } else if (currentUser.points < item.price) {
+            } else if (!hasPoints) {
                 button.textContent = t('not_enough_points');
             } else {
                 button.textContent = t('buy');
@@ -6732,60 +6786,73 @@ function getShopTimerDisplay(ms) {
     });
 }
 
-        async function buyItem(code, price) {
+      // REMPLACE TA FONCTION BUYITEM PAR CELLE-CI
+async function buyItem(code, price) {
+    console.log(`🛒 Achat: ${code}`);
+    
+    // Vérifier les points
     if (currentUser.points < price) {
         alert(t('not_enough_points'));
         return;
     }
     
-    // Trouver l'item dans les shops selon l'onglet actuel
-    let shopItem;
+    // Chercher dans le BON tableau selon l'onglet actif
+    let shopItem = null;
+    
     if (currentShopTab === 'normal' && currentUser.normalShopItems) {
         shopItem = currentUser.normalShopItems.find(item => item.code === code);
-    } else if (currentShopTab === 'ramadan' && currentUser.ramadanShopItems) {
+        console.log("Recherche dans normalShopItems:", shopItem);
+    } 
+    else if (currentShopTab === 'ramadan' && currentUser.ramadanShopItems) {
         shopItem = currentUser.ramadanShopItems.find(item => item.code === code);
+        console.log("Recherche dans ramadanShopItems:", shopItem);
     }
     
-    if (!shopItem || shopItem.stock <= 0) {
+    // Vérifier si l'item existe
+    if (!shopItem) {
+        console.error("Item non trouvé! Code:", code);
+        alert("❌ Erreur: Item non trouvé");
+        return;
+    }
+    
+    // Vérifier le stock
+    if (shopItem.stock <= 0) {
         alert(t('out_of_stock'));
         return;
     }
     
+    // ACHAT RÉUSSI !
+    console.log("✅ Achat possible!");
+    console.log("Stock avant:", shopItem.stock);
+    
+    // Effectuer l'achat
     currentUser.points -= price;
     shopItem.stock--;
     currentUser.ownedItems[code] = (currentUser.ownedItems[code] || 0) + 1;
-    currentUser.shopItemsBoughtTotal++;
-    currentUser.shopPointsSpent += price;
     
-    if (currentUser.ownedItems['DAILY_REROLL'] > (currentUser.dailyRerollsOwnedMax || 0)) {
-        currentUser.dailyRerollsOwnedMax = currentUser.ownedItems['DAILY_REROLL'];
+    // Mettre à jour l'affichage
+    const stockEl = document.getElementById(`stock-${code}`);
+    if (stockEl) {
+        stockEl.textContent = shopItem.stock;
     }
     
-    const stockEl = document.getElementById(`stock-${code}`);
-    if (stockEl) stockEl.textContent = shopItem.stock;
+    const btn = document.getElementById(`buy-${code}`);
+    if (btn) {
+        if (shopItem.stock <= 0) {
+            btn.disabled = true;
+            btn.textContent = t('out_of_stock');
+        }
+    }
     
+    console.log("Stock après:", shopItem.stock);
+    
+    // Sauvegarder et mettre à jour
+    await saveUser();
     updateStats();
     updateOwnedItemsDisplay();
-    updateBuyButtons();
-    await saveUser();
     
-    // Traduire le nom de l'objet pour le popup
+    // Message de succès
     let itemName = SHOP_ITEMS[code]?.[0] || code;
-    
-    if (code === 'RAMADAN_BADGE') {
-        itemName = getRamadanBadgeName(); // ✅ Utiliser la traduction
-    } else if (currentLang === 'en') {
-        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
-        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
-        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
-        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
-    } else if (currentLang === 'ar') {
-        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
-        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
-        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
-        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
-    }
-    
     showPopup("💰", t('purchase_success'), `${itemName} ${t('bought_for')} ${price} ${t('points')} !`);
 }
 
@@ -8607,58 +8674,7 @@ function debugQCM() {
     console.log("=== FIN DÉBOGAGE ===");
 }
 
-// ================================================================
-// CORRECTION DE LA FONCTION BUYITEM (parenthèse manquante)
-// ================================================================
-async function buyItem(code, price) {
-    if (currentUser.points < price) {
-        alert(t('not_enough_points'));
-        return;
-    }
-    
-    const shopItem = currentUser.dailyShopItems.find(item => item.code === code);
-    if (!shopItem || shopItem.stock <= 0) {
-        alert(t('out_of_stock'));
-        return;
-    }
-    
-    currentUser.points -= price;
-    shopItem.stock--;
-    currentUser.ownedItems[code] = (currentUser.ownedItems[code] || 0) + 1;
-    currentUser.shopItemsBoughtTotal++;
-    currentUser.shopPointsSpent += price;
-    
-    if (currentUser.ownedItems['DAILY_REROLL'] > (currentUser.dailyRerollsOwnedMax || 0)) {
-        currentUser.dailyRerollsOwnedMax = currentUser.ownedItems['DAILY_REROLL'];
-    }
-    
-    const stockEl = document.getElementById(`stock-${code}`);
-    if (stockEl) stockEl.textContent = shopItem.stock;
-    
-    updateStats();
-    updateOwnedItemsDisplay();
-    updateBuyButtons();
-    await saveUser();
-    
-    // Traduire le nom de l'objet pour le popup
-    let itemName = SHOP_ITEMS[code][0];
-    
-    if (code === 'RAMADAN_BADGE') {
-        itemName = getRamadanBadgeName();
-    } else if (currentLang === 'en') {
-        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
-        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
-        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
-        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
-    } else if (currentLang === 'ar') {
-        if (code === 'XP_BOOST_X2') itemName = t('double_xp');
-        else if (code === 'HINT_TOKEN') itemName = t('hint_token');
-        else if (code === 'INFINITE_REVIVE') itemName = t('infinite_revive');
-        else if (code === 'DAILY_REROLL') itemName = t('daily_reroll');
-    }
-    
-    showPopup("💰", t('purchase_success'), `${itemName} ${t('bought_for')} ${price} ${t('points')} !`);
-}
+
 // ================================================================
 // FONCTIONS POUR LE SLIDER DE LANGUE
 // ================================================================
